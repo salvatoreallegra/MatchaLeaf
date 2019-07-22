@@ -1,7 +1,13 @@
 Endpoints
 
-get/ \*Gets every resource
+GET/FILES gets every resource
 
-get/{name} \*Gets any file or folder resource
+GET/ gets every resource
 
-delete/ \*Deletes and file or folder that is in the trash
+GET/{NAME} Gets any file or folder resource
+
+DELETE/{NAME} Deletes and file or folder that is in the trash
+
+PATCH/{DESTINATION} Moves file to different parent
+
+POST/{DESTINATION}
