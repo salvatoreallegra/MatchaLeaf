@@ -13,5 +13,5 @@ PATCH/{DESTINATION} Moves file to different parent
 POST/{DESTINATION}
 
 Database Entity Relationship Diagrams
-![GitHub Logo](./docimages/databasediagram.png)
+![GitHub Logo](docimages/databasediagram.png)
 Format: ![Alt Text](url)
