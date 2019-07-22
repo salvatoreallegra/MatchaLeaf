@@ -2,11 +2,9 @@ Endpoints
 
 GET/FILES gets every resource
 
-GET/ gets every resource
+GET/{ID} Gets any file or folder resource
 
-GET/{NAME} Gets any file or folder resource
-
-DELETE/{NAME} Deletes and file or folder that is in the trash
+DELETE/{id} Deletes and file or folder that is in the trash
 
 PATCH/{DESTINATION} Moves file to different parent
 
