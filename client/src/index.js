@@ -1,7 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter } from 'react-router-redux'
 import App from './Containers/App/App'
 import { createGlobalStyle } from 'styled-components'
+import configureStore from './configureStore'
+
+const history = createHistory()
+const store = configureStore({}, history)
+const MOUNT_NODE = document.getElementById('app')
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -12,9 +20,11 @@ body {
 `
 
 ReactDOM.render(
-  <>
-    <GlobalStyle />
-    <App />
-  </>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <GlobalStyle />
+      <App />
+    </ConnectedRouter>
+  </Provider>,
+  MOUNT_NODE
 )
