@@ -1,8 +1,32 @@
-Endpoints
+## API Data Type
+### File
+```javascript
+{//File
+  id: 'integer',
+  fileName: 'string',
+  path: 'string',
+  isFolder: 'boolean'
+  }
+```
 
-GET/FILES gets every resource
 
-GET/{ID} Gets any file or folder resource
+## API Endpoints
+
+### `GET    files` 
+Returns a list of files
+
+#### Return
+```javascript
+['file']
+```
+
+### GET   files/{ID} 
+If it's a file it returns the file asked but a folder returns every file or folder inside of it
+
+#### Return
+```javascript
+['file']
+```
 
 DELETE/{id} Deletes and file or folder that is in the trash
 
