@@ -48,12 +48,7 @@ user uploads a file/files
 
 #### Request
 ```javascript
-[
-{
-  name: 'string',
-  data: 'dataStream'
-}
-]
+[{name: 'string', data: 'dataStream'}]
 ```
 
 ### PATCH   trash/{id}
