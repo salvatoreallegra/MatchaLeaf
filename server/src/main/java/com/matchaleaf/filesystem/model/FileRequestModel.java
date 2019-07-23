@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-public class FileModel {
+public class FileRequestModel {
 	
 	
 	public class DBFile {
