@@ -28,7 +28,7 @@ creates a file
 {
   name: string,
   data: byte[],
-  folder: integer
+  folderId: integer
 }
 ```
 
@@ -39,7 +39,7 @@ creates a folder
 ```javascript
 {
   name: string,
-  folder: integer
+  folderId: integer
 }
 ```
 
@@ -62,46 +62,25 @@ Returns a file with its data for the purpose of downloading
 }
 ```
 
-### GET   download/{id}
-allows the user to download the file or folder (folders are zipped before the download)
-
-### POST    create
-allows user to create folders
-
-#### Request
-```javascript
-{name: 'string'}
-```
-#### Response
-```javascript
-['file']
-```
-
-### POST    upload
-user uploads a file/files
-
-#### Request
-```javascript
-[{name: 'string', data: 'dataStream'}]
-```
-
-### PATCH   trash/{id}
+### PATCH /files/{id}/trash
 
 #### Response
 ```javascript
-['file']
+  File
 ```
 
-### PATCH   move/{id}
+### PATCH /files/{id}/move
 
 #### Request
 ```javascript
-{newPath: 'string'}
+{
+  folderId: integer
+}
 ```
 
 #### Response
 ```javascript
-['file']
+  File
 ```
 
 
