@@ -6,6 +6,10 @@ import java.util.Set;
 
 @Entity
 public class File {
+	
+	public File() {
+		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +19,7 @@ public class File {
 	private String name;
 
 	@ManyToOne
-	private Folder folder;
+	private Folder parentFolder;
 
 	public Integer getId() {
 		return id;
@@ -33,19 +37,5 @@ public class File {
 		this.name = name;
 	}
 
-	public Folder getFolder() {
-		return folder;
-	}
-
-	public void setFolder(Folder folder) {
-		this.folder = folder;
-	}
-
-	public File() {
-	}
-
-//    public File(String name) {
-//        this.name = name;
-//    }
 
 }
