@@ -1,5 +1,0 @@
-// actions
-
-// reducer
-
-// action creators
