@@ -9,7 +9,7 @@ import configureStore from './configureStore'
 
 const history = createHistory()
 const store = configureStore({}, history)
-const MOUNT_NODE = document.getElementById('app')
+const MOUNT_NODE = document.getElementById('root')
 
 const GlobalStyle = createGlobalStyle`
 body {
