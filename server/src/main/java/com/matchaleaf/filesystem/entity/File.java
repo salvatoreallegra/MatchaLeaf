@@ -17,6 +17,30 @@ public class File {
 	@ManyToOne
 	private Folder folder;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+
 	public File() {
 	}
 

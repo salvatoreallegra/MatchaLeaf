@@ -7,7 +7,3 @@
 //
 //
 //
-//@Transactional
-//public interface FileRepository extends JpaRepository<FileModel, Long>{	
-//	public FileModel findByName(String name);
-//}
