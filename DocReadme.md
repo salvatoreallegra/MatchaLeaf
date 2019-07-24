@@ -12,6 +12,29 @@
 
 ## API Endpoints
 
+### POST /files
+creates a file
+
+#### request
+```javascript
+{
+  name: string,
+  data: byte[],
+  folder: integer
+}
+```
+
+### POST /folders
+creates a folder
+
+#### request
+```javascript
+{
+  name: string,
+  folder: integer
+}
+```
+
 ### `GET    files` 
 Returns a list of files
 
