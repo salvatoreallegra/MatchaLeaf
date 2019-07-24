@@ -1,33 +1,43 @@
-//package com.matchaleaf.filesystem.controllers;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.multipart.MultipartFile;
-//
-//import com.matchaleaf.filesystem.model.FileModel;
-//import com.matchaleaf.filesystem.repository.FileRepository;
-//
-//
-// 
-//@RestController
-//public class FileController {
-//	
-//	@Autowired
-//	FileRepository fileRepository;
-// 
-//    /*
-//     * MultipartFile Upload
-//     */
-//    @PostMapping("/api/file/upload")
-//    public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file) {
-//    	try {
-//    		// save file to PostgreSQL
-//	    	FileModel filemode = new FileModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
-//	    	fileRepository.save(filemode);
-//	    	return "File uploaded successfully! -> filename = " + file.getOriginalFilename();
-//		} catch (	Exception e) {
-//			return "FAIL! Maybe You had uploaded the file before or the file's size > 500KB";
-//		}    
+package com.matchaleaf.filesystem.controllers;
+
+
+import org.springframework.web.bind.annotation.*;
+import com.matchaleaf.filesystem.services.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/files")
+public class FileController {
+
+    private FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+//    @GetMapping
+//    public List<CourseResponseDto> getAllCourses() {
+//        return courseService.getAllCourses();
 //    }
-//}
+
+    @PostMapping
+    public FileResponseDto createFile(@RequestBody FileRequestDto fileDto) {
+        return fileService.createCourse(fileDto);
+    }
+
+//    @GetMapping("/{id}")
+//    public CourseResponseDto readCourse(@PathVariable Integer id) {
+//        return courseService.readCourse(id);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public CourseResponseDto updateCourse(@PathVariable Integer id, @RequestBody CourseRequestDto courseDto) {
+//        return courseService.updateCourse(id, courseDto);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public CourseResponseDto deleteCourse(@PathVariable Integer id) {
+//        return courseService.deleteCourse(id);
+//    }
+}

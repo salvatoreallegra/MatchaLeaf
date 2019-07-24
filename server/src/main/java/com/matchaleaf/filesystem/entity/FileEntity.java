@@ -1,4 +1,4 @@
-package com.matchaleaf.filesystem.entities;
+package com.matchaleaf.filesystem.entity;
 //package com.matchaleaf.entities;
 //
 //import javax.persistence.GeneratedValue;
