@@ -51,12 +51,15 @@ Returns a folder by id
 Folder
 ```
 
-### GET   files/{ID} 
-If it's a file it returns the file asked but a folder returns every file or folder inside of it
+### GET /files/{ID} 
+Returns a file with its data for the purpose of downloading
 
 #### Response
 ```javascript
-['file']
+{
+  name: string,
+  data: byte[]
+}
 ```
 
 ### GET   download/{id}
