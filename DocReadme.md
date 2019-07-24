@@ -43,12 +43,12 @@ creates a folder
 }
 ```
 
-### `GET    files` 
+### GET /files 
 Returns a list of files
 
 #### Response
 ```javascript
-['file']
+[ File ]
 ```
 
 ### GET   files/{ID} 
