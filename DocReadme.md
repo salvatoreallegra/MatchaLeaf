@@ -1,12 +1,20 @@
 ## API Data Type
 ### File
 ```javascript
-{//File
-  id: 'integer',
-  fileName: 'string',
-  path: 'string',
-  isFolder: 'boolean'
-  }
+{ //File
+  id: integer,
+  name: string
+}
+```
+
+### Folder
+```javascript
+{
+  id: integer,
+  name: string,
+  files: [ File ],
+  folders: [ Folder ],
+}
 ```
 
 
