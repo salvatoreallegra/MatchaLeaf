@@ -32,6 +32,13 @@ creates a file
 }
 ```
 
+#### response
+```javascript
+{
+  id: integer
+}
+```
+
 ### POST /folders
 creates a folder
 
@@ -40,6 +47,13 @@ creates a folder
 {
   name: string,
   folderId: integer
+}
+```
+
+#### response
+```javascript
+{
+  id: integer
 }
 ```
 
