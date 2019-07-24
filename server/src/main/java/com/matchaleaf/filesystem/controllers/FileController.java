@@ -1,7 +1,9 @@
 package com.matchaleaf.filesystem.controllers;
 
-
 import org.springframework.web.bind.annotation.*;
+
+import com.matchaleaf.filesystem.dto.FileRequestDto;
+import com.matchaleaf.filesystem.dto.FileResponseDto;
 import com.matchaleaf.filesystem.services.*;
 
 import java.util.List;
@@ -10,21 +12,21 @@ import java.util.List;
 @RequestMapping(path = "/files")
 public class FileController {
 
-    private FileService fileService;
+	private FileService fileService;
 
-    public FileController(FileService fileService) {
-        this.fileService = fileService;
-    }
+	public FileController(FileService fileService) {
+		this.fileService = fileService;
+	}
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {
 //        return courseService.getAllCourses();
 //    }
 
-    @PostMapping
-    public FileResponseDto createFile(@RequestBody FileRequestDto fileDto) {
-        return fileService.createCourse(fileDto);
-    }
+	@PostMapping
+	public FileResponseDto createFile(@RequestBody FileRequestDto fileDto) {
+		return fileService.createFile(fileDto);
+	}
 
 //    @GetMapping("/{id}")
 //    public CourseResponseDto readCourse(@PathVariable Integer id) {

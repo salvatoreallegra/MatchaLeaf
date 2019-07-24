@@ -1,13 +1,10 @@
 package com.matchaleaf.filesystem.services;
 
-import com.cooksys.orm.dto.CourseRequestDto;
-import com.cooksys.orm.dto.CourseResponseDto;
-import com.matchaleaf.filesystem.dto.FileDto;
-import com.matchaleaf.filesystem.repository.DBFileRepository;
+import com.matchaleaf.filesystem.dto.FileRequestDto;
+import com.matchaleaf.filesystem.dto.FileResponseDto;
 
 public interface FileService {
-	
-	
-	 FileResponseDto createFile(FileRequestDto fileDto);
+
+	FileResponseDto createFile(FileRequestDto fileDto);
 
 }
