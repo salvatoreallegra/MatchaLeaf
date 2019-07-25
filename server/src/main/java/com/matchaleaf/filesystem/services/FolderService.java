@@ -1,5 +1,6 @@
 package com.matchaleaf.filesystem.services;
 
+import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 
@@ -14,6 +15,24 @@ public interface FolderService {
 //		FolderDto
 	
 	   IdResponseDto createFolder(FolderUploadDto folderUploadDto);
+	   
+	   
+	   
+	   /*
+	    * The json response for FolderDto will be
+	    * 
+	    * 
+	    * {
+		*  id: integer,
+		*  name: string,
+		*  files: [ File ],
+		*  folders: [ Folder ],
+		* }
+	    * 
+	    * 
+	    * 
+	    */
+	   	FolderDto downloadFolderById(Integer id);
 
 
 }
