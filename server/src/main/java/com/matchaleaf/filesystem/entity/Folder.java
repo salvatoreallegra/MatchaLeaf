@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Folder {
@@ -30,21 +30,23 @@ public class Folder {
 	 * without explicitly calling file.save	 
 	 */
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "folder_id")
-	private Set<Folder> parentFolder;
+   
+	//@JoinColumn(name = "FOLDER_ID")
+	@ManyToOne
+	private Folder parentFolder;
 	
 	
 
-	@OneToMany
-	@JoinColumn(name = "FILE_ID")
-	private Set<File> files = new HashSet<File>();
+//	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "FILE_ID")
+	private Set<File> files;
 
 	public Folder() {
 	}
 
-	public Folder(Set<File> files, String name, Set<Folder> parentFolder) {
-		this.id = id;
+	public Folder(Set<File> files, String name, Folder parentFolder) {
+		//this.id = id;
 		this.files = files;
 		this.name = name;
 		this.parentFolder = parentFolder;

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class FilesystemApplication {
 	@Autowired
-	private FolderRepository folderRepository;
+	//private FolderRepository folderRepository;
 
 	static byte[] fileByteArray = "Any String you want".getBytes();
 
@@ -29,15 +29,16 @@ public class FilesystemApplication {
 	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
 			
-			
-			Set<File> fileSet = new HashSet();
-			File docFile = new File("Tracks.txt", fileByteArray,null);
-			fileSet.add(docFile);
+//			
+//			Set<File> fileSet = new HashSet();
+//			File docFile = new File("Tracks.txt", fileByteArray,null);
+//			//fileSet.add(docFile);
+//			fileRepository.save(docFile);
 			//Create a root folder *Root folder will just be sitting in database
-			folderRepository.save(new Folder(fileSet,"root",null)); 
-			folderRepository.save(new Folder(null,"photos",null));
+//			folderRepository.save(new Folder(fileSet,"root",null)); 
+//			folderRepository.save(new Folder(null,"photos",null));
 //			fileRepole(sitory.save(new Fi"Docs", fileByteArray, null));
-//			fileRepository.save(new File("Photos", fileByteArray,null));
+			fileRepository.save(new File("Photos", fileByteArray,null));
 //			fileRepository.save(new File("Docs", byte...,1))
 //			
 			

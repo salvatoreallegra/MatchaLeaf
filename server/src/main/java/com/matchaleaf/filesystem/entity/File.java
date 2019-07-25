@@ -29,7 +29,7 @@ public class File {
 	private byte[] fileBytes;
 
 	@ManyToOne
-	@JoinColumn(name = "FOLDER_ID")
+	//@JoinColumn(name = "FOLDER_ID")
 	private Folder parentFolder;
 
 	public Integer getId() {
