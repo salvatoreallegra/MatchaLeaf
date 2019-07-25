@@ -2,7 +2,8 @@ package com.matchaleaf.filesystem.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
-
+import com.matchaleaf.filesystem.dto.FileUploadDto;
+import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.services.*;
 
 import java.util.List;
@@ -16,6 +17,12 @@ public class FileController {
 	@GetMapping
 	public String sayHello() {
 		return "Hello";
+	}
+	
+	@PostMapping
+	public IdResponseDto createFile(FileUploadDto fileUploadDto) {
+		
+		return fileService.createFile(fileUploadDto);
 	}
 
 
