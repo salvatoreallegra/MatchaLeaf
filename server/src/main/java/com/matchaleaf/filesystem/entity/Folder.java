@@ -2,6 +2,7 @@ package com.matchaleaf.filesystem.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class Folder {
 	@Column(unique = true)
 	private String name;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "parent_folder")
 
 	private Folder parentFolder;

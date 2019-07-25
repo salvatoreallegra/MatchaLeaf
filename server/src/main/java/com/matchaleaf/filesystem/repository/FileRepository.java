@@ -1,9 +1,13 @@
 package com.matchaleaf.filesystem.repository;
-//
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import com.matchaleaf.filesystem.model.FileModel;
-//
-//
-//
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.matchaleaf.filesystem.entity.File;
+
+@Repository
+public interface FileRepository extends JpaRepository<File, Integer> {
+
+}
