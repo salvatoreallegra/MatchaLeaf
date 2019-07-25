@@ -7,10 +7,10 @@ const Folder = folders => (
   <div>
     {folders.map(folder => (
       <div key={folder.id} style={{ background: 'white', margin: '5px' }}>
-        <img src={folderIcon} />
+        <img src={folderIcon} alt='folder' />
         {folder.name}
-        <img src={downloadIcon} />
-        <img src={trashIcon} />
+        <img src={downloadIcon} alt='download' />
+        <img src={trashIcon} alt='' trash />
       </div>
     ))}
   </div>

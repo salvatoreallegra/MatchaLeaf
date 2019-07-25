@@ -7,10 +7,10 @@ const File = files => (
   <div>
     {files.map(file => (
       <div key={file.id} style={{ background: 'white', margin: '5px' }}>
-        <img src={fileIcon} />
+        <img src={fileIcon} alt='file' />
         {file.name}
-        <img src={downloadIcon} />
-        <img src={trashIcon} />
+        <img src={downloadIcon} alt='download' />
+        <img src={trashIcon} alt='trash' />
       </div>
     ))}
   </div>
