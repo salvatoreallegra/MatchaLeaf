@@ -7,27 +7,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Folder {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(unique = true)
 	private String name;
-	
-	private Folder parentFolder;
-	
-	    @OneToMany
-	    private Set<File> files;
 
-	
+	@OneToOne
+	@JoinColumn(name = "parent_folder")
+
+	private Folder parentFolder;
+
+	@OneToMany
+	private Set<File> files;
+
 	public Folder() {
 	}
-	
+
 	public Folder(Integer id, String name, Folder parentFolder) {
 		this.id = id;
 		this.name = name;
@@ -57,7 +61,5 @@ public class Folder {
 	public void setParentFolder(Folder parentFolder) {
 		this.parentFolder = parentFolder;
 	}
-
-	
 
 }
