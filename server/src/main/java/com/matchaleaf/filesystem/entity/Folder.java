@@ -21,6 +21,12 @@ public class Folder {
 
 	@Column(unique = true)
 	private String name;
+	
+	
+	/****************
+	 * Cascade all will allow saving of Files 
+	 * without explicitly calling file.save	 
+	 */
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "parent_folder")
@@ -33,8 +39,9 @@ public class Folder {
 	public Folder() {
 	}
 
-	public Folder(Integer id, String name, Folder parentFolder) {
+	public Folder(Integer id, Set<File> files, String name, Folder parentFolder) {
 		this.id = id;
+		this.files = files;
 		this.name = name;
 		this.parentFolder = parentFolder;
 	}
