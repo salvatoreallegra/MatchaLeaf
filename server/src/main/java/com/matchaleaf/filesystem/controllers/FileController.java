@@ -1,22 +1,23 @@
-//package com.matchaleaf.filesystem.controllers;
+package com.matchaleaf.filesystem.controllers;
+
+import org.springframework.web.bind.annotation.*;
+
+
+import com.matchaleaf.filesystem.services.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/files")
+public class FileController {
 //
-//import org.springframework.web.bind.annotation.*;
-//
-//import com.matchaleaf.filesystem.dto.FileRequestDto;
-//import com.matchaleaf.filesystem.dto.FileResponseDto;
-//import com.matchaleaf.filesystem.services.*;
-//
-//import java.util.List;
-//
-//@RestController
-//@RequestMapping(path = "/files")
-//public class FileController {
-//
-//	private FileService fileService;
-//
-//	public FileController(FileService fileService) {
-//		this.fileService = fileService;
-//	}
+	private FileService fileService;
+	
+	@GetMapping
+	public String sayHello() {
+		return "Hello";
+	}
+
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {
@@ -42,4 +43,4 @@
 //    public CourseResponseDto deleteCourse(@PathVariable Integer id) {
 //        return courseService.deleteCourse(id);
 //    }
-//}
+}
