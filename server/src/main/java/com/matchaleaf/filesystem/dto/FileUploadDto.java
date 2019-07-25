@@ -1,8 +1,8 @@
 package com.matchaleaf.filesystem.dto;
 
-public class FileRequestDto {
+public class FileUploadDto {
 
-	public FileRequestDto() {
+	public FileUploadDto() {
 
 	}
 

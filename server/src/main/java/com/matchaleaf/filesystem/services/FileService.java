@@ -16,7 +16,7 @@ public interface FileService {
 //	FolderDto
 //
 	
-	  FileDto downloadFileById(Integer id);
+	  FileDownloadDto downloadFileById(Integer id);
 	  
 	  
 	  
