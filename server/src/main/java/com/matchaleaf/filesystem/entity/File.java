@@ -23,7 +23,7 @@ public class File {
 	@Column(name = "FILE_ID")
 	private Integer id;
 
-	@Column(unique = true)
+	
 	private String name;
 
 	private byte[] fileBytes;

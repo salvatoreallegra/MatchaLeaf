@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class FilesystemApplication {
 	@Autowired
-	//private FolderRepository folderRepository;
+	// private FolderRepository folderRepository;
 
 	static byte[] fileByteArray = "Any String you want".getBytes();
 
@@ -28,32 +28,31 @@ public class FilesystemApplication {
 	@Bean
 	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
-			
-			
-			//Set of files
-			Set<File> fileSet = new HashSet<>();
-			
-			//One File
-  			File docFile = new File("Tracks.txt", fileByteArray,null);
-  			
-  			//Add a file to the set
-  			fileSet.add(docFile);
-  			
-  			
-  			//I am going to be root with no parent
-  			
-  			
-  			
-  			Folder folder = new Folder(fileSet,"Root", null);
-  			
-  			
-  			folderRepository.save(folder);
-  			
-  			fileRepository.save(new File("I have no parent", fileByteArray,null));
 
-			fileRepository.save(new File("I have a parent", fileByteArray,folder));
-		
-
+//			Set<File> fileSet = new HashSet<>();
+			Folder root = new Folder(null, "root", null);
+			Folder trash = new Folder(null, "trash", null);
+			folderRepository.save(root);
+			folderRepository.save(trash);
+			
+			
+//			// Set of files
+//			
+//			// One File
+//			File docFile = new File("Tracks.txt", fileByteArray, folder);
+//			File musicFile = new File("Mozart", fileByteArray,folder);
+//
+//			// Add a file to the set
+//			fileSet.add(docFile);
+//			fileSet.add(musicFile);
+//
+//			// I am going to be root with no parent
+//
+//			folderRepository.save(folder);
+//
+//			fileRepository.save(new File("I have no parent", fileByteArray, null));
+//
+//			fileRepository.save(new File("I have a parent", fileByteArray, folder));
 
 			// fetch all customers
 //			log.info("Customers found with findAll():");
