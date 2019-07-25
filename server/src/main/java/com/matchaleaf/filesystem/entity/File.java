@@ -10,6 +10,12 @@ public class File {
 	public File() {
 		
 	}
+	public File(Integer id, String name, byte[] fileBytes, Folder parentFolder) {
+		this.id = id;
+		this.name = name;
+		this.fileBytes = fileBytes;
+		this.parentFolder = parentFolder;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +23,8 @@ public class File {
 
 	@Column(unique = true)
 	private String name;
+	
+	private byte[] fileBytes;
 
 	@ManyToOne
 	private Folder parentFolder;
