@@ -1,5 +1,8 @@
 package com.matchaleaf.filesystem;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,10 +28,19 @@ public class FilesystemApplication {
 	@Bean
 	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
+			
+			
+			Set<File> fileSet = new HashSet();
+			File docFile = new File("Tracks.txt", fileByteArray,null);
+			fileSet.add(docFile);
 			//Create a root folder *Root folder will just be sitting in database
-			folderRepository.save(new Folder(null,"root",null));  
-			fileRepository.save(new File("Docs", fileByteArray, null));
-			fileRepository.save(new File("Photos", fileByteArray,null));
+			folderRepository.save(new Folder(fileSet,"root",null)); 
+			folderRepository.save(new Folder(null,"photos",null));
+//			fileRepole(sitory.save(new Fi"Docs", fileByteArray, null));
+//			fileRepository.save(new File("Photos", fileByteArray,null));
+//			fileRepository.save(new File("Docs", byte...,1))
+//			
+			
 
 
 			// fetch all customers

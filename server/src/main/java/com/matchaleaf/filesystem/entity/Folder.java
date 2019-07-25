@@ -30,9 +30,11 @@ public class Folder {
 	 * without explicitly calling file.save	 
 	 */
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "folder_id")
-	private Folder parentFolder;
+	private Set<Folder> parentFolder;
+	
+	
 
 	@OneToMany
 	@JoinColumn(name = "FILE_ID")
@@ -41,7 +43,7 @@ public class Folder {
 	public Folder() {
 	}
 
-	public Folder(Set<File> files, String name, Folder parentFolder) {
+	public Folder(Set<File> files, String name, Set<Folder> parentFolder) {
 		this.id = id;
 		this.files = files;
 		this.name = name;
@@ -64,12 +66,6 @@ public class Folder {
 		this.name = name;
 	}
 
-	public Folder getParentFolder() {
-		return parentFolder;
-	}
 
-	public void setParentFolder(Folder parentFolder) {
-		this.parentFolder = parentFolder;
-	}
 
 }
