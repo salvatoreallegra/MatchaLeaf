@@ -1,5 +1,6 @@
 package com.matchaleaf.filesystem.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,12 +30,12 @@ public class Folder {
 	 */
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "file_id")
-
+	@JoinColumn(name = "folder_id")
 	private Folder parentFolder;
 
 	@OneToMany
-	private Set<File> files;
+	@JoinColumn(name = "FILE_ID")
+	private Set<File> files = new HashSet<File>();
 
 	public Folder() {
 	}

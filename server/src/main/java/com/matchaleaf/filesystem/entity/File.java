@@ -12,7 +12,7 @@ public class File {
 	}
 
 	public File(String name, byte[] fileBytes, Folder parentFolder) {
-		
+
 		this.name = name;
 		this.fileBytes = fileBytes;
 		this.parentFolder = parentFolder;
@@ -20,15 +20,16 @@ public class File {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "FILE_ID")
 	private Integer id;
 
 	@Column(unique = true)
-	@JoinColumn
 	private String name;
 
 	private byte[] fileBytes;
 
 	@ManyToOne
+	@JoinColumn(name = "FOLDER_ID")
 	private Folder parentFolder;
 
 	public Integer getId() {
