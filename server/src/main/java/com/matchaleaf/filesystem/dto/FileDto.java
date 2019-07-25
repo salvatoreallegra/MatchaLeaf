@@ -1,3 +1,15 @@
+package com.matchaleaf.filesystem.dto;
+
+public class FileDto{
+	
+	
+	
+}
+
+
+
+
+
 //package com.matchaleaf.filesystem.dto;
 //
 //public class FileDto {
