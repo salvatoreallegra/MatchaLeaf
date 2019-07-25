@@ -1,8 +1,11 @@
 package com.matchaleaf.filesystem.services;
 
+import java.util.List;
+
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+
 
 public interface FolderService {
 	
@@ -33,6 +36,8 @@ public interface FolderService {
 	    * 
 	    */
 	   	FolderDto downloadFolderById(Integer id);
+	   	
+	    List<FolderDto> downloadZipFolder(Integer id);
 
 
 }
