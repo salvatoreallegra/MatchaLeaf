@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
-// import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import NavBar from '../../Components/NavBar'
+import Home from '../Home'
+import styled from 'styled-components'
+
+const GridDiv = styled.div`
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-auto-rows: 20% 20% 20% 20% 20%;
+`
 
 class App extends Component {
   state = {
@@ -10,10 +18,10 @@ class App extends Component {
   render () {
     const { items } = this.state
     return (
-      <div>
+      <GridDiv>
         <NavBar items={items} />
-        {/* <Route path='/' component={NavBar} /> */}
-      </div>
+        <Route path='/home' component={Home} />
+      </GridDiv>
     )
   }
 }
