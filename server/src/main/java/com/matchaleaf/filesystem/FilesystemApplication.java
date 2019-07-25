@@ -29,19 +29,30 @@ public class FilesystemApplication {
 	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
 			
-//			
-//			Set<File> fileSet = new HashSet();
-//			File docFile = new File("Tracks.txt", fileByteArray,null);
-//			//fileSet.add(docFile);
-//			fileRepository.save(docFile);
-			//Create a root folder *Root folder will just be sitting in database
-//			folderRepository.save(new Folder(fileSet,"root",null)); 
-//			folderRepository.save(new Folder(null,"photos",null));
-//			fileRepole(sitory.save(new Fi"Docs", fileByteArray, null));
-			fileRepository.save(new File("Photos", fileByteArray,null));
-//			fileRepository.save(new File("Docs", byte...,1))
-//			
 			
+			//Set of files
+			Set<File> fileSet = new HashSet<>();
+			
+			//One File
+  			File docFile = new File("Tracks.txt", fileByteArray,null);
+  			
+  			//Add a file to the set
+  			fileSet.add(docFile);
+  			
+  			
+  			//I am going to be root with no parent
+  			
+  			
+  			
+  			Folder folder = new Folder(fileSet,"Root", null);
+  			
+  			
+  			folderRepository.save(folder);
+  			
+  			fileRepository.save(new File("I have no parent", fileByteArray,null));
+
+			fileRepository.save(new File("I have a parent", fileByteArray,folder));
+		
 
 
 			// fetch all customers
