@@ -14,28 +14,22 @@ import org.springframework.context.annotation.Bean;
 public class FilesystemApplication {
 	@Autowired
 	private FolderRepository folderRepository;
-	
-	@Autowired
-	static
-	 FileRepository fileRepository;
-	
+
 	static byte[] fileByteArray = "Any String you want".getBytes();
 
 	public static void main(String[] args) {
 		SpringApplication.run(FilesystemApplication.class, args);
-		
-		
-	}	
+
+	}
+
 	@Bean
-	public CommandLineRunner demo(FileRepository repository) {
+	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
-			// save a couple of customers
-			repository.save(new File("Docs", fileByteArray, null));
-			repository.save(new File("Photos", fileByteArray,null));
-//			repository.save(new Customer("Chloe", "O'Brian"));
-//			repository.save(new Customer("Kim", "Bauer"));
-//			repository.save(new Customer("David", "Palmer"));
-//			repository.save(new Customer("Michelle", "Dessler"));
+			//Create a root folder *Root folder will just be sitting in database
+			folderRepository.save(new Folder(null,"root",null));
+			fileRepository.save(new File("Docs", fileByteArray, null));
+			fileRepository.save(new File("Photos", fileByteArray,null));
+
 
 			// fetch all customers
 //			log.info("Customers found with findAll():");
@@ -66,7 +60,5 @@ public class FilesystemApplication {
 //			log.info("");
 		};
 	}
-
-
 
 }

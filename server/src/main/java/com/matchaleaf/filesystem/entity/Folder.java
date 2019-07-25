@@ -29,7 +29,7 @@ public class Folder {
 	 */
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "parent_folder")
+	@JoinColumn(name = "file_id")
 
 	private Folder parentFolder;
 
@@ -39,7 +39,7 @@ public class Folder {
 	public Folder() {
 	}
 
-	public Folder(Integer id, Set<File> files, String name, Folder parentFolder) {
+	public Folder(Set<File> files, String name, Folder parentFolder) {
 		this.id = id;
 		this.files = files;
 		this.name = name;
