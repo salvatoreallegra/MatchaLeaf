@@ -1,6 +1,7 @@
 package com.matchaleaf.filesystem.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
@@ -20,9 +21,9 @@ public class FileController {
 	}
 	
 	@PostMapping
-	public IdResponseDto createFile(FileUploadDto fileUploadDto) {
-		
-		return fileService.createFile(fileUploadDto);
+	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file) {
+		return "Hello File";
+//		return fileService.createFile(fileUploadDto);
 	}
 
 
