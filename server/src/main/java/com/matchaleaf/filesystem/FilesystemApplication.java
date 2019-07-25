@@ -26,7 +26,7 @@ public class FilesystemApplication {
 	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
 		return (args) -> {
 			//Create a root folder *Root folder will just be sitting in database
-			folderRepository.save(new Folder(null,"root",null));
+			folderRepository.save(new Folder(null,"root",null));  
 			fileRepository.save(new File("Docs", fileByteArray, null));
 			fileRepository.save(new File("Photos", fileByteArray,null));
 

@@ -18,6 +18,7 @@ public class Folder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "FOLDER_ID")
 	private Integer id;
 
 	@Column(unique = true)
