@@ -1,11 +1,21 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-import Header from '../../Components/Header'
+import React, { Component } from 'react'
+// import { Route } from 'react-router-dom'
+import NavBar from '../../Components/NavBar'
 
-const App = props => (
-  <div>
-    <Route path='/' component={Header} />
-  </div>
-)
+class App extends Component {
+  state = {
+    items: [{ text: 'Home', link: '/' }, { text: 'Trash', link: '/trash' }]
+  }
+
+  render () {
+    const { items } = this.state
+    return (
+      <div>
+        <NavBar items={items} />
+        {/* <Route path='/' component={NavBar} /> */}
+      </div>
+    )
+  }
+}
 
 export default App

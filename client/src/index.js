@@ -15,6 +15,9 @@ body {
     background: rgb(255,255,255);
     background: #6FCF97;
 }
+a {
+  text-decoration: none;
+}
 `
 
 ReactDOM.render(
