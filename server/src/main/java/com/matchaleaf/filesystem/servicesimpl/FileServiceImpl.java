@@ -9,12 +9,12 @@
 //
 //public class FileServiceImpl implements FileService {
 //	
-//		DBFileRepository fileRepository;
+//		FileRepository fileRepository;
 //		
 //		
 //		
 //	@Autowired
-//	public FileServiceImpl(DBFileRepository fileRepository) {
+//	public FileServiceImpl(FileRepository fileRepository) {
 //		
 //		this.fileRepository = fileRepository;
 //	}
