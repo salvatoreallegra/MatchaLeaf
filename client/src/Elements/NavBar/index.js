@@ -9,5 +9,9 @@ const StyledNavBar = styled.nav`
   font-style: normal;
   font-size: 24px;
   line-height: 28px;
+  width: 20%;
+  height: 100vh;
+  border-right: 1px solid #000;
+  margin-top: -10px;
 `
 export default StyledNavBar

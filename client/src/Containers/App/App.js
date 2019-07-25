@@ -4,7 +4,7 @@ import NavBar from '../../Components/NavBar'
 
 class App extends Component {
   state = {
-    items: [{ text: 'Home', link: '/' }, { text: 'Trash', link: '/trash' }]
+    items: [{ text: 'Home', link: '/home' }, { text: 'Trash', link: '/trash' }]
   }
 
   render () {
