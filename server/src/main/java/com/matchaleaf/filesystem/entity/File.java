@@ -11,8 +11,8 @@ public class File {
 
 	}
 
-	public File(Integer id, String name, byte[] fileBytes, Folder parentFolder) {
-		this.id = id;
+	public File(String name, byte[] fileBytes, Folder parentFolder) {
+		
 		this.name = name;
 		this.fileBytes = fileBytes;
 		this.parentFolder = parentFolder;

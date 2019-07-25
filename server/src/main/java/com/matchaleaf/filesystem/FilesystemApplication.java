@@ -30,7 +30,8 @@ public class FilesystemApplication {
 	public CommandLineRunner demo(FileRepository repository) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new File(1, "Docs", fileByteArray, null));
+			repository.save(new File("Docs", fileByteArray, null));
+			repository.save(new File("Photos", fileByteArray,null));
 //			repository.save(new Customer("Chloe", "O'Brian"));
 //			repository.save(new Customer("Kim", "Bauer"));
 //			repository.save(new Customer("David", "Palmer"));
