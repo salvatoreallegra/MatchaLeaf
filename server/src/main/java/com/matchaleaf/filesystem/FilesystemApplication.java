@@ -18,7 +18,7 @@ public class FilesystemApplication {
 	@Autowired
 	// private FolderRepository folderRepository;
 
-	static byte[] fileByteArray = "Any String you want".getBytes();
+//	static byte[] fileByteArray = "Any String you want".getBytes();
 
 	public static void main(String[] args) {
 		SpringApplication.run(FilesystemApplication.class, args);
@@ -30,11 +30,11 @@ public class FilesystemApplication {
 		return (args) -> {
 
 //			Set<File> fileSet = new HashSet<>();
-			Folder root = new Folder(null, "root", null);
-			Folder trash = new Folder(null, "trash", null);
-			folderRepository.save(root);
-			folderRepository.save(trash);
-			
+//			Folder root = new Folder(null, "root", null);
+//			Folder trash = new Folder(null, "trash", null);
+//			folderRepository.save(root);
+//			folderRepository.save(trash);
+//			
 			
 //			// Set of files
 //			
