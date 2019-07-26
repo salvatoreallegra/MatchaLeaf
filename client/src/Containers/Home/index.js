@@ -3,6 +3,7 @@ import React from 'react'
 import connect from 'react-redux/es/connect/connect'
 import File from '../../Components/File'
 import Folder from '../../Components/Folder'
+import ContentDiv from '../../Elements/ContentDiv'
 
 // need to import the actions to dispatch
 
@@ -12,11 +13,14 @@ class Home extends React.Component {
     const files = this.props.fileList
 
     return (
-      <div>
+      <ContentDiv>
+        <h2>Files</h2>
+        <hr />
         {File(files)}
-        -----
+        <h2>Folders</h2>
+        <hr />
         {Folder(folders)}
-      </div>
+      </ContentDiv>
     )
   }
 }
