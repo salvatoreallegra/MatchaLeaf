@@ -40,8 +40,14 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
+	    
+		byte[] fileByteArray = "Any String you want".getBytes();
+		FileUploadDto uploadDto = new FileUploadDto();
+		uploadDto.setName("Jubby");
+		uploadDto.setData(fileByteArray);
+		uploadDto.setFolderId(1);
 		
-		testDto = new IdResponseDto();
+			
 	
 		// TODO Auto-generated method stub
 		return testDto;

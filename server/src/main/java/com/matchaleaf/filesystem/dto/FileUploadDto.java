@@ -7,7 +7,7 @@ public class FileUploadDto {
 	}
 
 	String name;
-	Byte[] data;
+	byte[] data;
 	Integer folderId;
 	
 
@@ -19,12 +19,12 @@ public class FileUploadDto {
 		this.name = name;
 	}
 
-	public Byte[] getData() {
+	public byte[] getData() {
 		return data;
 	}
 
-	public void setData(Byte[] data) {
-		this.data = data;
+	public void setData(byte[] fileByteArray) {
+		this.data = fileByteArray;
 	}
 
 	public Integer getFolderId() {
