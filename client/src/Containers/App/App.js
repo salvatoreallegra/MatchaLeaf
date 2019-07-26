@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import NavBar from '../../Components/NavBar'
 import Home from '../Home'
+import Trash from '../Trash'
 import styled from 'styled-components'
 
 const GridDiv = styled.div`
@@ -21,6 +22,7 @@ class App extends Component {
       <GridDiv>
         <NavBar items={items} />
         <Route path='/home' component={Home} />
+        <Route path='/trash' component={Trash} />
       </GridDiv>
     )
   }

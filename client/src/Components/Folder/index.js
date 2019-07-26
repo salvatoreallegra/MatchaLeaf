@@ -6,7 +6,7 @@ import trashIcon from '../../image_source/trashIcon.png'
 const Folder = folders => (
   <div>
     {folders.map(folder => (
-      <div key={folder.id} style={{ background: 'white', margin: '5px' }}>
+      <div key={folder.id} style={{ background: 'white', margin: '10px' }}>
         <img src={folderIcon} alt='folder' />
         {folder.name}
         <img src={downloadIcon} alt='download' />
