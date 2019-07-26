@@ -1,5 +1,10 @@
 package com.matchaleaf.filesystem.mapper;
 
-public class FolderMapper {
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+
+@Mapper
+public interface FolderMapper {
 
 }
