@@ -22,6 +22,8 @@ public class FileServiceImpl implements FileService {
 	private FileRepository fileRepository;
 	private FolderRepository folderRepository;
 	//private FileMapper fileMapper;
+	
+	private IdResponseDto testDto;
 
 	@Autowired
 	public FileServiceImpl(FileRepository fileRepository, FolderRepository folderRepository) {
@@ -37,11 +39,12 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String/*IdResponseDto*/ createFile(MultipartFile file, Integer folderID/* FileUploadDto fileUploadDto */) {
-		System.out.println("99999999999" + file.getOriginalFilename());
+	public IdResponseDto createFile( FileUploadDto fileUploadDto) {
+		
+		testDto = new IdResponseDto();
 	
 		// TODO Auto-generated method stub
-		return "hello";
+		return testDto;
 	}
 
 }
