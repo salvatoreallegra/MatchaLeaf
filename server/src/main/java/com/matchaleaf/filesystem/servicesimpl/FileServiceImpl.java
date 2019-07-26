@@ -39,7 +39,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public IdResponseDto createFile( FileUploadDto fileUploadDto) {
+	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
 		
 		testDto = new IdResponseDto();
 	
