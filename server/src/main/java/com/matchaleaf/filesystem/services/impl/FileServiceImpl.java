@@ -1,10 +1,9 @@
-package com.matchaleaf.filesystem.servicesimpl;
+package com.matchaleaf.filesystem.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-//import com.matchaleaf.filesystem.mapper.FileMapper;
 
 import com.matchaleaf.filesystem.dto.FileDownloadDto;
 
@@ -26,7 +25,7 @@ public class FileServiceImpl implements FileService {
 	private IdResponseDto testDto;
 
 	@Autowired
-	public FileServiceImpl(FileRepository fileRepository, FolderRepository folderRepository, FileMapper fileMapper) {
+	public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FolderRepository folderRepository ) {
 
 		this.fileRepository = fileRepository;
 		this.folderRepository = folderRepository;
@@ -48,10 +47,9 @@ public class FileServiceImpl implements FileService {
 		fileUploadDto.setData(fileByteArray);
 		fileUploadDto.setFolderId(1);
 
-		//return fileMapper.entityToDto.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto)));
+		return fileMapper.entityToDto(fileRepository.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto))); /*.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto));*/
 
 		// TODO Auto-generated method stub
-		return testDto;
 	}
 
 }
