@@ -3,14 +3,11 @@ package com.matchaleaf.filesystem.servicesimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.matchaleaf.filesystem.entity.File;
-import com.matchaleaf.filesystem.mapper.FileMapper;
-import com.cooksys.orm.mapper.StudentMapper;
-import com.cooksys.orm.repository.CourseRepository;
-import com.cooksys.orm.repository.MajorRepository;
-import com.cooksys.orm.repository.StudentRepository;
+
+//import com.matchaleaf.filesystem.mapper.FileMapper;
+
 import com.matchaleaf.filesystem.dto.FileDownloadDto;
-import com.matchaleaf.filesystem.dto.FileDto;
+
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.repository.FileRepository;
@@ -22,12 +19,13 @@ public class FileServiceImpl implements FileService {
 
 	private FileRepository fileRepository;
 	private FolderRepository folderRepository;
-	private FileMapper fileMapper;
+	//private FileMapper fileMapper;
 
 	@Autowired
-	public FileServiceImpl(FileRepository fileRepository) {
+	public FileServiceImpl(FileRepository fileRepository, FolderRepository folderRepository) {
 
 		this.fileRepository = fileRepository;
+		this.folderRepository = folderRepository;
 	}
 
 	@Override
@@ -37,9 +35,11 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public IdResponseDto createFile(MultipartFile file, FileUploadDto fileUploadDto) {
+	public String/*IdResponseDto*/ createFile(MultipartFile file, FileUploadDto fileUploadDto) {
+		System.out.println("99999999999" + file.getOriginalFilename());
+	
 		// TODO Auto-generated method stub
-		return null;
+		return "hello";
 	}
 
 }

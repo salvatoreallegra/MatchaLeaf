@@ -21,7 +21,7 @@ public class FileController {
 	}
 	
 	@PostMapping
-	public IdResponseDto createFile(@RequestParam("file") MultipartFile file, FileUploadDto fileUploadDto) {
+	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file, @RequestBody FileUploadDto fileUploadDto) {
 		System.out.println("88888888888888 " + file.getOriginalFilename());
 		//return "Hello File";
 		return fileService.createFile(file, fileUploadDto);
