@@ -8,7 +8,7 @@ public class FileUploadDto {
 
 	String fileName;
 	Byte[] fileBytes;
-	String folderName;
+	Integer folderId;
 
 	public String getFileName() {
 		return fileName;
@@ -26,12 +26,14 @@ public class FileUploadDto {
 		this.fileBytes = fileBytes;
 	}
 
-	public String getFolderName() {
-		return folderName;
+	public Integer getFolderId() {
+		return folderId;
 	}
 
-	public void setFolderName(String folderName) {
-		this.folderName = folderName;
+	public void setFolderId(Integer folderId) {
+		this.folderId = folderId;
 	}
+
+
 
 }
