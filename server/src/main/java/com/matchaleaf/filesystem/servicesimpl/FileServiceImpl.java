@@ -37,7 +37,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String/*IdResponseDto*/ createFile(MultipartFile file/* FileUploadDto fileUploadDto */) {
+	public String/*IdResponseDto*/ createFile(MultipartFile file, Integer folderID/* FileUploadDto fileUploadDto */) {
 		System.out.println("99999999999" + file.getOriginalFilename());
 	
 		// TODO Auto-generated method stub
