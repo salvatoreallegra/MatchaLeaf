@@ -1,6 +1,7 @@
 package com.matchaleaf.filesystem.servicesimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -15,6 +16,7 @@ import com.matchaleaf.filesystem.repository.FolderRepository;
 import com.matchaleaf.filesystem.services.FileService;
 
 //
+@Service
 public class FileServiceImpl implements FileService {
 
 	private FileRepository fileRepository;
@@ -35,7 +37,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String/*IdResponseDto*/ createFile(MultipartFile file, FileUploadDto fileUploadDto) {
+	public String/*IdResponseDto*/ createFile(MultipartFile file/* FileUploadDto fileUploadDto */) {
 		System.out.println("99999999999" + file.getOriginalFilename());
 	
 		// TODO Auto-generated method stub

@@ -15,16 +15,20 @@ public class FileController {
 //
 	private FileService fileService;
 	
+	public FileController(FileService fileService) {
+		this.fileService = fileService;
+	}
+	
 	@GetMapping
 	public String sayHello() {
 		return "Hello";
 	}
 	
 	@PostMapping
-	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file, @RequestBody FileUploadDto fileUploadDto) {
+	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file/* @RequestBody FileUploadDto fileUploadDto*/) {
 		System.out.println("88888888888888 " + file.getOriginalFilename());
 		//return "Hello File";
-		return fileService.createFile(file, fileUploadDto);
+		return fileService.createFile(file);
 	}
 
 
