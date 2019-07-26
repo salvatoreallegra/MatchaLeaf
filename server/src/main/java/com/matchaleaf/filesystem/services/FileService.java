@@ -1,6 +1,9 @@
 package com.matchaleaf.filesystem.services;
 
+import java.io.File;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.matchaleaf.filesystem.dto.*;
 
@@ -16,7 +19,7 @@ public interface FileService {
 //
 
 	//This is can also be considered uploading a file
-	IdResponseDto createFile(FileUploadDto fileUploadDto);   
+	IdResponseDto createFile( MultipartFile file,FileUploadDto fileUploadDto);   
 	FileDownloadDto downloadFileById(Integer id);
 	
 	
