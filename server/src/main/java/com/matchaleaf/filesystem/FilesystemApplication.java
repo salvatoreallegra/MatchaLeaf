@@ -54,6 +54,11 @@ public class FilesystemApplication {
 //
 //			fileRepository.save(new File("I have a parent", fileByteArray, folder));
 
+
+			
+			
+			
+			
 			// fetch all customers
 //			log.info("Customers found with findAll():");
 //			log.info("-------------------------------");
