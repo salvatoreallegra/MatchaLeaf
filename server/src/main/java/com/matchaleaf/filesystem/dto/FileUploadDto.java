@@ -6,34 +6,30 @@ public class FileUploadDto {
 
 	}
 
-	String fileName;
-	Byte[] fileBytes;
-	Integer folderId;
-
-	public String getFileName() {
-		return fileName;
+	String name;
+	Byte[] data;
+	public String getName() {
+		return name;
 	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public Byte[] getFileBytes() {
-		return fileBytes;
+	public Byte[] getData() {
+		return data;
 	}
-
-	public void setFileBytes(Byte[] fileBytes) {
-		this.fileBytes = fileBytes;
+	public void setData(Byte[] data) {
+		this.data = data;
 	}
-
 	public Integer getFolderId() {
 		return folderId;
 	}
-
 	public void setFolderId(Integer folderId) {
 		this.folderId = folderId;
 	}
 
+	Integer folderId;
+
+	
 
 
 }

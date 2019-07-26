@@ -24,12 +24,20 @@ public class FileController {
 		return "Hello";
 	}
 	
-	@PostMapping
-	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file, @RequestBody Integer folderID) {
-		System.out.println("88888888888888 " + file.getOriginalFilename());
+	//Keep getting unsupported media type exception in postman, this has something to do with
+	//headers when I use @RequestBody
+	
+//	@PostMapping
+//	public String/*IdResponseDto*/ createFile(@RequestParam("file") MultipartFile file, @RequestBody Integer folderID) {
+//		System.out.println("88888888888888 " + file.getOriginalFilename());
+//		
+//		//return "Hello File";
+//		return fileService.createFile(file, folderID);
+//	}
+	
+	public IdResponseDto createFile(@RequestBody FileUploadDto fileUploadDto) {
 		
-		//return "Hello File";
-		return fileService.createFile(file, folderID);
+		return fileService.createFile(fileUploadDto);
 	}
 
 
