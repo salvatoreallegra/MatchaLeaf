@@ -7,16 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
+import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.entity.File;
 import com.matchaleaf.filesystem.entity.Folder;
+import com.matchaleaf.filesystem.mapper.FileMapper;
 import com.matchaleaf.filesystem.repository.*;
+import com.matchaleaf.filesystem.services.FileService;
+import com.matchaleaf.filesystem.services.impl.FileServiceImpl;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class FilesystemApplication {
-	@Autowired
+	
+	
+	//@Autowired
 	// private FolderRepository folderRepository;
+	
+//	FileService fileService;
 
 //	static byte[] fileByteArray = "Any String you want".getBytes();
 
@@ -25,9 +34,17 @@ public class FilesystemApplication {
 
 	}
 
-	@Bean
-	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
-		return (args) -> {
+//	@Bean
+//	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
+//		return (args) -> {
+//			
+//			byte[] fileByteArray = "Any String you want".getBytes();
+//			FileUploadDto fileUploadDto = new FileUploadDto();
+//			fileUploadDto.setName("Jubby");
+//			fileUploadDto.setData(fileByteArray);
+//			fileUploadDto.setFolderId(1);
+//
+//			fileService.createFile(fileUploadDto,1);
 
 //			Set<File> fileSet = new HashSet<>();
 //			Folder root = new Folder(null, "root", null);
@@ -86,7 +103,7 @@ public class FilesystemApplication {
 //			// 	log.info(bauer.toString());
 //			// }
 //			log.info("");
-		};
-	}
+//		};
+//	}
 
 }

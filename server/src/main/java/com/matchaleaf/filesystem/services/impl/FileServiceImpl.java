@@ -22,14 +22,18 @@ public class FileServiceImpl implements FileService {
 	private FolderRepository folderRepository;
 	private FileMapper fileMapper;
 
-	private IdResponseDto testDto;
+	//private IdResponseDto testDto;
+	public FileServiceImpl() {
+		
+	}
 
-	@Autowired
+	
 	public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FolderRepository folderRepository ) {
 
 		this.fileRepository = fileRepository;
-		this.folderRepository = folderRepository;
 		this.fileMapper = fileMapper;
+		this.folderRepository = folderRepository;
+		
 	}
 
 	@Override
@@ -47,7 +51,7 @@ public class FileServiceImpl implements FileService {
 		fileUploadDto.setData(fileByteArray);
 		fileUploadDto.setFolderId(1);
 
-		return fileMapper.entityToDto(fileRepository.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto))); /*.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto));*/
+		return fileMapper.entityToDto(fileRepository.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto))); 
 
 		// TODO Auto-generated method stub
 	}

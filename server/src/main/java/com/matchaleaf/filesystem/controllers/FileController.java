@@ -35,12 +35,14 @@ public class FileController {
 		//return "Hello File";
 		return fileService.createFile(file, folderID);
 	}
-	//@PostMapping
-//	@RequestMapping(/*value = "/api/v1/upload",*/ method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//	public IdResponseDto createFile(@RequestBody FileUploadDto fileUploadDto) {
-//		
-//		return fileService.createFile(fileUploadDto);
-//	}
+
+	@PostMapping("/test")
+	public IdResponseDto createFileTest(@RequestParam("file") MultipartFile file) {
+		
+		int folderID = 1;
+		//return "Hello File";
+		return fileService.createFile(file, folderID);
+	}
 
 
 //    @GetMapping

@@ -2,11 +2,13 @@ package com.matchaleaf.filesystem.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 
-
+@Service
 public interface FolderService {
 	
 // The dto's we need
