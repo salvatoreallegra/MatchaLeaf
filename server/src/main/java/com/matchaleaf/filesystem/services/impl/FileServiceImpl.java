@@ -45,7 +45,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
+	public String createFile(MultipartFile file, Integer folderId) {
         try {
 			System.out.println("Bytes*8**** " + file.getBytes());
 		} catch (IOException e) {
@@ -62,8 +62,13 @@ public class FileServiceImpl implements FileService {
 		fileUploadDto.setFolderId(1);
 		
 		System.out.println("******************I am file upload dto name" + fileUploadDto.getName());
+		
+		//Attempt to save file without all these damn layers, let's just do a simple save
+		fileRepository.save(fileMapper.dtoToEntity(fileUploadDto));
+		
+		return "Possibly saved to database";
 
-		return fileMapper.entityToDto(fileRepository.save(fileMapper.dtoToEntity(fileUploadDto))); 
+		//return fileMapper.entityToDto(fileRepository.save(fileMapper.dtoToEntity(fileUploadDto))); 
 
 		// TODO Auto-generated method stub
 	}

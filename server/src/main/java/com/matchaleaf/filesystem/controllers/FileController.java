@@ -29,7 +29,7 @@ public class FileController {
 	//headers when I use @RequestBody
 	
 	@PostMapping
-	public IdResponseDto createFile(@RequestParam("file") MultipartFile file, @RequestBody Integer folderID) {
+	public String createFile(@RequestParam("file") MultipartFile file, @RequestBody Integer folderID) {
 		System.out.println("88888888888888 " + file.getOriginalFilename());
 		
 		//return "Hello File";
@@ -37,7 +37,7 @@ public class FileController {
 	}
 
 	@PostMapping("/test")
-	public IdResponseDto createFileTest(@RequestParam("file") MultipartFile file) {
+	public String createFileTest(@RequestParam("file") MultipartFile file) {
 		System.out.println("I am in controller******** " + file.getOriginalFilename());
 		int folderID = 1;
 		//return "Hello File";
