@@ -32,19 +32,19 @@ public class FileController {
 	// to do with
 	// headers when I use @RequestBody
 
-	@PostMapping
-	public String createFile(@RequestParam("file") MultipartFile file) {
-		System.out.println("88888888888888 " + file.getOriginalFilename());
-
-		// return "Hello File";
-		return fileService.createFile(file);
-	}
+//	@PostMapping
+//	public String createFile(@RequestParam("file") MultipartFile file) {
+//		System.out.println("88888888888888 " + file.getOriginalFilename());
+//
+//		// return "Hello File";
+//		return fileService.createFile(file);
+//	}
 
 	@PostMapping("/test")
-	public String createFileTest(@RequestParam("file") MultipartFile file, @RequestParam(name = "parentFolderId") String folderId) {
+	public String createFileTest(@RequestParam("file") MultipartFile file, @RequestParam(name = "parentFolderId") Integer folderId) {
 		System.out.println("Parent Folder id  " + folderId);
 
-		return fileService.createFile(file);
+		return fileService.createFile(file, folderId);
 		//return "Hello";
 
 	}

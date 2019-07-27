@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String createFile(MultipartFile file) {
+	public String createFile(MultipartFile file, Integer folderId) {
       
 		File fileEntity = new File();
 		fileEntity.setName(file.getOriginalFilename());
@@ -57,7 +57,7 @@ public class FileServiceImpl implements FileService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fileEntity.setParentFolder(null);
+		fileEntity.setParentFolderId(folderId);
 
 	    fileRepository.save(fileEntity); 
 

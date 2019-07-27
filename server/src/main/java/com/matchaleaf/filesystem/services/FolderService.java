@@ -19,7 +19,7 @@ public interface FolderService {
 //		FileDto   ---This is related to the photo Pedro sent me in slack
 //		FolderDto
 	
-	   IdResponseDto createFolder(FolderUploadDto folderUploadDto);
+	   String createFolder(FolderUploadDto folderUploadDto);
 	   
 	   
 	   
