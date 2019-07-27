@@ -41,8 +41,8 @@ public class FileController {
 	}
 
 	@PostMapping("/test")
-	public String createFileTest(@RequestParam("file") MultipartFile file) {
-		System.out.println("I am in controller******** " + file.getOriginalFilename());
+	public String createFileTest(@RequestParam("file") MultipartFile file, @RequestParam(name = "parentFolderId") String folderId) {
+		System.out.println("Parent Folder id  " + folderId);
 
 		return fileService.createFile(file);
 		//return "Hello";
