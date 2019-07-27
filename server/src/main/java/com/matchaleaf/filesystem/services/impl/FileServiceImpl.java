@@ -11,6 +11,7 @@ import com.matchaleaf.filesystem.dto.FileDownloadDto;
 
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+import com.matchaleaf.filesystem.entity.File;
 import com.matchaleaf.filesystem.repository.FileRepository;
 import com.matchaleaf.filesystem.repository.FolderRepository;
 import com.matchaleaf.filesystem.services.FileService;
@@ -20,6 +21,7 @@ import com.matchaleaf.filesystem.mapper.*;
 @Service
 public class FileServiceImpl implements FileService {
 
+	@Autowired
 	private FileRepository fileRepository;
 	private FolderRepository folderRepository;
 	private FileMapper fileMapper;
@@ -47,9 +49,17 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public String createFile(MultipartFile file) {
       
-		
+		File fileEntity = new File();
+		fileEntity.setName(file.getOriginalFilename());
+		try {
+			fileEntity.setFileBytes(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		fileEntity.setParentFolder(null);
 
-	    fileRepository.save(file); 
+	    fileRepository.save(fileEntity); 
 
 		return "Possibly saved to database";
 	}
