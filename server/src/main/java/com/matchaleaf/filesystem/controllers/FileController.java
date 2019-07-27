@@ -38,7 +38,7 @@ public class FileController {
 
 	@PostMapping("/test")
 	public IdResponseDto createFileTest(@RequestParam("file") MultipartFile file) {
-		
+		System.out.println("I am in controller******** " + file.getOriginalFilename());
 		int folderID = 1;
 		//return "Hello File";
 		return fileService.createFile(file, folderID);

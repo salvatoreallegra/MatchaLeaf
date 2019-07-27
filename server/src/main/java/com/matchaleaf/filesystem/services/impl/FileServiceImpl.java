@@ -44,12 +44,15 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
-
+        System.out.println("******************In Create File");
+        System.out.println("******************I am folder id " + folderId);
 		byte[] fileByteArray = "Any String you want".getBytes();
 		FileUploadDto fileUploadDto = new FileUploadDto();
 		fileUploadDto.setName("Jubby");
 		fileUploadDto.setData(fileByteArray);
 		fileUploadDto.setFolderId(1);
+		
+		System.out.println("******************I am file upload dto name" + fileUploadDto.getName());
 
 		return fileMapper.entityToDto(fileRepository.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto))); 
 
