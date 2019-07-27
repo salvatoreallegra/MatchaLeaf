@@ -25,7 +25,7 @@ public class File {
 
 	
 	private String name;
-
+	@Lob
 	private byte[] fileBytes;
 
 	@ManyToOne

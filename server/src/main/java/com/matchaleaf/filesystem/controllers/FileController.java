@@ -6,8 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+import com.matchaleaf.filesystem.entity.File;
+import com.matchaleaf.filesystem.repository.FileRepository;
 import com.matchaleaf.filesystem.services.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -15,35 +18,36 @@ import java.util.List;
 public class FileController {
 //
 	private FileService fileService;
-	
+
 	public FileController(FileService fileService) {
 		this.fileService = fileService;
 	}
-	
+
 	@GetMapping
 	public String sayHello() {
 		return "Hello";
 	}
-	
-	//Keep getting unsupported media type exception in postman, this has something to do with
-	//headers when I use @RequestBody
-	
+
+	// Keep getting unsupported media type exception in postman, this has something
+	// to do with
+	// headers when I use @RequestBody
+
 	@PostMapping
-	public String createFile(@RequestParam("file") MultipartFile file, @RequestBody Integer folderID) {
+	public String createFile(@RequestParam("file") MultipartFile file) {
 		System.out.println("88888888888888 " + file.getOriginalFilename());
-		
-		//return "Hello File";
-		return fileService.createFile(file, folderID);
+
+		// return "Hello File";
+		return fileService.createFile(file);
 	}
 
 	@PostMapping("/test")
 	public String createFileTest(@RequestParam("file") MultipartFile file) {
 		System.out.println("I am in controller******** " + file.getOriginalFilename());
-		int folderID = 1;
-		//return "Hello File";
-		return fileService.createFile(file, folderID);
-	}
 
+		return fileService.createFile(file);
+		//return "Hello";
+
+	}
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {
