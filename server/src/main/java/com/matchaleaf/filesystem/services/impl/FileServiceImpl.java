@@ -1,5 +1,7 @@
 package com.matchaleaf.filesystem.services.impl;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,9 +46,16 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
-        System.out.println("******************In Create File");
+        try {
+			System.out.println("Bytes*8**** " + file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("******************In Create File");
         System.out.println("******************I am folder id " + folderId);
 		byte[] fileByteArray = "Any String you want".getBytes();
+		
 		FileUploadDto fileUploadDto = new FileUploadDto();
 		fileUploadDto.setName("Jubby");
 		fileUploadDto.setData(fileByteArray);
@@ -54,7 +63,7 @@ public class FileServiceImpl implements FileService {
 		
 		System.out.println("******************I am file upload dto name" + fileUploadDto.getName());
 
-		return fileMapper.entityToDto(fileRepository.saveAndFlush(fileMapper.dtoToEntity(fileUploadDto))); 
+		return fileMapper.entityToDto(fileRepository.save(fileMapper.dtoToEntity(fileUploadDto))); 
 
 		// TODO Auto-generated method stub
 	}
