@@ -1,7 +1,7 @@
 import React from 'react'
 import Btn from '../../Elements/Btn'
 
-const UploadButton = openModal => (
+const UploadButton = ({ openModal }) => (
   <div
     style={{
       display: 'flex',
