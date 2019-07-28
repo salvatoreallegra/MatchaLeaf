@@ -54,6 +54,10 @@ public class FileServiceImpl implements FileService {
 
 		Folder parentFolder = new Folder();
 		parentFolder = folderRepository.getOne(folderId);
+//		if(parentFolder == null) {
+//			folderId = 1;
+//			parentFolder = folderRepository.getOne(folderId);
+//		}
 		File fileEntity = new File();
 
 		fileEntity.setName(file.getOriginalFilename());
@@ -67,8 +71,9 @@ public class FileServiceImpl implements FileService {
 		// fileEntity.setParentFolderId(folderId);
 
 		fileRepository.save(fileEntity);
+		return fileEntity.getId().toString();
 
-		return "Possibly saved to database";
+		
 	}
 
 }
