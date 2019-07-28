@@ -36,7 +36,6 @@ class Home extends React.Component {
           {Folder(folders)}
         </ContentDiv>
         <UploadButton />
-        />
       </>
     )
   }
