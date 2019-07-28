@@ -1,6 +1,8 @@
 package com.matchaleaf.filesystem.controllers;
 
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,11 +52,23 @@ public class FileController {
 
 	@GetMapping("/{ID}")
 	public FileDownloadDto downloadFile(@PathVariable Integer ID) {
-		
+
 		System.out.println("Im the id in the controller " + ID);
 		// Load file from database
 		return fileService.downloadFileById(ID);
 
+	}
+
+	// This may be what we eventually download, I don't think the downloadFile
+	// Method will work because it returns the bytes as text
+
+	@GetMapping("/bytes/{idbytes}")
+	public ResponseEntity<Resource> downloadFileBytes(@PathVariable Integer idbytes) {
+
+		File file = fileService.downloadFileBytesById(idbytes);
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
+				.body(new ByteArrayResource(file.getFileBytes()));
 	}
 
 //    @GetMapping

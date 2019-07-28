@@ -3,6 +3,8 @@ package com.matchaleaf.filesystem.services.impl;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,6 +60,13 @@ public class FileServiceImpl implements FileService {
 
 		return downloadDto;
 	}
+	
+	public File downloadFileBytesById(Integer ID) {
+       
+		return fileRepository.getOne(ID);
+               
+    }
+	
 
 	@Override
 	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
