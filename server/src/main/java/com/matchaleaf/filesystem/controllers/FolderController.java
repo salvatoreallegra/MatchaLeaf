@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
+import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.services.FolderService;
 
 @RestController
@@ -21,10 +22,10 @@ public class FolderController {
 	}
 
 	@PostMapping
-	public String createFolder(@RequestBody FolderUploadDto folderUploadDto) {
+	public IdResponseDto createFolder(@RequestBody FolderUploadDto folderUploadDto) {
+		System.out.println(folderUploadDto.getParentFolderId());
 		System.out.println(folderUploadDto.getFolderName());
-		 folderService.createFolder(folderUploadDto);
-		return "Hello";
+		return folderService.createFolder(folderUploadDto);
 
 	}
 
