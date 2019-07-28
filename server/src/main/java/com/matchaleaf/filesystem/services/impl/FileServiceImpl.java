@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.matchaleaf.filesystem.dto.FileDownloadDto;
-
+import com.matchaleaf.filesystem.dto.FileDto;
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.entity.File;
@@ -66,6 +66,24 @@ public class FileServiceImpl implements FileService {
 		return fileRepository.getOne(ID);
                
     }
+	
+	
+	//Trashing a file, Update files parent folder id to the trash folder id
+	public FileDto trashFile(Integer Id) {
+		
+		Folder trashFolder = new Folder();
+		trashFolder = folderRepository.getOne(2);
+		
+		File fileToPatch = fileRepository.getOne(Id);
+        fileToPatch.setParentFolder(trashFolder);
+        FileDto patchedFileDto = new FileDto();
+        patchedFileDto.setId(fileToPatch.getId());
+        patchedFileDto.setName(fileToPatch.getName());
+        fileRepository.save(fileToPatch);
+        
+        return patchedFileDto;
+		
+	}
 	
 
 	@Override

@@ -28,6 +28,8 @@ public interface FileService {
 	
 	FileDownloadDto downloadFileById(Integer id);
 	
+	FileDto trashFile(Integer Id);
+	
 	File downloadFileBytesById(Integer id);
 	
 	

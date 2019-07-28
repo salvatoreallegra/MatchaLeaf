@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cooksys.orm.dto.StudentResponseDto;
 import com.matchaleaf.filesystem.dto.FileDownloadDto;
+import com.matchaleaf.filesystem.dto.FileDto;
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.entity.File;
@@ -71,11 +71,11 @@ public class FileController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
 				.body(new ByteArrayResource(file.getFileBytes()));
 	}
-	
-	  @PatchMapping("/{id}/trash")
-	    public StudentResponseDto updateStudentMajor(@PathVariable Integer id, @PathVariable String majorName) {
-	        return studentSerive.updateStudentMajor(id, majorName);
-	    }
+
+	@PatchMapping("/{id}/trash")
+	public FileDto trashFile(@PathVariable Integer id) {
+		return fileService.trashFile(id);
+	}
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {
