@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.matchaleaf.filesystem.dto.FileDownloadDto;
 
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.entity.File;
+import com.matchaleaf.filesystem.entity.Folder;
 import com.matchaleaf.filesystem.repository.FileRepository;
 import com.matchaleaf.filesystem.repository.FolderRepository;
 import com.matchaleaf.filesystem.services.FileService;
@@ -23,8 +23,12 @@ public class FileServiceImpl implements FileService {
 
 	@Autowired
 	private FileRepository fileRepository;
+	@Autowired
 	private FolderRepository folderRepository;
 	private FileMapper fileMapper;
+	
+//	@Autowired
+//	Folder parentFolder;
 
 	//private IdResponseDto testDto;
 	public FileServiceImpl() {
@@ -49,7 +53,11 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public String createFile(MultipartFile file, Integer folderId) {
       
+		//Major majorToUpdate = majorRepository.getOne(id);
+		Folder parentFolder = new Folder();
+	    parentFolder = folderRepository.getOne(folderId);
 		File fileEntity = new File();
+		
 		fileEntity.setName(file.getOriginalFilename());
 		try {
 			fileEntity.setFileBytes(file.getBytes());
@@ -57,7 +65,8 @@ public class FileServiceImpl implements FileService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fileEntity.setParentFolderId(folderId);
+		fileEntity.setParentFolder(parentFolder);
+		//fileEntity.setParentFolderId(folderId);
 
 	    fileRepository.save(fileEntity); 
 

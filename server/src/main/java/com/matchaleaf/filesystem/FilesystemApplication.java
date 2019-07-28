@@ -22,8 +22,8 @@ import org.springframework.context.annotation.Bean;
 public class FilesystemApplication {
 	
 	
-	//@Autowired
-	// private FolderRepository folderRepository;
+	@Autowired
+	 private FolderRepository folderRepository;
 	
 //	FileService fileService;
 
@@ -34,9 +34,9 @@ public class FilesystemApplication {
 
 	}
 
-//	@Bean
-//	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
-//		return (args) -> {
+	@Bean
+	public CommandLineRunner demo(FileRepository fileRepository, FolderRepository folderRepository) {
+		return (args) -> {
 //			
 //			byte[] fileByteArray = "Any String you want".getBytes();
 //			FileUploadDto fileUploadDto = new FileUploadDto();
@@ -47,6 +47,8 @@ public class FilesystemApplication {
 //			fileService.createFile(fileUploadDto,1);
 
 //			Set<File> fileSet = new HashSet<>();
+			
+			
 //			Folder root = new Folder(null, "root", null);
 //			Folder trash = new Folder(null, "trash", null);
 //			folderRepository.save(root);
@@ -103,7 +105,7 @@ public class FilesystemApplication {
 //			// 	log.info(bauer.toString());
 //			// }
 //			log.info("");
-//		};
-//	}
+		};
+	}
 
 }

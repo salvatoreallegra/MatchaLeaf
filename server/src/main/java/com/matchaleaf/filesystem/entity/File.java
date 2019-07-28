@@ -16,7 +16,6 @@ public class File {
 		this.name = name;
 		this.fileBytes = fileBytes;
 		this.parentFolder = parentFolder;
-		this.parentFolderId = parentFolderId;
 	}
 
 	@Id
@@ -30,7 +29,7 @@ public class File {
 	
 	private byte[] fileBytes;
 	
-	private Integer parentFolderId;
+	//private Integer parentFolderId;
 
 	@ManyToOne
 	//@JoinColumn(name = "FOLDER_ID")
@@ -68,12 +67,12 @@ public class File {
 		this.parentFolder = parentFolder;
 	}
 
-	public Integer getParentFolderId() {
-		return parentFolderId;
-	}
-
-	public void setParentFolderId(Integer parentFolderId) {
-		this.parentFolderId = parentFolderId;
-	}
+//	public Integer getParentFolderId() {
+//		return parentFolderId;
+//	}
+//
+//	public void setParentFolderId(Integer parentFolderId) {
+//		this.parentFolderId = parentFolderId;
+//	}
 
 }

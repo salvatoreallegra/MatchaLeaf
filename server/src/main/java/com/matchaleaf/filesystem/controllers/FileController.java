@@ -32,22 +32,29 @@ public class FileController {
 	// to do with
 	// headers when I use @RequestBody
 
-//	@PostMapping
-//	public String createFile(@RequestParam("file") MultipartFile file) {
-//		System.out.println("88888888888888 " + file.getOriginalFilename());
-//
-//		// return "Hello File";
-//		return fileService.createFile(file);
-//	}
+	@PostMapping
+	public String createFile(@RequestParam("file") MultipartFile file,
+			@RequestParam(name = "parentFolderId") Integer folderId) {
+		if (folderId instanceof Integer) {
+			System.out.println("Folder id is integer");
+		} else {
+			System.out.println("Not an integer");
+		}
 
-	@PostMapping("/test")
-	public String createFileTest(@RequestParam("file") MultipartFile file, @RequestParam(name = "parentFolderId") Integer folderId) {
 		System.out.println("Parent Folder id  " + folderId);
 
 		return fileService.createFile(file, folderId);
-		//return "Hello";
-
 	}
+
+//	@PostMapping("/test")
+//	public String createFileTest(@RequestParam("file") MultipartFile file,
+//			@RequestParam(name = "parentFolderId") Integer folderId) {
+//		System.out.println("Parent Folder id  " + folderId);
+//
+//		return fileService.createFile(file, folderId);
+//		// return "Hello";
+//
+//	}
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {

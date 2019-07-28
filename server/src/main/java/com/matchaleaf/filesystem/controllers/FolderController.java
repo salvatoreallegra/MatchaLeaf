@@ -23,7 +23,7 @@ public class FolderController {
 	@PostMapping
 	public String createFolder(@RequestBody FolderUploadDto folderUploadDto) {
 		System.out.println(folderUploadDto.getFolderName());
-		// return fileService.createFile(file, folderId);
+		 folderService.createFolder(folderUploadDto);
 		return "Hello";
 
 	}
