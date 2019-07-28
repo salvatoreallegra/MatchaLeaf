@@ -1,9 +1,12 @@
 package com.matchaleaf.filesystem.controllers;
 
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.matchaleaf.filesystem.dto.FileDownloadDto;
 import com.matchaleaf.filesystem.dto.FileUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
 import com.matchaleaf.filesystem.entity.File;
@@ -28,14 +31,10 @@ public class FileController {
 		return "Hello";
 	}
 
-	// Keep getting unsupported media type exception in postman, this has something
-	// to do with
-	// headers when I use @RequestBody
-
 	@PostMapping
 	public IdResponseDto createFile(@RequestParam("file") MultipartFile file,
 			@RequestParam(name = "parentFolderId") Integer folderId) {
-		if(folderId == null) {			
+		if (folderId == null) {
 			folderId = 1;
 		}
 		if (folderId instanceof Integer) {
@@ -49,15 +48,14 @@ public class FileController {
 		return fileService.createFile(file, folderId);
 	}
 
-//	@PostMapping("/test")
-//	public String createFileTest(@RequestParam("file") MultipartFile file,
-//			@RequestParam(name = "parentFolderId") Integer folderId) {
-//		System.out.println("Parent Folder id  " + folderId);
-//
-//		return fileService.createFile(file, folderId);
-//		// return "Hello";
-//
-//	}
+	@GetMapping("/{ID}")
+	public FileDownloadDto downloadFile(@PathVariable Integer ID) {
+		
+		System.out.println("Im the id in the controller " + ID);
+		// Load file from database
+		return fileService.downloadFileById(ID);
+
+	}
 
 //    @GetMapping
 //    public List<CourseResponseDto> getAllCourses() {

@@ -27,7 +27,7 @@ public class FileServiceImpl implements FileService {
 	private FolderRepository folderRepository;
 //	@Autowired
 //	private IdResponseDto idResponseDto;
-	
+
 	private FileMapper fileMapper;
 
 //	@Autowired
@@ -48,8 +48,15 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public FileDownloadDto downloadFileById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		File fileEntity = new File();
+		fileEntity = fileRepository.getOne(id);
+		
+		FileDownloadDto downloadDto = new FileDownloadDto();
+		downloadDto.setName(fileEntity.getName());
+		downloadDto.setData(fileEntity.getFileBytes());
+		
+
+		return downloadDto;
 	}
 
 	@Override
@@ -67,21 +74,17 @@ public class FileServiceImpl implements FileService {
 		try {
 			fileEntity.setFileBytes(file.getBytes());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		fileEntity.setParentFolder(parentFolder);
-		// fileEntity.setParentFolderId(folderId);
 
 		fileRepository.save(fileEntity);
-		
+
 		IdResponseDto idResponseDto = new IdResponseDto();
 		idResponseDto.setId(fileEntity.getId());
-		
-//	return fileEntity.getId().toString();
-		return(idResponseDto);
 
-		
+		return (idResponseDto);
+
 	}
 
 }
