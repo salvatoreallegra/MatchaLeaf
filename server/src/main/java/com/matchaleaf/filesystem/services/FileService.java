@@ -20,7 +20,7 @@ public interface FileService {
 //
 
 	//This is can also be considered uploading a file
-	String createFile(MultipartFile file, Integer folderId);   
+	IdResponseDto createFile(MultipartFile file, Integer folderId);   
 	FileDownloadDto downloadFileById(Integer id);
 	
 	

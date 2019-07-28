@@ -33,7 +33,7 @@ public class FileController {
 	// headers when I use @RequestBody
 
 	@PostMapping
-	public String createFile(@RequestParam("file") MultipartFile file,
+	public IdResponseDto createFile(@RequestParam("file") MultipartFile file,
 			@RequestParam(name = "parentFolderId") Integer folderId) {
 		if(folderId == null) {			
 			folderId = 1;

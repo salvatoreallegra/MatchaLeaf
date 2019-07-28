@@ -25,6 +25,9 @@ public class FileServiceImpl implements FileService {
 	private FileRepository fileRepository;
 	@Autowired
 	private FolderRepository folderRepository;
+//	@Autowired
+//	private IdResponseDto idResponseDto;
+	
 	private FileMapper fileMapper;
 
 //	@Autowired
@@ -50,7 +53,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public String createFile(MultipartFile file, Integer folderId) {
+	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
 
 		Folder parentFolder = new Folder();
 		parentFolder = folderRepository.getOne(folderId);
@@ -71,7 +74,12 @@ public class FileServiceImpl implements FileService {
 		// fileEntity.setParentFolderId(folderId);
 
 		fileRepository.save(fileEntity);
-		return fileEntity.getId().toString();
+		
+		IdResponseDto idResponseDto = new IdResponseDto();
+		idResponseDto.setId(fileEntity.getId());
+		
+//	return fileEntity.getId().toString();
+		return(idResponseDto);
 
 		
 	}
