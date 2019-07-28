@@ -35,6 +35,9 @@ public class FileController {
 	@PostMapping
 	public String createFile(@RequestParam("file") MultipartFile file,
 			@RequestParam(name = "parentFolderId") Integer folderId) {
+		if(folderId == null) {			
+			folderId = 1;
+		}
 		if (folderId instanceof Integer) {
 			System.out.println("Folder id is integer");
 		} else {
