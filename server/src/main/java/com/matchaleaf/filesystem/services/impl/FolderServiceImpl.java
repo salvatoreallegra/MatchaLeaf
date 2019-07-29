@@ -57,6 +57,16 @@ public class FolderServiceImpl implements FolderService {
 	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
 		Folder folder = folderRepository.getOne(id);
+		
+		
+		
+		//root folder id = 1
+				
+		//select 2 lists, one list is Folder to select all parent folders of the current id
+		
+		//then get the list of files of the parent of the id we are reading in
+		
+		
 		System.out.println("In Service " + folder.getFolders().isEmpty());
 		System.out.println("In Service Files" + folder.getFiles().isEmpty());
 		return null;

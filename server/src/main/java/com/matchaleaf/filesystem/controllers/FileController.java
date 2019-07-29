@@ -52,21 +52,9 @@ public class FileController {
 	}
 
 	@GetMapping("/{ID}")
-	public FileDownloadDto downloadFile(@PathVariable Integer ID) {
+	public ResponseEntity<Resource> downloadFileBytes(@PathVariable Integer ID) {
 
-		System.out.println("Im the id in the controller " + ID);
-		// Load file from database
-		return fileService.downloadFileById(ID);
-
-	}
-
-	// This may be what we eventually download, I don't think the downloadFile
-	// Method will work because it returns the bytes as text
-
-	@GetMapping("/bytes/{idbytes}")
-	public ResponseEntity<Resource> downloadFileBytes(@PathVariable Integer idbytes) {
-
-		File file = fileService.downloadFileBytesById(idbytes);
+		File file = fileService.downloadFileBytesById(ID);
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
 				.body(new ByteArrayResource(file.getFileBytes()));
@@ -77,28 +65,4 @@ public class FileController {
 		return fileService.trashFile(id);
 	}
 
-//    @GetMapping
-//    public List<CourseResponseDto> getAllCourses() {
-//        return courseService.getAllCourses();
-//    }
-
-//	@PostMapping
-//	public FileResponseDto createFile(@RequestBody FileRequestDto fileDto) {
-//		return fileService.createFile(fileDto);
-//	}
-
-//    @GetMapping("/{id}")
-//    public CourseResponseDto readCourse(@PathVariable Integer id) {
-//        return courseService.readCourse(id);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public CourseResponseDto updateCourse(@PathVariable Integer id, @RequestBody CourseRequestDto courseDto) {
-//        return courseService.updateCourse(id, courseDto);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public CourseResponseDto deleteCourse(@PathVariable Integer id) {
-//        return courseService.deleteCourse(id);
-//    }
 }
