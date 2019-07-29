@@ -1,6 +1,9 @@
 package com.matchaleaf.filesystem.services.impl;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -104,6 +107,11 @@ public class FileServiceImpl implements FileService {
 			e.printStackTrace();
 		}
 		fileEntity.setParentFolder(parentFolder);
+		Set parentFolderSet = new HashSet<>();
+		parentFolderSet = parentFolder.getFiles();
+		parentFolderSet.add(fileEntity);
+		//this may be wrong
+		parentFolder.setFiles(parentFolderSet);
 
 		fileRepository.save(fileEntity);
 

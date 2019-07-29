@@ -52,6 +52,9 @@ public class FolderServiceImpl implements FolderService {
 	@Override
 	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
+		Folder folder = folderRepository.getOne(id);
+		System.out.println("In Service "  + folder.getFolders().isEmpty());
+		System.out.println("In Service Files" + folder.getFiles().isEmpty());
 		return null;
 	}
 
