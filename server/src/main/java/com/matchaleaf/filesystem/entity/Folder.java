@@ -24,20 +24,14 @@ public class Folder {
 	@Column(unique = true)
 	private String name;
 
-	/****************
-	 * Cascade all will allow saving of Files without explicitly calling file.save
-	 */
-
-	// @JoinColumn(name = "FOLDER_ID")
 	@ManyToOne
 	private Folder parentFolder;
 
 	@OneToMany
 	private Set<Folder> childFolders; // use a list instead of set
 
-	// @OneToMany
 	@OneToMany(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "FILE_ID")
+
 	private Set<File> files;
 
 	public Folder(Set<File> files, String name, Folder parentFolder, Set<Folder> childFolders) {

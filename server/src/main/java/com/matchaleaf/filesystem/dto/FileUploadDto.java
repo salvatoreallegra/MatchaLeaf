@@ -9,7 +9,6 @@ public class FileUploadDto {
 	String name;
 	byte[] data;
 	Integer folderId;
-	
 
 	public String getName() {
 		return name;
@@ -34,7 +33,5 @@ public class FileUploadDto {
 	public void setFolderId(Integer folderId) {
 		this.folderId = folderId;
 	}
-
-
 
 }

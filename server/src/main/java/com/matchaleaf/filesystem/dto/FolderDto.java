@@ -12,7 +12,7 @@ public class FolderDto {
 	private String name;
 	private Set<FileDto> files;
 	private Set<FolderDto> folders;
-	
+
 	public FolderDto() {
 
 	}
@@ -56,6 +56,5 @@ public class FolderDto {
 	public void setFolders(Set<FolderDto> folders) {
 		this.folders = folders;
 	}
-	
-	
+
 }

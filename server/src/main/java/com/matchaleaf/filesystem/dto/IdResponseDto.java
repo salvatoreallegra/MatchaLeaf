@@ -1,11 +1,11 @@
 package com.matchaleaf.filesystem.dto;
 
 public class IdResponseDto {
-	
+
 	public IdResponseDto() {
-		
+
 	}
-	
+
 	private Integer id;
 
 	public Integer getId() {

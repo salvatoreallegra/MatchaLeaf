@@ -26,8 +26,6 @@ public class FolderServiceImpl implements FolderService {
 	private FileMapper fileMapper;
 	private FolderMapper folderMapper;
 
-	
-
 	public FolderServiceImpl(FolderRepository folderRepository, FileMapper fileMapper, FolderMapper folderMapper) {
 		super();
 		this.folderRepository = folderRepository;
@@ -36,7 +34,7 @@ public class FolderServiceImpl implements FolderService {
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
-		
+
 		Folder parentFolder = folderRepository.getOne(folderUploadDto.getParentFolderId());
 		Folder folder = new Folder();
 		folder.setName(folderUploadDto.getName());
@@ -46,60 +44,50 @@ public class FolderServiceImpl implements FolderService {
 		Set parentFolderFolders = parentFolder.getFolders();
 		parentFolderFolders.add(folder);
 		parentFolder.setFolders(parentFolderFolders);
-		// folder.setFolders(folders);
 
 		folderRepository.saveAndFlush(folder);
 		folderRepository.saveAndFlush(parentFolder);
 		System.out.println("Inside Service");
-		
+
 		System.out.println("All Folders" + folder.getFolders());
-		//System.out.println(folderUploadDto.getName() + folderUploadDto.getParentFolderId());
-		
-		//return folderMapper.entityToDto(folderRepository.saveAndFlush(folderMapper.dtoToEntity(folderUploadDto)));
-		
-       return folderMapper.entityToDto(folder);
+
+		return folderMapper.entityToDto(folder);
 	}
 
 	@Override
 	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
-		
-		//Get the Folder requested from controller/endpoint
-		Folder folder = folderRepository.getOne(id);	
-		
-		//Get Set of Files belonging to requested folder
+
+		// Get the Folder requested from controller/end point
+		Folder folder = folderRepository.getOne(id);
+
+		// Get Set of Files belonging to requested folder
 		Set<File> fileSet = folder.getFiles();
-		
-		//Get set of Folders belonging to requested folder
+
+		// Get set of Folders belonging to requested folder
 		Set<Folder> folderSet = folder.getFolders();
-		
-		
+
 		Set<FileDto> fileDtos = new HashSet<>();
 		Set<FolderDto> folderDtos = new HashSet<>();
-		
-		
+
 		for (File f : fileSet) {
 			FileDto fi = fileMapper.entityToFileDto(f);
 			fileDtos.add(fi);
 		}
-		for (Folder f: folderSet) {
+		for (Folder f : folderSet) {
 			FolderDto fdt = folderMapper.entityToFolderDto(f);
 			folderDtos.add(fdt);
-			
+
 		}
-		
-		
+
 		FolderDto folderDto = new FolderDto();
 
-		
-	
-		
 		folderDto.setId(folder.getId());
 		folderDto.setName(folder.getName());
 		folderDto.setFiles(fileDtos);
-        folderDto.setFolders(folderDtos);
-        return folderDto;
-		
+		folderDto.setFolders(folderDtos);
+		return folderDto;
+
 	}
 
 	@Override

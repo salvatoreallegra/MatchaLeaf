@@ -6,8 +6,7 @@ import com.matchaleaf.filesystem.entity.File;
 
 @Mapper(componentModel = "spring")
 public interface FileMapper {
-	
-	
+
 	// Convert our file upload dto to a file entity
 	File dtoToEntity(FileUploadDto fileUploadDto);
 
@@ -15,6 +14,5 @@ public interface FileMapper {
 	IdResponseDto entityToDto(File file);
 
 	FileDto entityToFileDto(File file);
-
 
 }

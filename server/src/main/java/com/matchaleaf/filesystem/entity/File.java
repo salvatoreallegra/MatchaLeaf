@@ -23,16 +23,14 @@ public class File {
 	@Column(name = "FILE_ID")
 	private Integer id;
 
-	
 	private String name;
-	
-	
+
 	private byte[] fileBytes;
-	
-	//private Integer parentFolderId;
+
+	// private Integer parentFolderId;
 
 	@ManyToOne
-	//@JoinColumn(name = "FOLDER_ID")
+	// @JoinColumn(name = "FOLDER_ID")
 	private Folder parentFolder;
 
 	public Integer getId() {

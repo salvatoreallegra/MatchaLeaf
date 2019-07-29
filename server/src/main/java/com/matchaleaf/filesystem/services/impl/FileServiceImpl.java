@@ -90,10 +90,7 @@ public class FileServiceImpl implements FileService {
 
 		Folder parentFolder = new Folder();
 		parentFolder = folderRepository.getOne(folderId);
-//		if(parentFolder == null) {
-//			folderId = 1;
-//			parentFolder = folderRepository.getOne(folderId);
-//		}
+
 		File fileEntity = new File();
 
 		fileEntity.setName(file.getOriginalFilename());
@@ -106,8 +103,7 @@ public class FileServiceImpl implements FileService {
 		Set parentFolderSet = new HashSet<>();
 		parentFolderSet = parentFolder.getFiles();
 		parentFolderSet.add(fileEntity);
-		
-		// this may be wrong
+
 		parentFolder.setFiles(parentFolderSet);
 
 		fileRepository.save(fileEntity);
@@ -121,18 +117,18 @@ public class FileServiceImpl implements FileService {
 
 	@Override
 	public FileDto moveFile(Integer id, String name) {
-		
+
 		Folder destinationFolder = folderRepository.getByName(name);
 		File fileToMove = fileRepository.getOne(id);
-		
+
 		Set<File> destinationFolderFiles = destinationFolder.getFiles();
 		destinationFolderFiles.add(fileToMove);
 		destinationFolder.setFiles(destinationFolderFiles);
 		folderRepository.save(destinationFolder);
-		
+
 		fileToMove.setParentFolder(destinationFolder);
 		fileRepository.save(fileToMove);
-		
+
 		return fileMapper.entityToFileDto(fileToMove);
 	}
 

@@ -26,19 +26,20 @@ public class FolderController {
 
 	@PostMapping
 	public IdResponseDto createFolder(@RequestBody FolderUploadDto folderUploadDto) {
-		
+
 		System.out.println(folderUploadDto.getParentFolderId());
 		System.out.println(folderUploadDto.getName());
 		return folderService.createFolder(folderUploadDto);
 
 	}
+
 	@GetMapping("/{ID}")
 	public FolderDto getFolderById(@PathVariable Integer ID) {
-		
+
 		System.out.println("In getFolderbyId " + ID);
-		
+
 		return folderService.getFolderById(ID);
-		
+
 	}
 
 }

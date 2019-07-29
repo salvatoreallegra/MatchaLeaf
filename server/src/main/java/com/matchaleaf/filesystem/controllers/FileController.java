@@ -64,7 +64,7 @@ public class FileController {
 	public FileDto trashFile(@PathVariable Integer id) {
 		return fileService.trashFile(id);
 	}
-	
+
 	@PatchMapping("/move")
 	public FileDto moveFile(@RequestBody FileDto filePatchDto) {
 		Integer id = filePatchDto.getId();

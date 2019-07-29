@@ -11,8 +11,4 @@ import com.matchaleaf.filesystem.entity.File;
 @Repository
 public interface FileRepository extends JpaRepository<File, Integer> {
 
-	
-	
-	
-
 }
