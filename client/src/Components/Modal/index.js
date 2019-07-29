@@ -14,7 +14,7 @@ const Modal = ({ hideModal }) => {
         <input type='file' name='files[]' multiple />
         <input type='submit' value='Upload File' name='submit' />
       </form>
-      <button onClick={hideModal}>close</button>
+      <button onClick={hideModal}>cancel</button>
     </div>
   )
 }

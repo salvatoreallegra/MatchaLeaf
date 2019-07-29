@@ -51,11 +51,11 @@ class Home extends React.Component {
         <div
           style={{
             display: this.state.show ? 'flex' : 'none',
-            gridRowStart: '2',
-            gridRowEnd: '5',
-            gridColumnStart: '2',
-            gridColumnEnd: '5',
-            background: 'white',
+            gridRowStart: '3',
+            gridRowEnd: '4',
+            gridColumnStart: '3',
+            gridColumnEnd: '4',
+            background: '#6FCF97',
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column'
