@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+import com.matchaleaf.filesystem.entity.Folder;
 import com.matchaleaf.filesystem.mapper.FileMapper;
 import com.matchaleaf.filesystem.mapper.FolderMapper;
 import com.matchaleaf.filesystem.repository.FileRepository;
@@ -22,9 +23,7 @@ public class FolderServiceImpl implements FolderService {
 	
 	private FolderMapper folderMapper;
 
-	public FolderServiceImpl() {
-
-	}
+	
 
 	public FolderServiceImpl(FolderMapper folderMapper, FolderRepository folderRepository) {
 
@@ -34,9 +33,17 @@ public class FolderServiceImpl implements FolderService {
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
+//		Folder folderObj = folderRepository.getOne(folderUploadDto.getParentFolderId());
+//		Folder folder = new Folder();
+//		folder.setName(folderUploadDto.getName());
+//		folder.setParentFolder(folderObj);
+//		folderRepository.saveAndFlush(folder);
+//		folderRepository.saveAndFlush(folderObj);
+		//extract list  
+		//folder.setFolders(folders);
 		
 		System.out.println("Inside Service");
-		System.out.println(folderUploadDto.getFolderName() + folderUploadDto.getParentFolderId());
+		System.out.println(folderUploadDto.getName() + folderUploadDto.getParentFolderId());
 
 		return folderMapper.entityToDto(folderRepository.saveAndFlush(folderMapper.dtoToEntity(folderUploadDto)));
 

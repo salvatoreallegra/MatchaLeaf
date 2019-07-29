@@ -24,7 +24,7 @@ public class FolderController {
 	@PostMapping
 	public IdResponseDto createFolder(@RequestBody FolderUploadDto folderUploadDto) {
 		System.out.println(folderUploadDto.getParentFolderId());
-		System.out.println(folderUploadDto.getFolderName());
+		System.out.println(folderUploadDto.getName());
 		return folderService.createFolder(folderUploadDto);
 
 	}

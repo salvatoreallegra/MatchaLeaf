@@ -23,21 +23,43 @@ public class Folder {
 
 	@Column(unique = true)
 	private String name;
-	
-	
+
 	/****************
-	 * Cascade all will allow saving of Files 
-	 * without explicitly calling file.save	 
+	 * Cascade all will allow saving of Files without explicitly calling file.save
 	 */
 
-   
-	//@JoinColumn(name = "FOLDER_ID")
+	// @JoinColumn(name = "FOLDER_ID")
 	@ManyToOne
 	private Folder parentFolder;
 	
-	
-
 //	@OneToMany
+//	private Set<Folder> folders;  //use a list instead of set
+
+//	public Set<Folder> getFolders() {
+//		return folders;
+//	}
+//
+//	public void setFolders(Set<Folder> folders) {
+//		this.folders = folders;
+//	}
+
+	public Folder getParentFolder() {
+		return parentFolder;
+	}
+
+	public void setParentFolder(Folder parentFolder) {
+		this.parentFolder = parentFolder;
+	}
+
+	public Set<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(Set<File> files) {
+		this.files = files;
+	}
+
+	// @OneToMany
 	@OneToMany(cascade = CascadeType.ALL)
 	// @JoinColumn(name = "FILE_ID")
 	private Set<File> files;
@@ -46,7 +68,7 @@ public class Folder {
 	}
 
 	public Folder(Set<File> files, String name, Folder parentFolder) {
-		//this.id = id;
+		// this.id = id;
 		this.files = files;
 		this.name = name;
 		this.parentFolder = parentFolder;
@@ -67,7 +89,5 @@ public class Folder {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 }
