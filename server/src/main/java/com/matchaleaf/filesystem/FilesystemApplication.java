@@ -49,11 +49,13 @@ public class FilesystemApplication {
 //			Set<File> fileSet = new HashSet<>();
 			
 			
-//			Folder root = new Folder(null, "root", null);
-//			Folder trash = new Folder(null, "trash", null);
+//			Folder root = new Folder(null, "root", null, null);
+//			Folder trash = new Folder(null, "trash", null, null);
+//			Folder businessDocs = new Folder(null,"business docs", root, null);
 //			folderRepository.save(root);
 //			folderRepository.save(trash);
-//			
+//			folderRepository.save(businessDocs);
+			
 			
 //			// Set of files
 //			

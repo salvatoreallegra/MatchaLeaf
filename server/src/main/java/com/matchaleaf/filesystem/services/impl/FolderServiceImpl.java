@@ -50,13 +50,19 @@ public class FolderServiceImpl implements FolderService {
 	}
 
 	@Override
-	public FolderDto downloadFolderById(Integer id) {
+	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<FolderDto> downloadZipFolder(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FolderDto downloadFolderById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

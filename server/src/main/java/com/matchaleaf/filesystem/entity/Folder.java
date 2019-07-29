@@ -31,17 +31,30 @@ public class Folder {
 	// @JoinColumn(name = "FOLDER_ID")
 	@ManyToOne
 	private Folder parentFolder;
-	
-//	@OneToMany
-//	private Set<Folder> folders;  //use a list instead of set
 
-//	public Set<Folder> getFolders() {
-//		return folders;
-//	}
-//
-//	public void setFolders(Set<Folder> folders) {
-//		this.folders = folders;
-//	}
+	@OneToMany
+	private Set<Folder> childFolders; // use a list instead of set
+
+	// @OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "FILE_ID")
+	private Set<File> files;
+
+	public Folder(Set<File> files, String name, Folder parentFolder, Set<Folder> childFolders) {
+		// this.id = id;
+		this.files = files;
+		this.name = name;
+		this.parentFolder = parentFolder;
+		this.childFolders = childFolders;
+	}
+
+	public Set<Folder> getFolders() {
+		return childFolders;
+	}
+
+	public void setFolders(Set<Folder> childFolders) {
+		this.childFolders = childFolders;
+	}
 
 	public Folder getParentFolder() {
 		return parentFolder;
@@ -59,19 +72,7 @@ public class Folder {
 		this.files = files;
 	}
 
-	// @OneToMany
-	@OneToMany(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "FILE_ID")
-	private Set<File> files;
-
 	public Folder() {
-	}
-
-	public Folder(Set<File> files, String name, Folder parentFolder) {
-		// this.id = id;
-		this.files = files;
-		this.name = name;
-		this.parentFolder = parentFolder;
 	}
 
 	public Integer getId() {
