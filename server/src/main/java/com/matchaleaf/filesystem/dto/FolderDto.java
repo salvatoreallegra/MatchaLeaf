@@ -1,17 +1,28 @@
 package com.matchaleaf.filesystem.dto;
 
 import java.util.List;
+import java.util.Set;
+
+import com.matchaleaf.filesystem.entity.File;
+import com.matchaleaf.filesystem.entity.Folder;
 
 public class FolderDto {
-	
-	
+
 	private Integer id;
 	private String name;
-	private List<FileDto> files;
-	private List<FolderDto> folders;
+	private Set<FileDto> files;
+	private Set<FolderDto> folders;
 	
 	public FolderDto() {
-		
+
+	}
+
+	public FolderDto(Integer id, String name, Set<FileDto> files, Set<FolderDto> folders) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.files = files;
+		this.folders = folders;
 	}
 
 	public Integer getId() {
@@ -30,20 +41,21 @@ public class FolderDto {
 		this.name = name;
 	}
 
-	public List<FileDto> getFiles() {
+	public Set<FileDto> getFiles() {
 		return files;
 	}
 
-	public void setFiles(List<FileDto> files) {
+	public void setFiles(Set<FileDto> files) {
 		this.files = files;
 	}
 
-	public List<FolderDto> getFolders() {
+	public Set<FolderDto> getFolders() {
 		return folders;
 	}
 
-	public void setFolders(List<FolderDto> folders) {
+	public void setFolders(Set<FolderDto> folders) {
 		this.folders = folders;
 	}
-
+	
+	
 }

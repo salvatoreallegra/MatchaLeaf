@@ -39,9 +39,9 @@ public class FileServiceImpl implements FileService {
 //	Folder parentFolder;
 
 	// private IdResponseDto testDto;
-	public FileServiceImpl() {
-
-	}
+//	public FileServiceImpl() {
+//
+//	}
 
 	public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FolderRepository folderRepository) {
 
@@ -74,7 +74,6 @@ public class FileServiceImpl implements FileService {
 
 		Folder trashFolder = new Folder();
 		trashFolder = folderRepository.getOne(2);
-
 		File fileToPatch = fileRepository.getOne(Id);
 		fileToPatch.setParentFolder(trashFolder);
 		FileDto patchedFileDto = new FileDto();

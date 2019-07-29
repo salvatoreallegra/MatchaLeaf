@@ -1,14 +1,17 @@
 package com.matchaleaf.filesystem.services.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matchaleaf.filesystem.dto.FileDto;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+import com.matchaleaf.filesystem.entity.File;
 import com.matchaleaf.filesystem.entity.Folder;
 import com.matchaleaf.filesystem.mapper.FileMapper;
 import com.matchaleaf.filesystem.mapper.FolderMapper;
@@ -20,14 +23,16 @@ import com.matchaleaf.filesystem.services.FolderService;
 public class FolderServiceImpl implements FolderService {
 
 	private FolderRepository folderRepository;
-
+	private FileMapper fileMapper;
 	private FolderMapper folderMapper;
 
-	public FolderServiceImpl(FolderMapper folderMapper, FolderRepository folderRepository) {
+	
 
-		this.folderMapper = folderMapper;
+	public FolderServiceImpl(FolderRepository folderRepository, FileMapper fileMapper, FolderMapper folderMapper) {
+		super();
 		this.folderRepository = folderRepository;
-
+		this.fileMapper = fileMapper;
+		this.folderMapper = folderMapper;
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
@@ -47,29 +52,54 @@ public class FolderServiceImpl implements FolderService {
 		folderRepository.saveAndFlush(parentFolder);
 		System.out.println("Inside Service");
 		
-		System.out.println(folderUploadDto.getName() + folderUploadDto.getParentFolderId());
+		System.out.println("All Folders" + folder.getFolders());
+		//System.out.println(folderUploadDto.getName() + folderUploadDto.getParentFolderId());
 		
 		//return folderMapper.entityToDto(folderRepository.saveAndFlush(folderMapper.dtoToEntity(folderUploadDto)));
-        return folderMapper.entityToDto(folder);
+		
+       return folderMapper.entityToDto(folder);
 	}
 
 	@Override
 	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
-		Folder folder = folderRepository.getOne(id);
+		
+		//Get the Folder requested from controller/endpoint
+		Folder folder = folderRepository.getOne(id);	
+		
+		//Get Set of Files belonging to requested folder
+		Set<File> fileSet = folder.getFiles();
+		
+		//Get set of Folders belonging to requested folder
+		Set<Folder> folderSet = folder.getFolders();
 		
 		
-		
-		//root folder id = 1
-				
-		//select 2 lists, one list is Folder to select all parent folders of the current id
-		
-		//then get the list of files of the parent of the id we are reading in
+		Set<FileDto> fileDtos = new HashSet<>();
+		Set<FolderDto> folderDtos = new HashSet<>();
 		
 		
-		System.out.println("In Service " + folder.getFolders().isEmpty());
-		System.out.println("In Service Files" + folder.getFiles().isEmpty());
-		return null;
+		for (File f : fileSet) {
+			FileDto fi = fileMapper.entityToFileDto(f);
+			fileDtos.add(fi);
+		}
+		for (Folder f: folderSet) {
+			FolderDto fdt = folderMapper.entityToFolderDto(f);
+			folderDtos.add(fdt);
+			
+		}
+		
+		
+		FolderDto folderDto = new FolderDto();
+
+		
+	
+		
+		folderDto.setId(folder.getId());
+		folderDto.setName(folder.getName());
+		folderDto.setFiles(fileDtos);
+        folderDto.setFolders(folderDtos);
+        return folderDto;
+		
 	}
 
 	@Override
