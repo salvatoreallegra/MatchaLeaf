@@ -13,7 +13,7 @@ public interface FolderMapper {
 	IdResponseDto entityToDto(Folder folder);
 
 	Folder dtoToEntity(FolderUploadDto folderUploadDto);
-	
+
 	FolderDto entityToFolderDto(Folder folder);
 
 }
