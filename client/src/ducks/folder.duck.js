@@ -1,6 +1,6 @@
 import initialState from './mockState'
 import axios from 'axios'
-const API_ROOT = 'localhost:8000/'
+const API_ROOT = 'localhost:8080/'
 
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
@@ -28,7 +28,8 @@ export default function reducer (state = initialState, action) {
       }
     case CREATE_FOLDER:
       return {
-        ...state
+        ...state,
+        files: [...state.files, action.payload]
       }
     case DELETE_FOLDER:
       return {
@@ -45,9 +46,9 @@ export const loadFolder = folder => ({
   payload: folder
 })
 
-export const createFolder = folder => ({
+export const createFolder = (folderName, folderId) => ({
   type: CREATE_FOLDER,
-  payload: folder
+  payload: { folderName, folderId }
 })
 
 export const deleteFolder = folderId => ({
@@ -60,3 +61,12 @@ export const fetchFolder = folderId => dispatch =>
     .get(`${API_ROOT}folders/${folderId}`)
     .then(result => dispatch(loadFolder(result)))
     .catch(err => console.log(`Oops... ${err}`))
+
+export const newFolder = (folderName, parentId) => dispatch =>
+  axios
+    .post(`${API_ROOT}folders/`, {
+      name: folderName,
+      parent: parentId
+    })
+    .then(result => dispatch(createFolder(folderName, result)))
+    .catch(err => console.log(`impossible to create: ${err}`))
