@@ -3,7 +3,7 @@ package com.matchaleaf.filesystem.dto;
 public class FolderUploadDto {
 	
 	
-	private String folderName;
+	private String name;
 	
 	private Integer parentFolderId;
 	
@@ -11,13 +11,19 @@ public class FolderUploadDto {
 		
 	}
 
-	public String getFolderName() {
-		return folderName;
+
+
+	public String getName() {
+		return name;
 	}
 
-	public void setFolderName(String folderName) {
-		this.folderName = folderName;
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
 
 	public Integer getParentFolderId() {
 		return parentFolderId;

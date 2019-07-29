@@ -1,6 +1,9 @@
 package com.matchaleaf.filesystem.services.impl;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -52,39 +55,36 @@ public class FileServiceImpl implements FileService {
 	public FileDownloadDto downloadFileById(Integer id) {
 		File fileEntity = new File();
 		fileEntity = fileRepository.getOne(id);
-		
+
 		FileDownloadDto downloadDto = new FileDownloadDto();
 		downloadDto.setName(fileEntity.getName());
 		downloadDto.setData(fileEntity.getFileBytes());
-		
 
 		return downloadDto;
 	}
-	
+
 	public File downloadFileBytesById(Integer ID) {
-       
+
 		return fileRepository.getOne(ID);
-               
-    }
-	
-	
-	//Trashing a file, Update files parent folder id to the trash folder id
+
+	}
+
+	// Trashing a file, Update files parent folder id to the trash folder id
 	public FileDto trashFile(Integer Id) {
-		
+
 		Folder trashFolder = new Folder();
 		trashFolder = folderRepository.getOne(2);
-		
+
 		File fileToPatch = fileRepository.getOne(Id);
-        fileToPatch.setParentFolder(trashFolder);
-        FileDto patchedFileDto = new FileDto();
-        patchedFileDto.setId(fileToPatch.getId());
-        patchedFileDto.setName(fileToPatch.getName());
-        fileRepository.save(fileToPatch);
-        
-        return patchedFileDto;
-		
+		fileToPatch.setParentFolder(trashFolder);
+		FileDto patchedFileDto = new FileDto();
+		patchedFileDto.setId(fileToPatch.getId());
+		patchedFileDto.setName(fileToPatch.getName());
+		fileRepository.save(fileToPatch);
+
+		return patchedFileDto;
+
 	}
-	
 
 	@Override
 	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
@@ -104,6 +104,12 @@ public class FileServiceImpl implements FileService {
 			e.printStackTrace();
 		}
 		fileEntity.setParentFolder(parentFolder);
+		Set parentFolderSet = new HashSet<>();
+		parentFolderSet = parentFolder.getFiles();
+		parentFolderSet.add(fileEntity);
+		
+		// this may be wrong
+		parentFolder.setFiles(parentFolderSet);
 
 		fileRepository.save(fileEntity);
 

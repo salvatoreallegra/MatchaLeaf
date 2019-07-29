@@ -21,6 +21,8 @@ public interface FolderService {
 	
 	   IdResponseDto createFolder(FolderUploadDto folderUploadDto);
 	   
+	   FolderDto getFolderById(Integer id);
+	   
 	   
 	   
 	   /*
