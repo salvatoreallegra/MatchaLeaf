@@ -35,7 +35,19 @@ class Home extends React.Component {
           <hr />
           {Folder(folders)}
         </ContentDiv>
+        <div
+          style={{
+            display: this.state.show ? 'block' : 'none',
+            gridRowStart: '1',
+            gridRowEnd: '6',
+            gridColumnStart: '1',
+            gridColumnEnd: '6',
+            background: 'rgba(000, 000, 000, .7)',
+            margin: '-10px'
+          }}
+        />
         <UploadButton openModal={this.showModal} />
+
         <div
           style={{
             display: this.state.show ? 'block' : 'none',
