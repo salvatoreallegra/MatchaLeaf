@@ -50,12 +50,15 @@ class Home extends React.Component {
 
         <div
           style={{
-            display: this.state.show ? 'block' : 'none',
+            display: this.state.show ? 'flex' : 'none',
             gridRowStart: '2',
             gridRowEnd: '5',
             gridColumnStart: '2',
             gridColumnEnd: '5',
-            background: 'white'
+            background: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column'
           }}
         >
           <Modal hideModal={this.hideModal} />
