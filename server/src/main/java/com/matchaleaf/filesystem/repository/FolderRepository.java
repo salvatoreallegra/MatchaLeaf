@@ -9,6 +9,6 @@ import com.matchaleaf.filesystem.entity.Folder;
 @Repository
 public interface FolderRepository extends JpaRepository<Folder, Integer> {
 
-	
+	Folder getByName(String name);
 
 }

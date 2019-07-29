@@ -120,4 +120,21 @@ public class FileServiceImpl implements FileService {
 
 	}
 
+	@Override
+	public FileDto moveFile(Integer id, String name) {
+		
+		Folder destinationFolder = folderRepository.getByName(name);
+		File fileToMove = fileRepository.getOne(id);
+		
+		Set<File> destinationFolderFiles = destinationFolder.getFiles();
+		destinationFolderFiles.add(fileToMove);
+		destinationFolder.setFiles(destinationFolderFiles);
+		folderRepository.save(destinationFolder);
+		
+		fileToMove.setParentFolder(destinationFolder);
+		fileRepository.save(fileToMove);
+		
+		return fileMapper.fileToFileDto(fileToMove);
+	}
+
 }
