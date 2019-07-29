@@ -31,7 +31,8 @@ public interface FileService {
 	FileDto trashFile(Integer Id);
 	
 	File downloadFileBytesById(Integer id);
-	
+
+	FileDto moveFile(Integer id, String name);	
 	
 
 }
