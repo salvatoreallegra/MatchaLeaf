@@ -13,7 +13,6 @@ public interface FileMapper {
 
 	// This will return the IdResponse to File Service
 	IdResponseDto entityToDto(File file);
-	
 
 	FileDto entityToFileDto(File file);
 

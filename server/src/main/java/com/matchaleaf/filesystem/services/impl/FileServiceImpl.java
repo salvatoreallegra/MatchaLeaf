@@ -133,7 +133,7 @@ public class FileServiceImpl implements FileService {
 		fileToMove.setParentFolder(destinationFolder);
 		fileRepository.save(fileToMove);
 		
-		return fileMapper.fileToFileDto(fileToMove);
+		return fileMapper.entityToFileDto(fileToMove);
 	}
 
 }
