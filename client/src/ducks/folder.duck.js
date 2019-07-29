@@ -1,4 +1,6 @@
 import initialState from './mockState'
+import axios from 'axios'
+const API_ROOT = 'localhost:8000/'
 
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
@@ -52,3 +54,9 @@ export const deleteFolder = folderId => ({
   type: DELETE_FOLDER,
   payload: folderId
 })
+
+export const fetchFolder = folderId => dispatch =>
+  axios
+    .get(`${API_ROOT}folders/${folderId}`)
+    .then(result => dispatch(loadFolder(result)))
+    .catch(err => console.log(`Oops... ${err}`))

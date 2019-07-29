@@ -8,6 +8,7 @@ import ContentDiv from '../../Elements/ContentDiv'
 import Modal from '../../Components/Modal'
 
 // need to import the actions to dispatch
+import { fetchFolder } from '../../ducks/folder.duck'
 
 class Home extends React.Component {
   state = { show: false }
@@ -33,7 +34,7 @@ class Home extends React.Component {
           {File(files)}
           <h2>Folders</h2>
           <hr />
-          {Folder(folders)}
+          {Folder(folders, this.props.loadFolder)}
         </ContentDiv>
         <div
           style={{
@@ -81,4 +82,11 @@ const mapStateToProps = state => ({
   fileList: state.folder.files
 })
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = dispatch => ({
+  loadFolder: folderId => dispatch(fetchFolder(folderId))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
