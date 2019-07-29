@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -122,16 +123,23 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public FileDto moveFile(Integer id, String name) {
 		
-		Folder destinationFolder = folderRepository.getByName(name);
 		File fileToMove = fileRepository.getOne(id);
+		Folder destinationFolder = folderRepository.getByName(name);
+		Folder originFolder = folderRepository.getOne(fileToMove.getParentFolder().getId());
+		
+		Set<File> originFolderFiles = originFolder.getFiles();
+		originFolderFiles.remove(fileToMove);
+		originFolder.setFiles(originFolderFiles);
+		folderRepository.saveAndFlush(originFolder);
 		
 		Set<File> destinationFolderFiles = destinationFolder.getFiles();
+		if(destinationFolderFiles == null) { destinationFolderFiles = new HashSet(); }
 		destinationFolderFiles.add(fileToMove);
 		destinationFolder.setFiles(destinationFolderFiles);
-		folderRepository.save(destinationFolder);
+		folderRepository.saveAndFlush(destinationFolder);
 		
 		fileToMove.setParentFolder(destinationFolder);
-		fileRepository.save(fileToMove);
+		fileRepository.saveAndFlush(fileToMove);
 		
 		return fileMapper.entityToFileDto(fileToMove);
 	}
