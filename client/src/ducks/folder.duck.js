@@ -1,10 +1,11 @@
 import initialState from './mockState'
 import axios from 'axios'
-const API_ROOT = 'localhost:8080/'
+const API_ROOT = 'http://localhost:8080/'
 
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
 export const CREATE_FOLDER = 'cooksys/matchaleaf/Folder/CREATE_FOLDER'
+export const SEND_FOLDER_TRASH = 'cooksys/matchaleaf/Folder/SEND_FOLDER_TRASH'
 export const DELETE_FOLDER = 'cooksys/matchaleaf/Folder/DELETE_FOLDER'
 
 // initial state
@@ -51,6 +52,10 @@ export const createFolder = (folderName, folderId) => ({
   payload: { folderName, folderId }
 })
 
+export const folderToTrash = folderId => ({
+  type: SEND_FOLDER_TRASH,
+  payload: folderId
+})
 export const deleteFolder = folderId => ({
   type: DELETE_FOLDER,
   payload: folderId
@@ -70,3 +75,15 @@ export const newFolder = (folderName, parentId) => dispatch =>
     })
     .then(result => dispatch(createFolder(folderName, result)))
     .catch(err => console.log(`impossible to create: ${err}`))
+
+export const sendFolderToTrash = folderId => dispatch =>
+  axios
+    .patch(`${API_ROOT}folders/${folderId}/trash`)
+    .then(result => dispatch(folderToTrash(folderId)))
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+export const sendFileToTrash = fileId => dispatch =>
+  axios
+    .patch(`${API_ROOT}files/${fileId}/trash`)
+    .then(result => dispatch(folderToTrash(fileId)))
+    .catch(err => console.log(`operation invalid: ${err}`))
