@@ -1,6 +1,7 @@
 package com.matchaleaf.filesystem.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,9 @@ import com.matchaleaf.filesystem.services.FolderService;
 @Service
 public class FolderServiceImpl implements FolderService {
 
-
 	private FolderRepository folderRepository;
-	
-	private FolderMapper folderMapper;
 
-	
+	private FolderMapper folderMapper;
 
 	public FolderServiceImpl(FolderMapper folderMapper, FolderRepository folderRepository) {
 
@@ -33,27 +31,33 @@ public class FolderServiceImpl implements FolderService {
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
-//		Folder folderObj = folderRepository.getOne(folderUploadDto.getParentFolderId());
-//		Folder folder = new Folder();
-//		folder.setName(folderUploadDto.getName());
-//		folder.setParentFolder(folderObj);
-//		folderRepository.saveAndFlush(folder);
-//		folderRepository.saveAndFlush(folderObj);
-		//extract list  
-		//folder.setFolders(folders);
 		
+		Folder parentFolder = folderRepository.getOne(folderUploadDto.getParentFolderId());
+		Folder folder = new Folder();
+		folder.setName(folderUploadDto.getName());
+		folder.setParentFolder(parentFolder);
+		// extract list
+
+		Set parentFolderFolders = parentFolder.getFolders();
+		parentFolderFolders.add(folder);
+		parentFolder.setFolders(parentFolderFolders);
+		// folder.setFolders(folders);
+
+		folderRepository.saveAndFlush(folder);
+		folderRepository.saveAndFlush(parentFolder);
 		System.out.println("Inside Service");
+		
 		System.out.println(folderUploadDto.getName() + folderUploadDto.getParentFolderId());
-
-		return folderMapper.entityToDto(folderRepository.saveAndFlush(folderMapper.dtoToEntity(folderUploadDto)));
-
+		
+		//return folderMapper.entityToDto(folderRepository.saveAndFlush(folderMapper.dtoToEntity(folderUploadDto)));
+        return folderMapper.entityToDto(folder);
 	}
 
 	@Override
 	public FolderDto getFolderById(Integer id) {
 		// TODO Auto-generated method stub
 		Folder folder = folderRepository.getOne(id);
-		System.out.println("In Service "  + folder.getFolders().isEmpty());
+		System.out.println("In Service " + folder.getFolders().isEmpty());
 		System.out.println("In Service Files" + folder.getFiles().isEmpty());
 		return null;
 	}
