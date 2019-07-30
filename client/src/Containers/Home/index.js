@@ -16,14 +16,14 @@ import {
 } from '../../ducks/folder.duck'
 
 class Home extends React.Component {
-  state = { show: false }
+  state = { show: false, isTrash: false }
 
   showModal = () => {
-    this.setState({ show: true })
+    this.setState({ ...this.state, show: true })
   }
 
   hideModal = () => {
-    this.setState({ show: false })
+    this.setState({ ...this.state, show: false })
   }
 
   componentDidMount (prevProps) {
@@ -40,12 +40,19 @@ class Home extends React.Component {
           <h3>{this.props.folderName}</h3>
           <h2>Files</h2>
           <hr />
-          {files === undefined ? null : File(files, this.props.fileToTrash)}
+          {files === undefined
+            ? null
+            : File(this.state.isTrash, files, this.props.fileToTrash)}
           <h2>Folders</h2>
           <hr />
           {folders === undefined
             ? null
-            : Folder(folders, this.props.folderToTrash, this.props.loadFolder)}
+            : Folder(
+              this.state.isTrash,
+              folders,
+              this.props.folderToTrash,
+              this.props.loadFolder
+            )}
         </ContentDiv>
         <div
           style={{

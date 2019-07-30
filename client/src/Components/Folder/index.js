@@ -3,7 +3,7 @@ import folderIcon from '../../image_source/folderIcon.png'
 import downloadIcon from '../../image_source/downloadIcon.png'
 import trashIcon from '../../image_source/trashIcon.png'
 
-const Folder = (folders, toggleTrash, loadFolder) => (
+const Folder = (isTrash, folders, toggleTrash, loadFolder) => (
   <div>
     {folders.map(folder => (
       <div
@@ -21,7 +21,8 @@ const Folder = (folders, toggleTrash, loadFolder) => (
         >
           {folder.name}
         </span>
-        <img src={downloadIcon} alt='download' />
+        {isTrash ? null : <img src={downloadIcon} alt='download' />}
+
         <img
           src={trashIcon}
           alt='trash'

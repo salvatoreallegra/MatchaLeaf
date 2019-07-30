@@ -13,6 +13,8 @@ import {
 } from '../../ducks/folder.duck'
 
 class Trash extends React.Component {
+  state = { isTrash: false }
+
   componentDidMount (prevProps) {
     this.props.loadFolder(2)
   }
@@ -23,13 +25,18 @@ class Trash extends React.Component {
 
     return (
       <ContentDiv>
-        <h3>{this.props.folderName}</h3>
+        <h3>/trash/{this.props.folderName}</h3>
         <h2>Files</h2>
         <hr />
-        {File(files, this.props.restoreFile)}
+        {File(this.state.isTrash, files, this.props.restoreFile)}
         <h2>Folders</h2>
         <hr />
-        {Folder(folders, this.props.restoreFolder, this.props.loadFolder)}
+        {Folder(
+          this.state.isTrash,
+          folders,
+          this.props.restoreFolder,
+          this.props.loadFolder
+        )}
       </ContentDiv>
     )
   }
