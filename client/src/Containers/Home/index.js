@@ -45,7 +45,7 @@ class Home extends React.Component {
           <hr />
           {folders === undefined
             ? null
-            : Folder(folders, this.props.loadFolder, this.props.folderToTrash)}
+            : Folder(folders, this.props.folderToTrash, this.props.loadFolder)}
         </ContentDiv>
         <div
           style={{

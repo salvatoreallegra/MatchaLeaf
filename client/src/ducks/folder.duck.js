@@ -4,8 +4,10 @@ const API_ROOT = 'http://localhost:8080/'
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
 export const CREATE_FOLDER = 'cooksys/matchaleaf/Folder/CREATE_FOLDER'
-export const REMOVE_FOLDER = 'cooksys/matchaleaf/Folder/SEND_FOLDER_TRASH'
-export const REMOVE_FILE = 'cooksys/matchaleaf/Folder/SEND_FOLDER_TRASH'
+export const REMOVE_FOLDER = 'cooksys/matchaleaf/Folder/REMOVE_FOLDER'
+export const REMOVE_FILE = 'cooksys/matchaleaf/Folder/REMOVE_FILE'
+export const RESTORE_FOLDER = 'cooksys/matchaleaf/Folder/RESTORE_FOLDER'
+export const RESTORE_FILE = 'cooksys/matchaleaf/Folder/RESTORE_FOLDER'
 
 // initial state
 const initialState = {
@@ -96,6 +98,24 @@ export const folderToTrash = folderId => dispatch =>
 export const fileToTrash = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/trash`)
+    .then(result => {
+      console.log('calling fileToTrash')
+      dispatch(removeFile(fileId))
+    })
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+export const restoreFolder = folderId => dispatch =>
+  axios
+    .patch(`${API_ROOT}folders/${folderId}/restore`)
+    .then(result => {
+      console.log('calling folderToTrash')
+      dispatch(removeFolder(folderId))
+    })
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+export const restoreFile = fileId => dispatch =>
+  axios
+    .patch(`${API_ROOT}files/${fileId}/restore`)
     .then(result => {
       console.log('calling fileToTrash')
       dispatch(removeFile(fileId))
