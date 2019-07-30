@@ -65,7 +65,10 @@ export const deleteFolder = folderId => ({
 export const fetchFolder = folderId => dispatch =>
   axios
     .get(`${API_ROOT}folders/${folderId}`)
-    .then(result => dispatch(loadFolder(result)))
+    .then(result => {
+      console.log(result)
+      dispatch(loadFolder(result.data))
+    })
     .catch(err => console.log(`Oops... ${err}`))
 
 export const newFolder = (folderName, parentId) => dispatch =>

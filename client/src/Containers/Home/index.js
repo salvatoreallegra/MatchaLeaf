@@ -31,10 +31,12 @@ class Home extends React.Component {
           <h3>{this.props.folderName}</h3>
           <h2>Files</h2>
           <hr />
-          {File(files)}
+          {files === undefined ? null : File(files)}
           <h2>Folders</h2>
           <hr />
-          {Folder(folders, this.props.loadFolder)}
+          {folders === undefined
+            ? null
+            : Folder(folders, this.props.loadFolder)}
         </ContentDiv>
         <div
           style={{
@@ -47,7 +49,10 @@ class Home extends React.Component {
             margin: '-10px'
           }}
         />
-        <UploadButton openModal={this.showModal} style={{cursor: 'pointer'}}/>
+        <UploadButton
+          openModal={this.showModal}
+          style={{ cursor: 'pointer' }}
+        />
 
         <div
           style={{
@@ -63,7 +68,6 @@ class Home extends React.Component {
           }}
         >
           <Modal hideModal={this.hideModal} />
-
         </div>
       </>
     )
