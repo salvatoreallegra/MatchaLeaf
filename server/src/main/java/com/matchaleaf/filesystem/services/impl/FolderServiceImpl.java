@@ -1,8 +1,17 @@
 package com.matchaleaf.filesystem.services.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +40,48 @@ public class FolderServiceImpl implements FolderService {
 		this.folderRepository = folderRepository;
 		this.fileMapper = fileMapper;
 		this.folderMapper = folderMapper;
+	}
+	
+	
+	//download a folders entire file contents as a zip file
+	public byte[] downloadFolder(Integer id) {
+		
+		Folder folderToZip = folderRepository.getOne(id);
+		Set<File> allFiles = folderToZip.getFiles();
+	//	List<String> fileNames = new ArrayList<>();
+		
+		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+		
+		ZipOutputStream zipOut = new ZipOutputStream(arrayOutputStream);
+		
+		for(File f: allFiles) {
+			try {
+				ZipEntry zipEntry = new ZipEntry(f.getName());
+				zipOut.putNextEntry(zipEntry);
+				zipOut.write(f.getFileBytes());
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+//			int length;
+//			while((length = arrayInputStream.read(f.getFileBytes() > 0) {
+//				
+//			}
+			
+		}
+		
+		try {
+			zipOut.close();
+			arrayOutputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arrayOutputStream.toByteArray();//repl;ace file output stream with byteoutarrayoutputstream //saves to byte array
+		//return byte array of file output stream
+		
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
