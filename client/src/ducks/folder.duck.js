@@ -1,4 +1,3 @@
-import initialState from './mockState'
 import axios from 'axios'
 const API_ROOT = 'http://localhost:8080/'
 
@@ -9,12 +8,12 @@ export const REMOVE_FOLDER = 'cooksys/matchaleaf/Folder/SEND_FOLDER_TRASH'
 export const REMOVE_FILE = 'cooksys/matchaleaf/Folder/SEND_FOLDER_TRASH'
 
 // initial state
-// const initialState = {
-//   id: 1,
-//   name: '/',
-//   files: [],
-//   folders: []
-// }
+const initialState = {
+  id: 1,
+  name: '/',
+  files: [],
+  folders: []
+}
 
 // reducer
 export default function reducer (state = initialState, action) {

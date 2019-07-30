@@ -26,6 +26,10 @@ class Home extends React.Component {
     this.setState({ show: false })
   }
 
+  componentDidUpdate (prevProps) {
+    this.props.loadFolder(1)
+  }
+
   render () {
     const folders = this.props.folderList
     const files = this.props.fileList
