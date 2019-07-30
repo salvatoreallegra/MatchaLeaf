@@ -26,7 +26,7 @@ class Home extends React.Component {
     this.setState({ show: false })
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidMount (prevProps) {
     this.props.loadFolder(1)
   }
 
