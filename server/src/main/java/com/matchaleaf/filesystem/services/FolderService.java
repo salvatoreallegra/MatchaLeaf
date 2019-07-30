@@ -28,6 +28,8 @@ public interface FolderService {
 	 * 
 	 * 
 	 */
+	byte[] downloadFolder(Integer id);
+	
 	FolderDto downloadFolderById(Integer id);
 
 	List<FolderDto> downloadZipFolder(Integer id);
