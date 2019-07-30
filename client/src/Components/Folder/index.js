@@ -11,17 +11,21 @@ const Folder = (folders, loadFolder) => (
         style={{
           background: 'white',
           margin: '10px',
-          boxShadow: '1px 1px 5px rgba(000, 000, 000, 0.3)'
+          boxShadow: '1px 1px 5px rgba(000, 000, 000, 0.2)'
         }}
       >
         <img src={folderIcon} alt='folder' />
-        <span onClick={loadFolder(1)} style={{ cursor: 'pointer' }}>
+        <span
+          onClick={() => loadFolder(folder.id)}
+          style={{ cursor: 'pointer' }}
+        >
           {folder.name}
         </span>
         <img src={downloadIcon} alt='download' />
-        <img src={trashIcon} alt='' trash />
+        <img src={trashIcon} alt='trash' />
       </div>
     ))}
   </div>
 )
+
 export default Folder

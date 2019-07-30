@@ -11,7 +11,7 @@ const File = files => (
         style={{
           background: 'white',
           margin: '10px',
-          boxShadow: '1px 1px 5px rgba(000, 000, 000, 0.3)'
+          boxShadow: '1px 1px 5px rgba(000, 000, 000, 0.2)'
         }}
       >
         <img src={fileIcon} alt='file' />

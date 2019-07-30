@@ -10,7 +10,7 @@ const Modal = ({ hideModal }) => {
         flexDirection: 'column'
       }}
     >
-      <form method='post' enctype='multipart/form-data'>
+      <form method='post' encType='multipart/form-data'>
         <input type='file' name='files[]' multiple />
         <input type='submit' value='Upload File' name='submit' />
       </form>

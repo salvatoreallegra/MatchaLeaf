@@ -64,9 +64,6 @@ class Home extends React.Component {
         >
           <Modal hideModal={this.hideModal} />
 
-          {console.log(this.state.show)}
-          {console.log(this.showModal)}
-          {console.log(this.hideModal)}
         </div>
       </>
     )
