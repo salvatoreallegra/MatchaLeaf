@@ -87,11 +87,17 @@ export const newFolder = (folderName, parentId) => dispatch =>
 export const folderToTrash = folderId => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/trash`)
-    .then(result => dispatch(removeFolder(folderId)))
+    .then(result => {
+      console.log('calling folderToTrash')
+      dispatch(removeFolder(folderId))
+    })
     .catch(err => console.log(`operation invalid: ${err}`))
 
 export const fileToTrash = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/trash`)
-    .then(result => dispatch(removeFile(fileId)))
+    .then(result => {
+      console.log('calling fileToTrash')
+      dispatch(removeFile(fileId))
+    })
     .catch(err => console.log(`operation invalid: ${err}`))
