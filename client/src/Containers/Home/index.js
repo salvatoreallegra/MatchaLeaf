@@ -47,7 +47,7 @@ class Home extends React.Component {
             margin: '-10px'
           }}
         />
-        <UploadButton openModal={this.showModal} />
+        <UploadButton openModal={this.showModal} style={{cursor: 'pointer'}}/>
 
         <div
           style={{
