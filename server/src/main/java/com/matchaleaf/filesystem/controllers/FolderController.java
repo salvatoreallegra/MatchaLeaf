@@ -43,6 +43,14 @@ public class FolderController {
 
 	}
 	
+	//Download a folders file contents as a zip file
+	@GetMapping("/download/{id}")
+	public String downloadFolder(@PathVariable Integer id) {
+		
+		
+		return "Downloading folder";
+	}
+	
 	@PatchMapping("/{id}/trash")
 	public IdResponseDto sendFolderToTrash(@PathVariable Integer id) {
 		return folderService.sendFolderToTrash(id);
