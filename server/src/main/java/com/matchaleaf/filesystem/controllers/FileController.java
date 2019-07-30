@@ -1,6 +1,8 @@
 package com.matchaleaf.filesystem.controllers;
 
 import org.springframework.core.io.ByteArrayResource;
+
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import com.matchaleaf.filesystem.services.*;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/files")
 public class FileController {
