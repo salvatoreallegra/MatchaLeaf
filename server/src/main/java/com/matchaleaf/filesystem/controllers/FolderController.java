@@ -1,6 +1,7 @@
 package com.matchaleaf.filesystem.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,11 @@ public class FolderController {
 
 		return folderService.getFolderById(ID);
 
+	}
+	
+	@PatchMapping("/{id}/trash")
+	public IdResponseDto sendFolderToTrash(@PathVariable Integer id) {
+		return folderService.sendFolderToTrash(id);
 	}
 
 }

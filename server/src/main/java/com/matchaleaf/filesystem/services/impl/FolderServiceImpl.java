@@ -102,4 +102,30 @@ public class FolderServiceImpl implements FolderService {
 		return null;
 	}
 
+	@Override
+	public IdResponseDto sendFolderToTrash(Integer id) {
+		
+		Folder folder = folderRepository.getOne(id);
+		Folder originalParentFolder = folderRepository.getOne(folder.getParentFolder().getId());
+		Folder trashFolder = folderRepository.getOne(2);
+		
+		Set<Folder> parentFolderFolders = originalParentFolder.getFolders();
+		parentFolderFolders.remove(folder);
+		originalParentFolder.setFolders(parentFolderFolders);
+		folderRepository.save(originalParentFolder);
+		
+		Set<Folder> trashFolderFolders = trashFolder.getFolders();
+		trashFolderFolders.add(folder);
+		trashFolder.setFolders(trashFolderFolders);
+		folderRepository.save(trashFolder);
+		
+		folder.setParentFolder(trashFolder);
+		folderRepository.save(folder);
+		
+		IdResponseDto folderIdDto = new IdResponseDto();
+		folderIdDto.setId(id);
+		
+		return folderIdDto;
+	}
+
 }

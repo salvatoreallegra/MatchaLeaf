@@ -13,6 +13,8 @@ public interface FolderService {
 
 	IdResponseDto createFolder(FolderUploadDto folderUploadDto);
 
+	IdResponseDto sendFolderToTrash(Integer id);
+
 	FolderDto getFolderById(Integer id);
 
 	/*
