@@ -1,5 +1,9 @@
 package com.matchaleaf.filesystem.controllers;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.matchaleaf.filesystem.dto.FolderDownloadZipDto;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
@@ -48,10 +53,13 @@ public class FolderController {
 	
 	//Download a folders file contents as a zip file
 	@GetMapping("/download/{id}")
-	public byte[] downloadFolder(@PathVariable Integer id) {
+	public ResponseEntity<Resource> downloadFolder(@PathVariable Integer id) {
 		
 		
-		return folderService.downloadFolder(id);
+		FolderDownloadZipDto zipDto = folderService.downloadFolder(id);
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + zipDto.getName() + "\"")
+				.body(new ByteArrayResource(zipDto.getByteArray()));
 	}
 	
 	@PatchMapping("/{id}/trash")
