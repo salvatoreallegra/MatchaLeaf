@@ -22,7 +22,6 @@ const Folder = (isTrash, folders, toggleTrash, loadFolder) => (
           {folder.name}
         </span>
         {isTrash ? null : <img src={downloadIcon} alt='download' />}
-
         <img
           src={trashIcon}
           alt='trash'

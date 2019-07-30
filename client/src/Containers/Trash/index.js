@@ -13,7 +13,7 @@ import {
 } from '../../ducks/folder.duck'
 
 class Trash extends React.Component {
-  state = { isTrash: false }
+  state = { isTrash: true }
 
   componentDidMount (prevProps) {
     this.props.loadFolder(2)
