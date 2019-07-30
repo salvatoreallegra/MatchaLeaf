@@ -15,7 +15,7 @@ const Folder = (folders, loadFolder) => (
         }}
       >
         <img src={folderIcon} alt='folder' />
-        <span onClick={loadFolder} style={{ cursor: 'pointer' }}>
+        <span onClick={loadFolder(folder.id)} style={{ cursor: 'pointer' }}>
           {folder.name}
         </span>
         <img src={downloadIcon} alt='download' />
