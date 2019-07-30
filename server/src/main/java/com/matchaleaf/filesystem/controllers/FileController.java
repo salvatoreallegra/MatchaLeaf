@@ -19,6 +19,7 @@ import com.matchaleaf.filesystem.services.*;
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/files")
 public class FileController {
