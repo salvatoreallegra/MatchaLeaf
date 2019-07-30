@@ -11,9 +11,13 @@ const MOUNT_NODE = document.getElementById('root')
 
 const GlobalStyle = createGlobalStyle`
 body {
-    background-image: url('');
-    background: rgb(255,255,255);
-    background: #6FCF97;
+    --main-color: #FFFFFF;
+    --second-color: #6FCF97;
+    background: var(--main-color);                                                          /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, var(--main-color), var(--second-color)); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(125.92deg, var(--main-color) 57.13%, var(--second-color) 98.8%);  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
 }
 `
