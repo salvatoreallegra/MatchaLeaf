@@ -61,6 +61,7 @@ export const deleteFolder = folderId => ({
   payload: folderId
 })
 
+// api calls
 export const fetchFolder = folderId => dispatch =>
   axios
     .get(`${API_ROOT}folders/${folderId}`)
