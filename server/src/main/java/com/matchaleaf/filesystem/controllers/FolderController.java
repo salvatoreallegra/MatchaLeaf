@@ -44,7 +44,7 @@ public class FolderController {
 	}
 	
 	@PatchMapping("/{id}/trash")
-	public IdResponseDto trashFolder(@PathVariable Integer id) {
+	public IdResponseDto sendFolderToTrash(@PathVariable Integer id) {
 		return folderService.sendFolderToTrash(id);
 	}
 

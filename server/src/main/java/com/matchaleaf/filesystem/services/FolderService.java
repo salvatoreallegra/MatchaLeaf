@@ -43,6 +43,8 @@ public interface FolderService {
 	   	
 	    List<FolderDto> downloadZipFolder(Integer id);
 
+		IdResponseDto sendFolderToTrash(Integer id);
+
 
 }
 
