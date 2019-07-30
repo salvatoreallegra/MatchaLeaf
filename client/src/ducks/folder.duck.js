@@ -97,7 +97,7 @@ export const fileToTrash = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/trash`)
     .then(result => {
-      onsole.log('calling fileToTrash')
+      console.log('calling fileToTrash')
       dispatch(removeFile(fileId))
     })
     .catch(err => console.log(`operation invalid: ${err}`))
