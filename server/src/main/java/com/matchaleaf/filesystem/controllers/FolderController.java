@@ -1,5 +1,6 @@
 package com.matchaleaf.filesystem.controllers;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
+import com.matchaleaf.filesystem.services.FileService;
 import com.matchaleaf.filesystem.services.FolderService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/folders")
 public class FolderController {
@@ -45,10 +48,10 @@ public class FolderController {
 	
 	//Download a folders file contents as a zip file
 	@GetMapping("/download/{id}")
-	public String downloadFolder(@PathVariable Integer id) {
+	public byte[] downloadFolder(@PathVariable Integer id) {
 		
 		
-		return "Downloading folder";
+		return folderService.downloadFolder(id);
 	}
 	
 	@PatchMapping("/{id}/trash")
