@@ -29,7 +29,7 @@ class Trash extends React.Component {
         {File(files, this.props.restoreFile)}
         <h2>Folders</h2>
         <hr />
-        {Folder(folders, this.props.restoreFolder)}
+        {Folder(folders, this.props.restoreFolder, this.props.loadFolder)}
       </ContentDiv>
     )
   }
