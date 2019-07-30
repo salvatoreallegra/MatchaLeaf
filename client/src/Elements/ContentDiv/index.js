@@ -4,7 +4,7 @@ const ContentDiv = styled.div`
   grid-row-start: 1;
   grid-row-end: 4;
   grid-column-start: 2;
-  grid-column-end: 6;
+  grid-column-end: 5;
 `
 
 export default ContentDiv
