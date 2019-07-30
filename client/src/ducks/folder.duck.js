@@ -1,6 +1,6 @@
 import initialState from './mockState'
 import axios from 'axios'
-const API_ROOT = 'https://localhost:8080/'
+const API_ROOT = 'http://localhost:8080/'
 
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
