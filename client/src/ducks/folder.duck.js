@@ -69,7 +69,6 @@ export const removeFolder = folderId => ({
   payload: folderId
 })
 
-
 // api calls
 export const fetchFolder = folderId => dispatch =>
   axios
@@ -86,13 +85,13 @@ export const newFolder = (folderName, parentId) => dispatch =>
     .then(result => dispatch(createFolder(folderName, result)))
     .catch(err => console.log(`impossible to create: ${err}`))
 
-export const sendFolderToTrash = folderId => dispatch =>
+export const folderToTrash = folderId => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/trash`)
     .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
-export const sendFileToTrash = fileId => dispatch =>
+export const fileToTrash = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/trash`)
     .then(result => dispatch(removeFile(fileId)))
