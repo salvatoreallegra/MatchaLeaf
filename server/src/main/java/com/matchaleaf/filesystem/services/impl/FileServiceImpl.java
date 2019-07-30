@@ -72,18 +72,31 @@ public class FileServiceImpl implements FileService {
 
 	// Trashing a file, Update files parent folder id to the trash folder id
 	public FileDto trashFile(Integer Id) {
-
-		Folder trashFolder = new Folder();
-		trashFolder = folderRepository.getOne(2);
+		
 		File fileToPatch = fileRepository.getOne(Id);
+		Folder originFolder = folderRepository.getOne(fileToPatch.getParentFolder().getId());
+		Folder trashFolder = folderRepository.getOne(2);
+		
+		Set<File> originFolderFiles = originFolder.getFiles();
+		originFolderFiles.remove(fileToPatch);
+		originFolder.setFiles(originFolderFiles);
+		folderRepository.saveAndFlush(originFolder);
+		
+		
+		Set<File> trashFolderFiles = trashFolder.getFiles();
+		if(trashFolderFiles == null) { trashFolderFiles = new HashSet<>(); }
+		trashFolderFiles.add(fileToPatch);
+		trashFolder.setFiles(trashFolderFiles);
+		folderRepository.saveAndFlush(trashFolder);
+		
 		fileToPatch.setParentFolder(trashFolder);
+		fileRepository.saveAndFlush(fileToPatch);
+		
 		FileDto patchedFileDto = new FileDto();
 		patchedFileDto.setId(fileToPatch.getId());
 		patchedFileDto.setName(fileToPatch.getName());
-		fileRepository.save(fileToPatch);
 
 		return patchedFileDto;
-
 	}
 
 	@Override
@@ -134,7 +147,6 @@ public class FileServiceImpl implements FileService {
 		if(destinationFolderFiles == null) { destinationFolderFiles = new HashSet(); }
 		destinationFolderFiles.add(fileToMove);
 		destinationFolder.setFiles(destinationFolderFiles);
-
 		folderRepository.saveAndFlush(destinationFolder);
 		
 		fileToMove.setParentFolder(destinationFolder);
