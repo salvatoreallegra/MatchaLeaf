@@ -6,6 +6,7 @@ import Folder from '../../Components/Folder'
 import ContentDiv from '../../Elements/ContentDiv'
 
 // need to import the actions to dispatch
+import { fetchFolder } from '../../ducks/folder.duck'
 
 class Trash extends React.Component {
   componentDidMount (prevProps) {
@@ -39,4 +40,11 @@ const mapStateToProps = state => ({
   fileList: state.folder.files
 })
 
-export default connect(mapStateToProps)(Trash)
+const mapDispatchToProps = dispatch => ({
+  loadFolder: folderId => dispatch(fetchFolder(folderId))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Trash)
