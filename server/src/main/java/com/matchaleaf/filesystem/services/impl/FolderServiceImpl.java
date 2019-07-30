@@ -105,27 +105,39 @@ public class FolderServiceImpl implements FolderService {
 	@Override
 	public IdResponseDto sendFolderToTrash(Integer id) {
 		
+		Folder trashFolder = folderRepository.getOne(2);
+		FolderDto folderDto = moveFolder(id, folderMapper.entityToFolderDto(trashFolder));
+		
+		IdResponseDto folderIdDto = new IdResponseDto();
+		folderIdDto.setId(id);
+		return folderIdDto;
+	}
+
+	
+	@Override
+	public FolderDto moveFolder(Integer id, FolderDto folderDto) {
+		
 		Folder folder = folderRepository.getOne(id);
 		Folder originalParentFolder = folderRepository.getOne(folder.getParentFolder().getId());
-		Folder trashFolder = folderRepository.getOne(2);
+		Folder destinationFolder = folderMapper.dtoToEntity(folderDto);
 		
 		Set<Folder> parentFolderFolders = originalParentFolder.getFolders();
 		parentFolderFolders.remove(folder);
 		originalParentFolder.setFolders(parentFolderFolders);
 		folderRepository.save(originalParentFolder);
 		
-		Set<Folder> trashFolderFolders = trashFolder.getFolders();
-		trashFolderFolders.add(folder);
-		trashFolder.setFolders(trashFolderFolders);
-		folderRepository.save(trashFolder);
+		Set<Folder> destinationFolderFolders = destinationFolder.getFolders();
+		destinationFolderFolders.add(folder);
+		destinationFolder.setFolders(destinationFolderFolders);
+		folderRepository.save(destinationFolder);
 		
-		folder.setParentFolder(trashFolder);
+		folder.setParentFolder(destinationFolder);
 		folderRepository.save(folder);
 		
 		IdResponseDto folderIdDto = new IdResponseDto();
 		folderIdDto.setId(id);
 		
-		return folderIdDto;
+		return folderDto;
 	}
 
 }

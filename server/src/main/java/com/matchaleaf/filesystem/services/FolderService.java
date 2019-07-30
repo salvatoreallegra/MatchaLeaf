@@ -11,7 +11,12 @@ import com.matchaleaf.filesystem.dto.IdResponseDto;
 @Service
 public interface FolderService {
 
+<<<<<<< HEAD
 	IdResponseDto createFolder(FolderUploadDto folderUploadDto);
+=======
+		FolderDto moveFolder(Integer id, FolderDto folderDto);
+
+>>>>>>> 7ce9a50600f99f467d24438d128e312acb6f1ad5
 
 	IdResponseDto sendFolderToTrash(Integer id);
 

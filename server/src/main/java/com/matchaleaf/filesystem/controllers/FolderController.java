@@ -47,5 +47,10 @@ public class FolderController {
 	public IdResponseDto sendFolderToTrash(@PathVariable Integer id) {
 		return folderService.sendFolderToTrash(id);
 	}
+	
+	@PatchMapping("/{id}/move")
+	public FolderDto moveFolder(@PathVariable Integer id, @RequestBody FolderDto folderDto) {
+		return folderService.moveFolder(id, folderDto);
+	}
 
 }
