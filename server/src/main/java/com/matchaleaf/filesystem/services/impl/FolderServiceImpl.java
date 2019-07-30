@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matchaleaf.filesystem.dto.FileDto;
+import com.matchaleaf.filesystem.dto.FolderDownloadZipDto;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
@@ -44,11 +45,10 @@ public class FolderServiceImpl implements FolderService {
 	
 	
 	//download a folders entire file contents as a zip file
-	public byte[] downloadFolder(Integer id) {
+	public FolderDownloadZipDto downloadFolder(Integer id) {
 		
 		Folder folderToZip = folderRepository.getOne(id);
 		Set<File> allFiles = folderToZip.getFiles();
-	//	List<String> fileNames = new ArrayList<>();
 		
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
 		
@@ -63,12 +63,7 @@ public class FolderServiceImpl implements FolderService {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-//			int length;
-//			while((length = arrayInputStream.read(f.getFileBytes() > 0) {
-//				
-//			}
+			}			
 			
 		}
 		
@@ -79,7 +74,12 @@ public class FolderServiceImpl implements FolderService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return arrayOutputStream.toByteArray();//repl;ace file output stream with byteoutarrayoutputstream //saves to byte array
+		
+		FolderDownloadZipDto downloadZipDto = new FolderDownloadZipDto();
+		downloadZipDto.setName(folderToZip.getName());
+		downloadZipDto.setByteArray(arrayOutputStream.toByteArray());
+		return downloadZipDto;
+		//return arrayOutputStream.toByteArray();//repl;ace file output stream with byteoutarrayoutputstream //saves to byte array
 		//return byte array of file output stream
 		
 	}

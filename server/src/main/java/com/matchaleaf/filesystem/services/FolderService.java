@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.matchaleaf.filesystem.dto.FolderDownloadZipDto;
 import com.matchaleaf.filesystem.dto.FolderDto;
 import com.matchaleaf.filesystem.dto.FolderUploadDto;
 import com.matchaleaf.filesystem.dto.IdResponseDto;
@@ -28,7 +29,7 @@ public interface FolderService {
 	 * 
 	 * 
 	 */
-	byte[] downloadFolder(Integer id);
+	FolderDownloadZipDto downloadFolder(Integer id);
 	
 	FolderDto downloadFolderById(Integer id);
 
