@@ -8,13 +8,17 @@ import ContentDiv from '../../Elements/ContentDiv'
 // need to import the actions to dispatch
 
 class Trash extends React.Component {
+  componentDidMount (prevProps) {
+    this.props.loadFolder(2)
+  }
+
   render () {
     const folders = this.props.folderList
     const files = this.props.fileList
 
     return (
       <ContentDiv>
-        <h3>trash{this.props.folderName}</h3>
+        <h3>{this.props.folderName}</h3>
         <h2>Files</h2>
         <hr />
         {File(files)}
