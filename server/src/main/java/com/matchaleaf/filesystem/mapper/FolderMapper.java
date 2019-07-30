@@ -16,4 +16,5 @@ public interface FolderMapper {
 
 	FolderDto entityToFolderDto(Folder folder);
 
+	Folder dtoToEntity(FolderDto folderDto);
 }
