@@ -128,4 +128,31 @@ public class FolderServiceImpl implements FolderService {
 		return folderIdDto;
 	}
 
+	
+	@Override
+	public FolderDto moveFolder(Integer id, FolderDto folderDto) {
+		
+		Folder folder = folderRepository.getOne(id);
+		Folder originalParentFolder = folderRepository.getOne(folder.getParentFolder().getId());
+		Folder destinationFolder = folderMapper.dtoToEntity(folderDto);
+		
+		Set<Folder> parentFolderFolders = originalParentFolder.getFolders();
+		parentFolderFolders.remove(folder);
+		originalParentFolder.setFolders(parentFolderFolders);
+		folderRepository.save(originalParentFolder);
+		
+		Set<Folder> destinationFolderFolders = destinationFolder.getFolders();
+		destinationFolderFolders.add(folder);
+		destinationFolder.setFolders(destinationFolderFolders);
+		folderRepository.save(destinationFolder);
+		
+		folder.setParentFolder(destinationFolder);
+		folderRepository.save(folder);
+		
+		IdResponseDto folderIdDto = new IdResponseDto();
+		folderIdDto.setId(id);
+		
+		return folderDto;
+	}
+
 }

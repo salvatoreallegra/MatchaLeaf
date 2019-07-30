@@ -45,6 +45,8 @@ public interface FolderService {
 
 		IdResponseDto sendFolderToTrash(Integer id);
 
+		FolderDto moveFolder(Integer id, FolderDto folderDto);
+
 
 }
 
