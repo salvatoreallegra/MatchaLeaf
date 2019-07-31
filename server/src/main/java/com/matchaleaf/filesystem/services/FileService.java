@@ -14,7 +14,7 @@ import com.matchaleaf.filesystem.dto.*;
 public interface FileService {
 
 	// This can also be considered uploading a file
-	IdResponseDto createFile(MultipartFile file, Integer folderId);
+	FileDto createFile(MultipartFile file, Integer folderId);
 
 	FileDownloadDto downloadFileById(Integer id);
 
@@ -25,5 +25,7 @@ public interface FileService {
 	IdResponseDto moveFile(Integer id, Integer destinationId);
 	
 	IdResponseDto restoreFileFromTrash(Integer id);
+
+	IdResponseDto deleteFile(Integer id);
 
 }

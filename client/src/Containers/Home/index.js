@@ -7,14 +7,15 @@ import UploadButton from '../../Components/UploadButton'
 import ContentDiv from '../../Elements/ContentDiv'
 import Modal from '../../Components/Modal'
 
-// need to import the actions to dispatch
+// import the actions to dispatch
 import {
   fetchFolder,
   newFolder,
   folderToTrash,
   fileToTrash,
   moveFolder,
-  moveFile
+  moveFile,
+  getFolder
 } from '../../ducks/folder.duck'
 
 class Home extends React.Component {
@@ -118,7 +119,9 @@ const mapDispatchToProps = dispatch => ({
   fileToTrash: fileId => dispatch(fileToTrash(fileId)),
   moveFolder: (folderId, newParent) =>
     dispatch(moveFolder(folderId, newParent)),
-  moveFile: (fileId, newParent) => dispatch(moveFile(fileId, newParent))
+  moveFile: (fileId, newParent) => dispatch(moveFile(fileId, newParent)),
+  createFolder: (folderName, parentId) =>
+    dispatch(getFolder(folderName, parentId))
 })
 
 export default connect(

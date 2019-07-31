@@ -72,26 +72,27 @@ public class FileServiceImpl implements FileService {
 
 	// Trashing a file, Update files parent folder id to the trash folder id
 	public FileDto trashFile(Integer Id) {
-		
+
 		File fileToPatch = fileRepository.getOne(Id);
 		Folder originFolder = folderRepository.getOne(fileToPatch.getParentFolder().getId());
 		Folder trashFolder = folderRepository.getOne(2);
-		
+
 		Set<File> originFolderFiles = originFolder.getFiles();
 		originFolderFiles.remove(fileToPatch);
 		originFolder.setFiles(originFolderFiles);
 		folderRepository.saveAndFlush(originFolder);
-		
-		
+
 		Set<File> trashFolderFiles = trashFolder.getFiles();
-		if(trashFolderFiles == null) { trashFolderFiles = new HashSet<>(); }
+		if (trashFolderFiles == null) {
+			trashFolderFiles = new HashSet<>();
+		}
 		trashFolderFiles.add(fileToPatch);
 		trashFolder.setFiles(trashFolderFiles);
 		folderRepository.saveAndFlush(trashFolder);
-		
+
 		fileToPatch.setParentFolder(trashFolder);
 		fileRepository.saveAndFlush(fileToPatch);
-		
+
 		FileDto patchedFileDto = new FileDto();
 		patchedFileDto.setId(fileToPatch.getId());
 		patchedFileDto.setName(fileToPatch.getName());
@@ -100,7 +101,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
+	public FileDto createFile(MultipartFile file, Integer folderId) {
 
 		Folder parentFolder = new Folder();
 		parentFolder = folderRepository.getOne(folderId);
@@ -122,10 +123,11 @@ public class FileServiceImpl implements FileService {
 
 		fileRepository.save(fileEntity);
 
-		IdResponseDto idResponseDto = new IdResponseDto();
-		idResponseDto.setId(fileEntity.getId());
+		FileDto fileDto = new FileDto();
+		fileDto.setId(fileEntity.getId());
+		fileDto.setName(fileEntity.getName());
 
-		return (idResponseDto);
+		return (fileDto);
 
 	}
 
@@ -135,54 +137,68 @@ public class FileServiceImpl implements FileService {
 		File fileToMove = fileRepository.getOne(id);
 		Folder destinationFolder = folderRepository.getOne(destinationId);
 		Folder originFolder = folderRepository.getOne(fileToMove.getParentFolder().getId());
-		
+
 		Set<File> originFolderFiles = originFolder.getFiles();
 		originFolderFiles.remove(fileToMove);
 		originFolder.setFiles(originFolderFiles);
 		folderRepository.saveAndFlush(originFolder);
-		
 
 		Set<File> destinationFolderFiles = destinationFolder.getFiles();
-		if(destinationFolderFiles == null) { destinationFolderFiles = new HashSet(); }
+		if (destinationFolderFiles == null) {
+			destinationFolderFiles = new HashSet();
+		}
 		destinationFolderFiles.add(fileToMove);
 		destinationFolder.setFiles(destinationFolderFiles);
 		folderRepository.saveAndFlush(destinationFolder);
-		
+
 		fileToMove.setParentFolder(destinationFolder);
 		fileRepository.saveAndFlush(fileToMove);
-		
+
 		IdResponseDto idResponse = new IdResponseDto();
 		idResponse.setId(fileToMove.getId());
-		
+
 		return idResponse;
 	}
-	
+
 	@Override
 	public IdResponseDto restoreFileFromTrash(Integer id) {
 		// TODO Auto-generated method stub
 		File fileToRestore = fileRepository.getOne(id);
 
-		  Folder trashFolder = folderRepository.getOne(2);
-		
-		  Folder rootFolder = folderRepository.getOne(1); 
-		   
-		  Set<File>  setOfFilesInTrash = trashFolder.getFiles(); 
-		  Set<File>  setOfFilesInRoot = rootFolder.getFiles(); 
-		  setOfFilesInTrash.remove(fileToRestore); 
-		  setOfFilesInRoot.add(fileToRestore);
-		  
-		  trashFolder.setFiles(setOfFilesInTrash); 
-		  rootFolder.setFiles(setOfFilesInRoot); 
-		  fileToRestore.setParentFolder(rootFolder); 
-		  fileRepository.saveAndFlush(fileToRestore); 
-		  folderRepository.saveAndFlush(trashFolder); 
-		  folderRepository.saveAndFlush(rootFolder); 
-		  
-		  IdResponseDto restoreFileDto = new IdResponseDto();
-		  restoreFileDto.setId(fileToRestore.getId());
-		 
+		Folder trashFolder = folderRepository.getOne(2);
+
+		Folder rootFolder = folderRepository.getOne(1);
+
+		Set<File> setOfFilesInTrash = trashFolder.getFiles();
+		Set<File> setOfFilesInRoot = rootFolder.getFiles();
+		setOfFilesInTrash.remove(fileToRestore);
+		setOfFilesInRoot.add(fileToRestore);
+
+		trashFolder.setFiles(setOfFilesInTrash);
+		rootFolder.setFiles(setOfFilesInRoot);
+		fileToRestore.setParentFolder(rootFolder);
+		fileRepository.saveAndFlush(fileToRestore);
+		folderRepository.saveAndFlush(trashFolder);
+		folderRepository.saveAndFlush(rootFolder);
+
+		IdResponseDto restoreFileDto = new IdResponseDto();
+		restoreFileDto.setId(fileToRestore.getId());
 
 		return restoreFileDto;
+	}
+
+	@Override
+	public IdResponseDto deleteFile(Integer id) {
+
+		File deletedFile = fileRepository.getOne(id);
+		Folder parentFolder = deletedFile.getParentFolder();
+		Set<File> parentFolderFiles = parentFolder.getFiles();
+		parentFolderFiles.remove(deletedFile);
+		parentFolder.setFiles(parentFolderFiles);
+		folderRepository.saveAndFlush(parentFolder);
+		fileRepository.delete(deletedFile);
+		return fileMapper.entityToDto(deletedFile);
+
 	}
 
 }

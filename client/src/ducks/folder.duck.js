@@ -29,7 +29,7 @@ export default function reducer (state = initialState, action) {
     case CREATE_FOLDER:
       return {
         ...state,
-        files: [...state.files, action.payload]
+        folder: [...state.folders, action.payload]
       }
     case REMOVE_FILE:
       return {
@@ -53,9 +53,9 @@ export const loadFolder = folder => ({
   payload: folder
 })
 
-export const createFolder = (folderName, folderId) => ({
+export const createFolder = folder => ({
   type: CREATE_FOLDER,
-  payload: { folderName, folderId }
+  payload: folder
 })
 
 export const removeFile = fileId => ({
@@ -139,4 +139,14 @@ export const moveFile = (fileId, newParent) => dispatch =>
       console.log('calling moveFile')
       dispatch(removeFile(fileId))
     })
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+// API calls to upload file and create folder
+export const getFolder = (folderName, parentId) => dispatch =>
+  axios
+    .post(`${API_ROOT}folders/`, {
+      folderName: folderName,
+      parentId: parentId
+    })
+    .then(result => dispatch(createFolder(result)))
     .catch(err => console.log(`operation invalid: ${err}`))
