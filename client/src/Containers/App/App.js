@@ -6,9 +6,8 @@ import Trash from '../Trash'
 import styled from 'styled-components'
 
 const GridDiv = styled.div`
-  display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-auto-rows: 20% 20% 20% 20% 20%;
+  display: flex;
+  flex-direction: row;
 `
 
 class App extends Component {
