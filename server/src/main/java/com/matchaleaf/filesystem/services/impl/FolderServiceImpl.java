@@ -212,5 +212,29 @@ public class FolderServiceImpl implements FolderService {
 
 		return restoreFolderDto;
 	}
+	@Override
+	public IdResponseDto deleteFolder(Integer id) {
+		
+		Folder deletedFolder = folderRepository.getOne(id);
+		
+		//Remove this deleted folder from the parent folders child folder set
+		Folder parentFolder = deletedFolder.getParentFolder();		
+		Set<Folder> parentFolderFolders = parentFolder.getFolders();
+		parentFolderFolders.remove(deletedFolder);
+		parentFolder.setFolders(parentFolderFolders);
+		folderRepository.saveAndFlush(parentFolder);
+		
+		//Delete Children Folders
+		
+//		if(deletedFolder.getFolders)
+//		
+//		
+//		parentFolderFiles.remove(deletedFile);
+//		parentFolder.setFiles(parentFolderFiles);
+//		folderRepository.saveAndFlush(parentFolder);
+		folderRepository.delete(deletedFolder);
+		
+		return folderMapper.entityToDto(deletedFolder);
+	}
 
 }

@@ -27,11 +27,10 @@ public class Folder {
 	@ManyToOne
 	private Folder parentFolder;
 
-	@OneToMany
+	@OneToMany(orphanRemoval=true)
 	private Set<Folder> childFolders; // use a list instead of set
 
-	@OneToMany(cascade = CascadeType.ALL)
-
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
 	private Set<File> files;
 
 	public Folder(Set<File> files, String name, Folder parentFolder, Set<Folder> childFolders) {

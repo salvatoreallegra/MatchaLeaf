@@ -5,6 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,5 +76,13 @@ public class FolderController {
 	public IdResponseDto restoreFolderFromTrash(@PathVariable Integer id) {
 		return folderService.restoreFolderFromTrash(id);
 	}
-
+	@DeleteMapping("/{id}/delete")
+	public IdResponseDto deleteFolder(@PathVariable Integer id) {
+		
+		return folderService.deleteFolder(id);
+	}
 }
+
+	
+
+
