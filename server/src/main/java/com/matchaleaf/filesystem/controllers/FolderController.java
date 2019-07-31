@@ -71,5 +71,9 @@ public class FolderController {
 	public FolderDto moveFolder(@PathVariable Integer id, @RequestBody FolderDto folderDto) {
 		return folderService.moveFolder(id, folderDto);
 	}
+	@PatchMapping ("/{id}/restorefolder")
+	public IdResponseDto restoreFolderFromTrash(@PathVariable Integer id) {
+		return folderService.restoreFolderFromTrash(id);
+	}
 
 }

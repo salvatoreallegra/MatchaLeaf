@@ -143,5 +143,33 @@ public class FileServiceImpl implements FileService {
 
 		return fileMapper.entityToFileDto(fileToMove);
 	}
+	
+	@Override
+	public IdResponseDto restoreFileFromTrash(Integer id) {
+		// TODO Auto-generated method stub
+		File fileToRestore = fileRepository.getOne(id);
+
+		  Folder trashFolder = folderRepository.getOne(2);
+		
+		  Folder rootFolder = folderRepository.getOne(1); 
+		   
+		  Set<File>  setOfFilesInTrash = trashFolder.getFiles(); 
+		  Set<File>  setOfFilesInRoot = rootFolder.getFiles(); 
+		  setOfFilesInTrash.remove(fileToRestore); 
+		  setOfFilesInRoot.add(fileToRestore);
+		  
+		  trashFolder.setFiles(setOfFilesInTrash); 
+		  rootFolder.setFiles(setOfFilesInRoot); 
+		  fileToRestore.setParentFolder(rootFolder); 
+		  fileRepository.saveAndFlush(fileToRestore); 
+		  folderRepository.saveAndFlush(trashFolder); 
+		  folderRepository.saveAndFlush(rootFolder); 
+		  
+		  IdResponseDto restoreFileDto = new IdResponseDto();
+		  restoreFileDto.setId(fileToRestore.getId());
+		 
+
+		return restoreFileDto;
+	}
 
 }

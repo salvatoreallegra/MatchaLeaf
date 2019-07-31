@@ -19,7 +19,7 @@ public interface FolderService {
 	IdResponseDto sendFolderToTrash(Integer id);
 
 	FolderDto getFolderById(Integer id);
-
+	
 	/*
 	 * The json response for FolderDto will be
 	 * 
@@ -34,5 +34,7 @@ public interface FolderService {
 	FolderDto downloadFolderById(Integer id);
 
 	List<FolderDto> downloadZipFolder(Integer id);
+	
+	IdResponseDto restoreFolderFromTrash(Integer id);
 
 }

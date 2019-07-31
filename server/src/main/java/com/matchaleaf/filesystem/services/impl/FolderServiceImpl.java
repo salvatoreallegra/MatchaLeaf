@@ -42,19 +42,18 @@ public class FolderServiceImpl implements FolderService {
 		this.fileMapper = fileMapper;
 		this.folderMapper = folderMapper;
 	}
-	
-	
-	//download a folders entire file contents as a zip file
+
+	// download a folders entire file contents as a zip file
 	public FolderDownloadZipDto downloadFolder(Integer id) {
-		
+
 		Folder folderToZip = folderRepository.getOne(id);
 		Set<File> allFiles = folderToZip.getFiles();
-		
+
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		
+
 		ZipOutputStream zipOut = new ZipOutputStream(arrayOutputStream);
-		
-		for(File f: allFiles) {
+
+		for (File f : allFiles) {
 			try {
 				ZipEntry zipEntry = new ZipEntry(f.getName());
 				zipOut.putNextEntry(zipEntry);
@@ -63,10 +62,10 @@ public class FolderServiceImpl implements FolderService {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}			
-			
+			}
+
 		}
-		
+
 		try {
 			zipOut.close();
 			arrayOutputStream.close();
@@ -74,14 +73,15 @@ public class FolderServiceImpl implements FolderService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		FolderDownloadZipDto downloadZipDto = new FolderDownloadZipDto();
 		downloadZipDto.setName(folderToZip.getName());
 		downloadZipDto.setByteArray(arrayOutputStream.toByteArray());
 		return downloadZipDto;
-		//return arrayOutputStream.toByteArray();//repl;ace file output stream with byteoutarrayoutputstream //saves to byte array
-		//return byte array of file output stream
-		
+		// return arrayOutputStream.toByteArray();//repl;ace file output stream with
+		// byteoutarrayoutputstream //saves to byte array
+		// return byte array of file output stream
+
 	}
 
 	public IdResponseDto createFolder(FolderUploadDto folderUploadDto) {
@@ -155,40 +155,66 @@ public class FolderServiceImpl implements FolderService {
 
 	@Override
 	public IdResponseDto sendFolderToTrash(Integer id) {
-		
+
 		Folder trashFolder = folderRepository.getOne(2);
 		FolderDto folderDto = moveFolder(id, folderMapper.entityToFolderDto(trashFolder));
-		
+
 		IdResponseDto folderIdDto = new IdResponseDto();
 		folderIdDto.setId(id);
 		return folderIdDto;
 	}
 
-	
 	@Override
 	public FolderDto moveFolder(Integer id, FolderDto folderDto) {
-		
+
 		Folder folder = folderRepository.getOne(id);
 		Folder originalParentFolder = folderRepository.getOne(folder.getParentFolder().getId());
 		Folder destinationFolder = folderMapper.dtoToEntity(folderDto);
-		
+
 		Set<Folder> parentFolderFolders = originalParentFolder.getFolders();
 		parentFolderFolders.remove(folder);
 		originalParentFolder.setFolders(parentFolderFolders);
 		folderRepository.save(originalParentFolder);
-		
+
 		Set<Folder> destinationFolderFolders = destinationFolder.getFolders();
 		destinationFolderFolders.add(folder);
 		destinationFolder.setFolders(destinationFolderFolders);
 		folderRepository.save(destinationFolder);
-		
+
 		folder.setParentFolder(destinationFolder);
 		folderRepository.save(folder);
-		
+
 		IdResponseDto folderIdDto = new IdResponseDto();
 		folderIdDto.setId(id);
-		
+
 		return folderDto;
+	}
+
+	@Override
+	public IdResponseDto restoreFolderFromTrash(Integer id) {
+		// TODO Auto-generated method stub
+		Folder folderToRestore = folderRepository.getOne(id);
+
+		Folder trashFolder = folderRepository.getOne(2);
+		
+		  Folder rootFolder = folderRepository.getOne(1); // 
+		  Set<Folder>  setOfFoldersInTrash = trashFolder.getFolders(); 
+		  Set<Folder>  setOfFoldersInRoot = rootFolder.getFolders(); 
+		  setOfFoldersInTrash.remove(folderToRestore); 
+		  setOfFoldersInRoot.add(folderToRestore);
+		  
+		  trashFolder.setFolders(setOfFoldersInTrash); 
+		  rootFolder.setFolders(setOfFoldersInRoot); 
+		 folderToRestore.setParentFolder(rootFolder); 
+		 folderRepository.saveAndFlush(folderToRestore); 
+		  folderRepository.saveAndFlush(trashFolder); 
+		  folderRepository.saveAndFlush(rootFolder); 
+		  
+		  IdResponseDto restoreFolderDto = new IdResponseDto();
+		  restoreFolderDto.setId(folderToRestore.getId());
+		 
+
+		return restoreFolderDto;
 	}
 
 }
