@@ -6,8 +6,6 @@ export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
 export const CREATE_FOLDER = 'cooksys/matchaleaf/Folder/CREATE_FOLDER'
 export const REMOVE_FOLDER = 'cooksys/matchaleaf/Folder/REMOVE_FOLDER'
 export const REMOVE_FILE = 'cooksys/matchaleaf/Folder/REMOVE_FILE'
-export const RESTORE_FOLDER = 'cooksys/matchaleaf/Folder/RESTORE_FOLDER'
-export const RESTORE_FILE = 'cooksys/matchaleaf/Folder/RESTORE_FOLDER'
 
 // initial state
 const initialState = {
@@ -36,12 +34,12 @@ export default function reducer (state = initialState, action) {
     case REMOVE_FILE:
       return {
         ...state,
-        folders: state.folders.filter(folder => folder.id !== action.payload)
+        files: state.files.filter(folder => folder.id !== action.payload)
       }
     case REMOVE_FOLDER:
       return {
         ...state,
-        files: state.files.filter(file => file.id !== action.payload)
+        folders: state.folders.filter(file => file.id !== action.payload)
       }
 
     default:
@@ -86,11 +84,13 @@ export const newFolder = (folderName, parentId) => dispatch =>
     .then(result => dispatch(createFolder(folderName, result)))
     .catch(err => console.log(`impossible to create: ${err}`))
 
+// API CALLS TO SEND AND RESTORE FILE AND FOLDERS FROM TRASH
 export const folderToTrash = folderId => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/trash`)
     .then(result => {
       console.log('calling folderToTrash')
+      console.log(folderId)
       dispatch(removeFolder(folderId))
     })
     .catch(err => console.log(`operation invalid: ${err}`))
@@ -106,9 +106,9 @@ export const fileToTrash = fileId => dispatch =>
 
 export const restoreFolder = folderId => dispatch =>
   axios
-    .patch(`${API_ROOT}folders/${folderId}/restore`)
+    .patch(`${API_ROOT}folders/${folderId}/restorefolder`)
     .then(result => {
-      console.log('calling folderToTrash')
+      console.log('calling restoreFolder')
       dispatch(removeFolder(folderId))
     })
     .catch(err => console.log(`operation invalid: ${err}`))
@@ -117,7 +117,7 @@ export const restoreFile = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/restore`)
     .then(result => {
-      console.log('calling fileToTrash')
+      console.log('calling restoreFile')
       dispatch(removeFile(fileId))
     })
     .catch(err => console.log(`operation invalid: ${err}`))
