@@ -125,9 +125,7 @@ export const restoreFile = fileId => dispatch =>
 // API calls to move folder/files to other folders
 export const moveFolder = (folderId, newParent) => dispatch =>
   axios
-    .patch(`${API_ROOT}folders/${folderId}/move`, {
-      newParent: newParent
-    })
+    .patch(`${API_ROOT}folders/${folderId}/move?id=${newParent}`)
     .then(result => {
       console.log('calling moveFolder')
       dispatch(removeFolder(folderId))
@@ -136,9 +134,7 @@ export const moveFolder = (folderId, newParent) => dispatch =>
 
 export const moveFile = (fileId, newParent) => dispatch =>
   axios
-    .patch(`${API_ROOT}files/${fileId}/move`, {
-      newParent: newParent
-    })
+    .patch(`${API_ROOT}files/${fileId}/move?id=${newParent}`)
     .then(result => {
       console.log('calling moveFile')
       dispatch(removeFile(fileId))
