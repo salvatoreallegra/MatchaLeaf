@@ -37,7 +37,9 @@ class Home extends React.Component {
     return (
       <>
         <ContentDiv>
-          <h3>{this.props.folderName}</h3>
+          <h3>
+            /{this.props.folderName === 'root' ? '' : this.props.folderName}
+          </h3>
           <h2>Files</h2>
           <hr />
           {files === undefined

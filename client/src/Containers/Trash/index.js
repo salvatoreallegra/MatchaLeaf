@@ -25,7 +25,10 @@ class Trash extends React.Component {
 
     return (
       <ContentDiv>
-        <h3>/trash/{this.props.folderName}</h3>
+        <h3>
+          /trash
+          {this.props.folderName !== 'trash' ? `/${this.props.folderName}` : ''}
+        </h3>
         <h2>Files</h2>
         <hr />
         {File(this.state.isTrash, files, this.props.restoreFile)}

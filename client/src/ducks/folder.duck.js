@@ -34,12 +34,12 @@ export default function reducer (state = initialState, action) {
     case REMOVE_FILE:
       return {
         ...state,
-        files: state.files.filter(folder => folder.id !== action.payload)
+        files: state.files.filter(file => file.id !== action.payload)
       }
     case REMOVE_FOLDER:
       return {
         ...state,
-        folders: state.folders.filter(file => file.id !== action.payload)
+        folders: state.folders.filter(folder => folder.id !== action.payload)
       }
 
     default:
