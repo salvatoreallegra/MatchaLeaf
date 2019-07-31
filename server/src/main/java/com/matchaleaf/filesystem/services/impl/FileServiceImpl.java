@@ -100,7 +100,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public IdResponseDto createFile(MultipartFile file, Integer folderId) {
+	public FileDto createFile(MultipartFile file, Integer folderId) {
 
 		Folder parentFolder = new Folder();
 		parentFolder = folderRepository.getOne(folderId);
@@ -122,10 +122,11 @@ public class FileServiceImpl implements FileService {
 
 		fileRepository.save(fileEntity);
 
-		IdResponseDto idResponseDto = new IdResponseDto();
-		idResponseDto.setId(fileEntity.getId());
+		FileDto fileDto = new FileDto();
+		fileDto.setId(fileEntity.getId());
+		fileDto.setName(fileEntity.getName());
 
-		return (idResponseDto);
+		return (fileDto);
 
 	}
 

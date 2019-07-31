@@ -38,7 +38,7 @@ public class FileController {
 	}
 
 	@PostMapping
-	public IdResponseDto createFile(@RequestParam("file") MultipartFile file,
+	public FileDto createFile(@RequestParam("file") MultipartFile file,
 			@RequestParam(name = "parentFolderId") Integer folderId) {
 		if (folderId == null) {
 			folderId = 1;
@@ -77,5 +77,15 @@ public class FileController {
 	public IdResponseDto restoreFileFromTrash(@PathVariable Integer id) {
 		return fileService.restoreFileFromTrash(id);
 	}
+	
+	@DeleteMapping("/{id}/delete")
+	public IdResponseDto deleteFile(@PathVariable Integer id) {
+		
+		
+		return null;		
+		
+	}
+	
+	
 
 }
