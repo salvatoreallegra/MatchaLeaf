@@ -3,7 +3,7 @@ import folderIcon from '../../image_source/folderIcon.png'
 import downloadIcon from '../../image_source/downloadIcon.png'
 import trashIcon from '../../image_source/trashIcon.png'
 
-const Folder = (isTrash, folders, toggleTrash, loadFolder) => (
+const Folder = (isTrash, folders, toggleTrash, loadFolder, moveFolder) => (
   <div>
     {folders.map(folder => (
       <div
@@ -27,6 +27,20 @@ const Folder = (isTrash, folders, toggleTrash, loadFolder) => (
           alt='trash'
           onClick={() => toggleTrash(folder.id)}
         />
+        {isTrash ? null : (
+          <select onChange={event => moveFolder(folder.id, event.target.value)}>
+            <option value='' defaultValue hidden>
+              Move to
+            </option>
+            {folders
+              .filter(iterator => iterator.id !== folder.id)
+              .map(obj => (
+                <option value={obj.id} key={obj.id}>
+                  {obj.name}
+                </option>
+              ))}
+          </select>
+        )}
       </div>
     ))}
   </div>

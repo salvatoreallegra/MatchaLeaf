@@ -31,7 +31,7 @@ class Trash extends React.Component {
         </h3>
         <h2>Files</h2>
         <hr />
-        {File(this.state.isTrash, files, this.props.restoreFile)}
+        {File(this.state.isTrash, files, folders, this.props.restoreFile)}
         <h2>Folders</h2>
         <hr />
         {Folder(

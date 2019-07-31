@@ -115,9 +115,32 @@ export const restoreFolder = folderId => dispatch =>
 
 export const restoreFile = fileId => dispatch =>
   axios
-    .patch(`${API_ROOT}files/${fileId}/restore`)
+    .patch(`${API_ROOT}files/${fileId}/restorefile`)
     .then(result => {
       console.log('calling restoreFile')
+      dispatch(removeFile(fileId))
+    })
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+// API calls to move folder/files to other folders
+export const moveFolder = (folderId, newParent) => dispatch =>
+  axios
+    .patch(`${API_ROOT}folders/${folderId}/move`, {
+      newParent: newParent
+    })
+    .then(result => {
+      console.log('calling moveFolder')
+      dispatch(removeFolder(folderId))
+    })
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+export const moveFile = (fileId, newParent) => dispatch =>
+  axios
+    .patch(`${API_ROOT}files/${fileId}/move`, {
+      newParent: newParent
+    })
+    .then(result => {
+      console.log('calling moveFile')
       dispatch(removeFile(fileId))
     })
     .catch(err => console.log(`operation invalid: ${err}`))

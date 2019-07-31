@@ -12,7 +12,9 @@ import {
   fetchFolder,
   newFolder,
   folderToTrash,
-  fileToTrash
+  fileToTrash,
+  moveFolder,
+  moveFile
 } from '../../ducks/folder.duck'
 
 class Home extends React.Component {
@@ -44,7 +46,13 @@ class Home extends React.Component {
           <hr />
           {files === undefined
             ? null
-            : File(this.state.isTrash, files, this.props.fileToTrash)}
+            : File(
+              this.state.isTrash,
+              files,
+              folders,
+              this.props.fileToTrash,
+              this.props.moveFile
+            )}
           <h2>Folders</h2>
           <hr />
           {folders === undefined
@@ -53,7 +61,8 @@ class Home extends React.Component {
               this.state.isTrash,
               folders,
               this.props.folderToTrash,
-              this.props.loadFolder
+              this.props.loadFolder,
+              this.props.moveFolder
             )}
         </ContentDiv>
         <div
@@ -106,7 +115,10 @@ const mapDispatchToProps = dispatch => ({
   createFolder: (folderName, parentId) =>
     dispatch(newFolder(folderName, parentId)),
   folderToTrash: folderId => dispatch(folderToTrash(folderId)),
-  fileToTrash: fileId => dispatch(fileToTrash(fileId))
+  fileToTrash: fileId => dispatch(fileToTrash(fileId)),
+  moveFolder: (folderId, newParent) =>
+    dispatch(moveFolder(folderId, newParent)),
+  moveFile: (fileId, newParent) => dispatch(moveFile(fileId, newParent))
 })
 
 export default connect(
