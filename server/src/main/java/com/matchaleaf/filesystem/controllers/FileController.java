@@ -68,11 +68,9 @@ public class FileController {
 		return fileService.trashFile(id);
 	}
 
-	@PatchMapping("/move")
-	public FileDto moveFile(@RequestBody FileDto filePatchDto) {
-		Integer id = filePatchDto.getId();
-		String name = filePatchDto.getName();
-		return fileService.moveFile(id, name);
+	@PatchMapping("{id}/move")
+	public IdResponseDto moveFile(@PathVariable Integer id, @RequestParam("id") Integer destinationId) {
+		return fileService.moveFile(id, destinationId);
 	}
 	
 	@PatchMapping ("/{id}/restorefile")

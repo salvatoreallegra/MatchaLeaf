@@ -130,11 +130,10 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public FileDto moveFile(Integer id, String name) {
+	public IdResponseDto moveFile(Integer id, Integer destinationId) {
 
-		
 		File fileToMove = fileRepository.getOne(id);
-		Folder destinationFolder = folderRepository.getByName(name);
+		Folder destinationFolder = folderRepository.getOne(destinationId);
 		Folder originFolder = folderRepository.getOne(fileToMove.getParentFolder().getId());
 		
 		Set<File> originFolderFiles = originFolder.getFiles();
@@ -152,8 +151,10 @@ public class FileServiceImpl implements FileService {
 		fileToMove.setParentFolder(destinationFolder);
 		fileRepository.saveAndFlush(fileToMove);
 		
-
-		return fileMapper.entityToFileDto(fileToMove);
+		IdResponseDto idResponse = new IdResponseDto();
+		idResponse.setId(fileToMove.getId());
+		
+		return idResponse;
 	}
 	
 	@Override

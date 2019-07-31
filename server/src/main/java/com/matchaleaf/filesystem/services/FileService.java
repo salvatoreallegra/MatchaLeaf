@@ -22,7 +22,7 @@ public interface FileService {
 
 	File downloadFileBytesById(Integer id);
 
-	FileDto moveFile(Integer id, String name);
+	IdResponseDto moveFile(Integer id, Integer destinationId);
 	
 	IdResponseDto restoreFileFromTrash(Integer id);
 
