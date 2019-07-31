@@ -2,7 +2,6 @@ package com.matchaleaf.filesystem.controllers;
 
 import org.springframework.core.io.ByteArrayResource;
 
-
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -72,20 +71,16 @@ public class FileController {
 	public IdResponseDto moveFile(@PathVariable Integer id, @RequestParam("id") Integer destinationId) {
 		return fileService.moveFile(id, destinationId);
 	}
-	
-	@PatchMapping ("/{id}/restorefile")
+
+	@PatchMapping("/{id}/restorefile")
 	public IdResponseDto restoreFileFromTrash(@PathVariable Integer id) {
 		return fileService.restoreFileFromTrash(id);
 	}
-	
+
 	@DeleteMapping("/{id}/delete")
 	public IdResponseDto deleteFile(@PathVariable Integer id) {
-		
-		
-		return null;		
-		
+
+		return fileService.deleteFile(id);
 	}
-	
-	
 
 }

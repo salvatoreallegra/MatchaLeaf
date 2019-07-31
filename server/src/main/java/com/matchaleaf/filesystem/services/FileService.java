@@ -26,4 +26,6 @@ public interface FileService {
 	
 	IdResponseDto restoreFileFromTrash(Integer id);
 
+	IdResponseDto deleteFile(Integer id);
+
 }
