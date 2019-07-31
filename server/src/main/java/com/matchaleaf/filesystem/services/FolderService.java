@@ -14,8 +14,6 @@ public interface FolderService {
 
 	IdResponseDto createFolder(FolderUploadDto folderUploadDto);
 
-	FolderDto moveFolder(Integer id, FolderDto folderDto);
-
 	IdResponseDto sendFolderToTrash(Integer id);
 
 	FolderDto getFolderById(Integer id);
@@ -36,5 +34,7 @@ public interface FolderService {
 	List<FolderDto> downloadZipFolder(Integer id);
 	
 	IdResponseDto restoreFolderFromTrash(Integer id);
+
+	IdResponseDto moveFolder(Integer id, Integer destinationId);
 
 }

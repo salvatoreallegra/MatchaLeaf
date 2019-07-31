@@ -156,20 +156,16 @@ public class FolderServiceImpl implements FolderService {
 	@Override
 	public IdResponseDto sendFolderToTrash(Integer id) {
 
-		Folder trashFolder = folderRepository.getOne(2);
-		FolderDto folderDto = moveFolder(id, folderMapper.entityToFolderDto(trashFolder));
-
-		IdResponseDto folderIdDto = new IdResponseDto();
-		folderIdDto.setId(id);
+		IdResponseDto folderIdDto = moveFolder(id, 2);
 		return folderIdDto;
 	}
 
 	@Override
-	public FolderDto moveFolder(Integer id, FolderDto folderDto) {
+	public IdResponseDto moveFolder(Integer id, Integer destinationId) {
 
 		Folder folder = folderRepository.getOne(id);
 		Folder originalParentFolder = folderRepository.getOne(folder.getParentFolder().getId());
-		Folder destinationFolder = folderMapper.dtoToEntity(folderDto);
+		Folder destinationFolder = folderRepository.getOne(destinationId);
 
 		Set<Folder> parentFolderFolders = originalParentFolder.getFolders();
 		parentFolderFolders.remove(folder);
@@ -187,7 +183,7 @@ public class FolderServiceImpl implements FolderService {
 		IdResponseDto folderIdDto = new IdResponseDto();
 		folderIdDto.setId(id);
 
-		return folderDto;
+		return folderIdDto;
 	}
 
 	@Override
