@@ -3,7 +3,7 @@ import fileIcon from '../../image_source/fileIcon.png'
 import downloadIcon from '../../image_source/downloadIcon.png'
 import trashIcon from '../../image_source/trashIcon.png'
 
-const File = (files, sendToTrash) => (
+const File = (isTrash, files, toggleTrash) => (
   <div>
     {files.map(file => (
       <div
@@ -16,8 +16,8 @@ const File = (files, sendToTrash) => (
       >
         <img src={fileIcon} alt='file' />
         {file.name}
-        <img src={downloadIcon} alt='download' />
-        <img src={trashIcon} alt='trash' onClick={() => sendToTrash(file.id)} />
+        {isTrash ? null : <img src={downloadIcon} alt='download' />}
+        <img src={trashIcon} alt='trash' onClick={() => toggleTrash(file.id)} />
       </div>
     ))}
   </div>
