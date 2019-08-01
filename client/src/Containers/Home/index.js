@@ -75,7 +75,7 @@ class Home extends React.Component {
         <div
           style={{
             display: this.state.show ? 'flex' : 'none',
-            background: '#6FCF97',
+            background: 'var(--second-color)',
           }}
         >
           <Modal hideModal={this.hideModal} create={this.props.createFolder} />

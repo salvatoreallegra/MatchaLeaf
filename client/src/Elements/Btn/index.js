@@ -6,7 +6,7 @@ const Btn = styled.button`
   grid-column-start: 5;
   grid-column-end: 5;
   border: 2px solid lightgrey;
-  background-color: #fff;
+  background-color: var(--main-color);
   font-size: 22px;
   height: 2.5em;
   width: 2.5em;
@@ -35,7 +35,7 @@ const Btn = styled.button`
     width: 1em;
   }
   &:hover {
-    background: silver;
+    background: var(--second-color);
   }
 `
 
