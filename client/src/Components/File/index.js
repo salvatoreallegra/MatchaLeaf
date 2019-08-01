@@ -22,20 +22,20 @@ const File = (isTrash, files, folders, toggleTrash, moveOrDeleteFile) => (
             justifyContent: 'space-between'
           }}>
           <span>
-            <img style={{ margin: '2px 5px 0 5px' }} src={fileIcon} alt='file' />
+            <img style={{ margin: '5px 5px 0 5px' }} src={fileIcon} alt='file' />
             {file.name}
           </span>
           <span>
-            {isTrash ? null : <img style={{ marginTop: '2px' }} src={downloadIcon} alt='download' />}
+            {isTrash ? null : <img style={{ margin: '5px 10px 0 10px' }} src={downloadIcon} alt='download' />}
             <img
-              style={{ marginTop: '2px' }}
+              style={{  margin: '5px 10px 0 10px'  }}
               src={isTrash ? restoreIcon : trashIcon}
               alt='trash'
               onClick={() => toggleTrash(file.id)}
             />
             {isTrash ? (
               <img
-                style={{ marginTop: '2px' }}
+                style={{  margin: '5px 10px 0 10px'  }}
                 src={trashIcon}
                 alt='trash'
                 onClick={() => moveOrDeleteFile(file.id)}

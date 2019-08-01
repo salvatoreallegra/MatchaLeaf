@@ -28,7 +28,7 @@ const Folder = (
             justifyContent: 'space-between'
           }}>
           <span>
-            <img style={{ margin: '2px 5px 0 5px' }} src={folderIcon} alt='folder' />
+            <img style={{ margin: '5px 5px 0 5px' }} src={folderIcon} alt='folder' />
             <span
               onClick={() => loadFolder(folder.id)}
               style={{ cursor: 'pointer' }}
@@ -37,16 +37,16 @@ const Folder = (
             </span>
           </span>
           <span>
-            {isTrash ? null : <img style={{ marginTop: '2px' }} src={downloadIcon} alt='download' />}
+            {isTrash ? null : <img style={{  margin: '5px 10px 0 10px'  }} src={downloadIcon} alt='download' />}
             <img
-              style={{ marginTop: '2px' }}
+              style={{  margin: '5px 10px 0 10px'  }}
               src={isTrash ? restoreIcon : trashIcon}
               alt='trash'
               onClick={() => toggleTrash(folder.id)}
             />
             {isTrash ? (
               <img
-                style={{ marginTop: '2px' }}
+                style={{  margin: '5px 10px 0 10px'  }}
                 src={trashIcon}
                 alt='trash'
                 onClick={() => moveOrDeleteFolder(folder.id)}
