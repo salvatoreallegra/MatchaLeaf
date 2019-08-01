@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 
 const ContentDiv = styled.div`
-  grid-row-start: 1;
-  grid-row-end: 4;
-  grid-column-start: 2;
-  grid-column-end: 5;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  padding: 10px;
+  justify-content: flex-start;
+  box-shadow: 3px 3px 10px rgba(000, 000, 000, 0.2);
+  width: 60vw;
+  height: 80vh;
 `
 
 export default ContentDiv
