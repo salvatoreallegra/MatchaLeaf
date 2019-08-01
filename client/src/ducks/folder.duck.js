@@ -29,7 +29,7 @@ export default function reducer (state = initialState, action) {
     case CREATE_FOLDER:
       return {
         ...state,
-        folder: [...state.folders, action.payload]
+        folders: [...state.folders, action.payload]
       }
     case REMOVE_FILE:
       return {
@@ -117,10 +117,13 @@ export const moveFile = (fileId, newParent) => dispatch =>
 export const newFolder = (folderName, parentId) => dispatch =>
   axios
     .post(`${API_ROOT}folders/`, {
-      folderName: folderName,
-      parentId: parentId
+      name: folderName,
+      parentFolderId: parentId
     })
-    .then(result => dispatch(createFolder(result)))
+    .then(result => {
+      console.log(result.config.data)
+      dispatch(createFolder(result.config.data))
+    })
     .catch(err => console.log(`operation invalid: ${err}`))
 
 // API Call to delete file and folders definetly

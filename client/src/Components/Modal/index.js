@@ -1,26 +1,11 @@
 import React, { useState } from 'react'
+import connect from 'react-redux/es/connect/connect'
 import StyledModal from '../../Elements/Modal'
+import { newFolder } from '../../ducks/folder.duck'
 
-const createFileForm = () => {
-  return (
-    <form method='post' encType='multipart/form-data'>
-      <input type='file' name='file[]' multiple />
-      <input type='submit' value='Upload File' name='submit' />
-    </form>
-  )
-}
-
-const createFolderForm = createFolder => {
-  return (
-    <form method='post' encType='multipart/form-data'>
-      <input type='folder' name='folder' multiple />
-      <input type='submit' value='Create folder' name='submit' />
-    </form>
-  )
-}
-
-const Modal = ({ hideModal }, create) => {
+const Modal = props => {
   const [flag, setFlag] = useState(true)
+  const [folderName, setFolderName] = useState('')
 
   return (
     <StyledModal>
@@ -49,11 +34,52 @@ const Modal = ({ hideModal }, create) => {
           </button>
         </nav>
         <div style={{ width: '25vw' }}>
-          {flag ? createFileForm() : createFolderForm(create)}
+          {flag ? (
+            <form method='post' encType='multipart/form-data'>
+              <input type='file' name='file[]' multiple />
+              <input type='submit' value='Upload File' name='submit' />
+            </form>
+          ) : (
+            <form method='post' encType='multipart/form-data'>
+              <input
+                type='folder'
+                name='folder'
+                multiple
+                onChange={event => {
+                  event.persist()
+                  setFolderName(event)
+                }}
+              />
+              <input
+                type='submit'
+                value='Create folder'
+                name='submit'
+                onClick={event => {
+                  event.preventDefault()
+                  console.log(folderName.target.value)
+                  console.log(props.folder.id)
+                  props.createFolder(folderName.target.value, props.folder.id)
+                }}
+              />
+            </form>
+          )}
         </div>
-        <button onClick={hideModal}>cancel</button>
+        <button onClick={() => props.hideModal()}>cancel</button>
       </div>
     </StyledModal>
   )
 }
-export default Modal
+
+const mapStateToProps = state => ({
+  folder: state.folder
+})
+
+const mapDispatchToProps = dispatch => ({
+  createFolder: (folderName, parentId) =>
+    dispatch(newFolder(folderName, parentId))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Modal)
