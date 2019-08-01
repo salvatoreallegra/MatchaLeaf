@@ -80,7 +80,9 @@ public class FileServiceImpl implements FileService {
 		Set<File> originFolderFiles = originFolder.getFiles();
 		originFolderFiles.remove(fileToPatch);
 		originFolder.setFiles(originFolderFiles);
+		if(originFolder.getId() != 1) {
 		folderRepository.saveAndFlush(originFolder);
+		}
 
 		Set<File> trashFolderFiles = trashFolder.getFiles();
 		if (trashFolderFiles == null) {
