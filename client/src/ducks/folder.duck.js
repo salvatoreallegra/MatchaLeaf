@@ -75,24 +75,11 @@ export const fetchFolder = folderId => dispatch =>
     .then(({ data }) => dispatch(loadFolder(data)))
     .catch(err => console.log(`Oops... ${err}`))
 
-export const newFolder = (folderName, parentId) => dispatch =>
-  axios
-    .post(`${API_ROOT}folders/`, {
-      name: folderName,
-      parent: parentId
-    })
-    .then(result => dispatch(createFolder(folderName, result)))
-    .catch(err => console.log(`impossible to create: ${err}`))
-
 // API CALLS TO SEND AND RESTORE FILE AND FOLDERS FROM TRASH
 export const folderToTrash = folderId => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/trash`)
-    .then(result => {
-      console.log('calling folderToTrash')
-      console.log(folderId)
-      dispatch(removeFolder(folderId))
-    })
+    .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 export const fileToTrash = fileId => dispatch =>
@@ -142,11 +129,24 @@ export const moveFile = (fileId, newParent) => dispatch =>
     .catch(err => console.log(`operation invalid: ${err}`))
 
 // API calls to upload file and create folder
-export const getFolder = (folderName, parentId) => dispatch =>
+export const newFolder = (folderName, parentId) => dispatch =>
   axios
     .post(`${API_ROOT}folders/`, {
       folderName: folderName,
       parentId: parentId
     })
     .then(result => dispatch(createFolder(result)))
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+// API Call to delete file and folders definetly
+export const deleteFile = fileId => dispatch =>
+  axios
+    .delete(`${API_ROOT}files/${fileId}/delete`)
+    .then(result => dispatch(removeFile(fileId)))
+    .catch(err => console.log(`operation invalid: ${err}`))
+
+export const deleteFolder = folderId => dispatch =>
+  axios
+    .delete(`${API_ROOT}folders/${folderId}/delete`)
+    .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))

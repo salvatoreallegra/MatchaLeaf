@@ -9,7 +9,9 @@ import ContentDiv from '../../Elements/ContentDiv'
 import {
   fetchFolder,
   restoreFolder,
-  restoreFile
+  restoreFile,
+  deleteFile,
+  deleteFolder
 } from '../../ducks/folder.duck'
 
 class Trash extends React.Component {
@@ -31,14 +33,15 @@ class Trash extends React.Component {
         </h3>
         <h2>Files</h2>
         <hr />
-        {File(this.state.isTrash, files, folders, this.props.restoreFile)}
+        {File(this.state.isTrash, files, folders, this.props.restoreFile, this.props.deleteFile)}
         <h2>Folders</h2>
         <hr />
         {Folder(
           this.state.isTrash,
           folders,
           this.props.restoreFolder,
-          this.props.loadFolder
+          this.props.loadFolder,
+          this.props.deleteFolder
         )}
       </ContentDiv>
     )
@@ -57,7 +60,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadFolder: folderId => dispatch(fetchFolder(folderId)),
   restoreFolder: folderId => dispatch(restoreFolder(folderId)),
-  restoreFile: fileId => dispatch(restoreFile(fileId))
+  restoreFile: fileId => dispatch(restoreFile(fileId)),
+  deleteFile: fileId => dispatch(deleteFile(fileId)),
+  deleteFolder: folderId => dispatch(deleteFolder(folderId))
 })
 
 export default connect(

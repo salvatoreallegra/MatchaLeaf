@@ -14,8 +14,7 @@ import {
   folderToTrash,
   fileToTrash,
   moveFolder,
-  moveFile,
-  getFolder
+  moveFile
 } from '../../ducks/folder.duck'
 
 class Home extends React.Component {
@@ -95,7 +94,7 @@ class Home extends React.Component {
             flexDirection: 'column'
           }}
         >
-          <Modal hideModal={this.hideModal} />
+          <Modal hideModal={this.hideModal} create={this.props.createFolder} />
         </div>
       </>
     )
@@ -113,15 +112,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadFolder: folderId => dispatch(fetchFolder(folderId)),
-  createFolder: (folderName, parentId) =>
-    dispatch(newFolder(folderName, parentId)),
   folderToTrash: folderId => dispatch(folderToTrash(folderId)),
   fileToTrash: fileId => dispatch(fileToTrash(fileId)),
   moveFolder: (folderId, newParent) =>
     dispatch(moveFolder(folderId, newParent)),
   moveFile: (fileId, newParent) => dispatch(moveFile(fileId, newParent)),
   createFolder: (folderName, parentId) =>
-    dispatch(getFolder(folderName, parentId))
+    dispatch(newFolder(folderName, parentId))
 })
 
 export default connect(

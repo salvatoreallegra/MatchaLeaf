@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import StyledModal from '../../Elements/Modal'
 
 const createFileForm = () => {
@@ -10,7 +10,7 @@ const createFileForm = () => {
   )
 }
 
-const createFolderForm = () => {
+const createFolderForm = createFolder => {
   return (
     <form method='post' encType='multipart/form-data'>
       <input type='folder' name='folder' multiple />
@@ -19,8 +19,7 @@ const createFolderForm = () => {
   )
 }
 
-
-const Modal = ({ hideModal }) => {
+const Modal = ({ hideModal }, create) => {
   const [flag, setFlag] = useState(true)
 
   return (
@@ -33,14 +32,24 @@ const Modal = ({ hideModal }) => {
             justifyContent: 'space-evenly',
             width: '100%',
             height: '8vh',
-            marginBottom: '5vh',
+            marginBottom: '5vh'
           }}
         >
-          <button onClick={ () => setFlag(true) } style={{ width: '50%', backgroundColor: '#FFFFFF' }}>File</button>
-          <button onClick={ () => setFlag(false) } style={{ width: '50%', backgroundColor: '#FFFFFF'  }}>Folder</button>
+          <button
+            onClick={() => setFlag(true)}
+            style={{ width: '50%', backgroundColor: '#FFFFFF' }}
+          >
+            File
+          </button>
+          <button
+            onClick={() => setFlag(false)}
+            style={{ width: '50%', backgroundColor: '#FFFFFF' }}
+          >
+            Folder
+          </button>
         </nav>
         <div style={{ width: '25vw' }}>
-          { flag ? createFileForm() : createFolderForm() }
+          {flag ? createFileForm() : createFolderForm(create)}
         </div>
         <button onClick={hideModal}>cancel</button>
       </div>

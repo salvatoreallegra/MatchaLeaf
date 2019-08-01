@@ -2,8 +2,15 @@ import React from 'react'
 import folderIcon from '../../image_source/folderIcon.png'
 import downloadIcon from '../../image_source/downloadIcon.png'
 import trashIcon from '../../image_source/trashIcon.png'
+import restoreIcon from '../../image_source/restoreIcon.png'
 
-const Folder = (isTrash, folders, toggleTrash, loadFolder, moveFolder) => (
+const Folder = (
+  isTrash,
+  folders,
+  toggleTrash,
+  loadFolder,
+  moveOrDeleteFolder
+) => (
   <div>
     {folders.map(folder => (
       <div
@@ -23,12 +30,23 @@ const Folder = (isTrash, folders, toggleTrash, loadFolder, moveFolder) => (
         </span>
         {isTrash ? null : <img src={downloadIcon} alt='download' />}
         <img
-          src={trashIcon}
+          src={isTrash ? restoreIcon : trashIcon}
           alt='trash'
           onClick={() => toggleTrash(folder.id)}
         />
+        {isTrash ? (
+          <img
+            src={trashIcon}
+            alt='trash'
+            onClick={() => moveOrDeleteFolder(folder.id)}
+          />
+        ) : null}
         {isTrash ? null : (
-          <select onChange={event => moveFolder(folder.id, event.target.value)}>
+          <select
+            onChange={event =>
+              moveOrDeleteFolder(folder.id, event.target.value)
+            }
+          >
             <option value='' defaultValue hidden>
               Move to
             </option>
