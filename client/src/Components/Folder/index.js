@@ -54,7 +54,7 @@ const Folder = (
             ) : null}
             {isTrash ? null : (
               <select
-                style={{ border:'none' }}
+                style={{ border:'none', width: '100px' }}
                 onChange={event =>
                   moveOrDeleteFolder(folder.id, event.target.value)
                 }

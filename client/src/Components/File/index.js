@@ -43,7 +43,7 @@ const File = (isTrash, files, folders, toggleTrash, moveOrDeleteFile) => (
             ) : null}
             {isTrash ? null : (
               <select
-                style={{ border:'none'}}
+                style={{ border:'none', width: '100px' }}
                 onChange={event => moveOrDeleteFile(file.id, event.target.value)}
               >
                 <option value='' defaultValue hidden>
