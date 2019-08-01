@@ -68,30 +68,16 @@ class Home extends React.Component {
         <div
           style={{
             display: this.state.show ? 'block' : 'none',
-            gridRowStart: '1',
-            gridRowEnd: '6',
-            gridColumnStart: '1',
-            gridColumnEnd: '6',
-            background: 'rgba(000, 000, 000, .7)',
-            margin: '-10px'
           }}
         />
         <UploadButton
           openModal={this.showModal}
           style={{ cursor: 'pointer' }}
         />
-
         <div
           style={{
             display: this.state.show ? 'flex' : 'none',
-            gridRowStart: '3',
-            gridRowEnd: '4',
-            gridColumnStart: '3',
-            gridColumnEnd: '4',
             background: '#6FCF97',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column'
           }}
         >
           <Modal hideModal={this.hideModal} create={this.props.createFolder} />
