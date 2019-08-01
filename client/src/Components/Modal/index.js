@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import connect from 'react-redux/es/connect/connect'
 import StyledModal from '../../Elements/Modal'
-import { newFolder } from '../../ducks/folder.duck'
+import { newFolder, uploadFile } from '../../ducks/folder.duck'
 
 const Modal = props => {
   const [flag, setFlag] = useState(true)
   const [folderName, setFolderName] = useState('')
+  const [data, setData] = useState('')
 
   return (
     <StyledModal>
@@ -36,8 +37,26 @@ const Modal = props => {
         <div style={{ width: '25vw' }}>
           {flag ? (
             <form method='post' encType='multipart/form-data'>
-              <input type='file' name='file[]' multiple />
-              <input type='submit' value='Upload File' name='submit' />
+              <input
+                type='file'
+                name='file[]'
+                multiple
+                onChange={event => {
+                  event.persist()
+                  console.log(event)
+                  console.log(event.target.files)
+                  setData(event.target.files[0])
+                }}
+              />
+              <input
+                type='submit'
+                value='Upload File'
+                name='submit'
+                onClick={event => {
+                  event.preventDefault()
+                  props.uploadFile(data, props.folder.id)
+                }}
+              />
             </form>
           ) : (
             <form method='post' encType='multipart/form-data'>
@@ -47,7 +66,7 @@ const Modal = props => {
                 multiple
                 onChange={event => {
                   event.persist()
-                  setFolderName(event)
+                  setFolderName(event.target.value)
                 }}
               />
               <input
@@ -56,9 +75,7 @@ const Modal = props => {
                 name='submit'
                 onClick={event => {
                   event.preventDefault()
-                  console.log(folderName.target.value)
-                  console.log(props.folder.id)
-                  props.createFolder(folderName.target.value, props.folder.id)
+                  props.createFolder(folderName, props.folder.id)
                 }}
               />
             </form>
@@ -76,7 +93,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createFolder: (folderName, parentId) =>
-    dispatch(newFolder(folderName, parentId))
+    dispatch(newFolder(folderName, parentId)),
+  uploadFile: (file, parentFolderId) =>
+    dispatch(uploadFile(file, parentFolderId))
 })
 
 export default connect(

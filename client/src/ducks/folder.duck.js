@@ -4,6 +4,7 @@ const API_ROOT = 'http://localhost:8080/'
 // actions
 export const LOAD_FOLDER = 'cooksys/matchaleaf/Folder/LOAD_FOLDER'
 export const CREATE_FOLDER = 'cooksys/matchaleaf/Folder/CREATE_FOLDER'
+export const CREATE_FILE = 'cooksys/matchaleaf/Folder/CREATE_FILE'
 export const REMOVE_FOLDER = 'cooksys/matchaleaf/Folder/REMOVE_FOLDER'
 export const REMOVE_FILE = 'cooksys/matchaleaf/Folder/REMOVE_FILE'
 
@@ -31,6 +32,11 @@ export default function reducer (state = initialState, action) {
         ...state,
         folders: [...state.folders, action.payload]
       }
+    case CREATE_FILE:
+      return {
+        ...state,
+        files: [...state.files, action.payload]
+      }
     case REMOVE_FILE:
       return {
         ...state,
@@ -56,6 +62,11 @@ export const loadFolder = folder => ({
 export const createFolder = folder => ({
   type: CREATE_FOLDER,
   payload: folder
+})
+
+export const createFile = file => ({
+  type: CREATE_FILE,
+  payload: file
 })
 
 export const removeFile = fileId => ({
@@ -121,8 +132,8 @@ export const newFolder = (folderName, parentId) => dispatch =>
       parentFolderId: parentId
     })
     .then(result => {
-      console.log(result.config.data)
-      dispatch(createFolder(result.config.data))
+      console.log(JSON.parse(result.config.data))
+      dispatch(createFolder(JSON.parse(result.config.data)))
     })
     .catch(err => console.log(`operation invalid: ${err}`))
 
@@ -138,3 +149,18 @@ export const deleteFolder = folderId => dispatch =>
     .delete(`${API_ROOT}folders/${folderId}/delete`)
     .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))
+
+// API call to upload a file
+export const uploadFile = (file, parentFolderId) => dispatch => {
+  let bodyFormData = new FormData()
+  bodyFormData.append('file', file)
+  bodyFormData.append('parentFolderId', parentFolderId)
+  axios({
+    method: 'post',
+    url: `${API_ROOT}files`,
+    data: bodyFormData,
+    config: { headers: { 'Content-Type': 'multipart/form-data' } }
+  })
+    .then(({ data }) => dispatch(createFile(data)))
+    .catch(err => console.log(`operation invalid: ${err}`))
+}
