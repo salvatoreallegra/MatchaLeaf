@@ -7,8 +7,9 @@ const ContentDiv = styled.div`
   padding: 10px;
   justify-content: flex-start;
   box-shadow: 3px 3px 10px rgba(000, 000, 000, 0.2);
+  border-radius: 10px;
   width: 60vw;
-  height: 80vh;
+  height: 85vh;
 `
 
 export default ContentDiv

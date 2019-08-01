@@ -5,9 +5,9 @@ const StyledNavBar = styled.nav`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 5vw;
+  margin-left: 6vw;
   margin-bottom: 20vw;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 28px;
   width: 15vw;
 `

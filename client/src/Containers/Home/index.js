@@ -42,8 +42,7 @@ class Home extends React.Component {
           <h3>
             /{this.props.folderName === 'root' ? '' : this.props.folderName}
           </h3>
-          <h2>Files</h2>
-          <hr />
+          <h2 style={{ margin: '5px' }}>Files</h2>
           {files === undefined
             ? null
             : File(
@@ -53,8 +52,7 @@ class Home extends React.Component {
               this.props.fileToTrash,
               this.props.moveFile
             )}
-          <h2>Folders</h2>
-          <hr />
+          <h2 style={{ marginBottom: '5px' }}>Folders</h2>
           {folders === undefined
             ? null
             : Folder(

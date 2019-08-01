@@ -9,6 +9,7 @@ const Link = styled(NavLink)`
   text-decoration: none;
   &.active {
     font-weight: bold;
+    text-decoration: underline;
   }
   &:hover {
     cursor: pointer;
