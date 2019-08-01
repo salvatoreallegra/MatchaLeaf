@@ -6,7 +6,7 @@ const StyledNavBar = styled.nav`
   justify-content: center;
   align-items: flex-start;
   margin-left: 5vw;
-  margin-bottom: 10vw;
+  margin-bottom: 20vw;
   font-size: 24px;
   line-height: 28px;
   width: 15vw;
