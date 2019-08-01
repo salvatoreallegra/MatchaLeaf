@@ -143,7 +143,9 @@ public class FileServiceImpl implements FileService {
 		Set<File> originFolderFiles = originFolder.getFiles();
 		originFolderFiles.remove(fileToMove);
 		originFolder.setFiles(originFolderFiles);
-		folderRepository.saveAndFlush(originFolder);
+		
+		//Temporarily commenting out this save, we are getting side effects due to orphan annotation in Folder Entity
+		//folderRepository.saveAndFlush(originFolder);
 
 		Set<File> destinationFolderFiles = destinationFolder.getFiles();
 		if (destinationFolderFiles == null) {
