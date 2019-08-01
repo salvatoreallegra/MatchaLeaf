@@ -85,47 +85,32 @@ export const folderToTrash = folderId => dispatch =>
 export const fileToTrash = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/trash`)
-    .then(result => {
-      console.log('calling fileToTrash')
-      dispatch(removeFile(fileId))
-    })
+    .then(result => dispatch(removeFile(fileId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 export const restoreFolder = folderId => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/restorefolder`)
-    .then(result => {
-      console.log('calling restoreFolder')
-      dispatch(removeFolder(folderId))
-    })
+    .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 export const restoreFile = fileId => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/restorefile`)
-    .then(result => {
-      console.log('calling restoreFile')
-      dispatch(removeFile(fileId))
-    })
+    .then(result => dispatch(removeFile(fileId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 // API calls to move folder/files to other folders
 export const moveFolder = (folderId, newParent) => dispatch =>
   axios
     .patch(`${API_ROOT}folders/${folderId}/move?id=${newParent}`)
-    .then(result => {
-      console.log('calling moveFolder')
-      dispatch(removeFolder(folderId))
-    })
+    .then(result => dispatch(removeFolder(folderId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 export const moveFile = (fileId, newParent) => dispatch =>
   axios
     .patch(`${API_ROOT}files/${fileId}/move?id=${newParent}`)
-    .then(result => {
-      console.log('calling moveFile')
-      dispatch(removeFile(fileId))
-    })
+    .then(result => dispatch(removeFile(fileId)))
     .catch(err => console.log(`operation invalid: ${err}`))
 
 // API calls to upload file and create folder

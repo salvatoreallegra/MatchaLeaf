@@ -15,7 +15,6 @@ const File = (isTrash, files, folders, toggleTrash, moveOrDeleteFile) => (
           boxShadow: '1px 1px 5px rgba(000, 000, 000, 0.2)'
         }}
       >
-        {console.log(file.id)}
         <img src={fileIcon} alt='file' />
         {file.name}
         {isTrash ? null : <img src={downloadIcon} alt='download' />}
@@ -32,7 +31,9 @@ const File = (isTrash, files, folders, toggleTrash, moveOrDeleteFile) => (
           />
         ) : null}
         {isTrash ? null : (
-          <select onChange={event => moveOrDeleteFile(file.id, event.target.value)}>
+          <select
+            onChange={event => moveOrDeleteFile(file.id, event.target.value)}
+          >
             <option value='' defaultValue hidden>
               Move to
             </option>
