@@ -165,11 +165,15 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public IdResponseDto restoreFileFromTrash(Integer id) {
 		// TODO Auto-generated method stub
+		
+		Integer trashFolderId = 2;
+		Integer rootFolderId = 1;
+		
 		File fileToRestore = fileRepository.getOne(id);
 
-		Folder trashFolder = folderRepository.getOne(2);
+		Folder trashFolder = folderRepository.getOne(trashFolderId);
 
-		Folder rootFolder = folderRepository.getOne(1);
+		Folder rootFolder = folderRepository.getOne(rootFolderId);
 
 		Set<File> setOfFilesInTrash = trashFolder.getFiles();
 		Set<File> setOfFilesInRoot = rootFolder.getFiles();
