@@ -47,7 +47,6 @@ public class FolderController {
 	public FolderDto getFolderById(@PathVariable Integer ID) {
 
 		System.out.println("In getFolderbyId " + ID);
-
 		return folderService.getFolderById(ID);
 
 	}
@@ -61,6 +60,7 @@ public class FolderController {
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + zipDto.getName() + "\"")
 				.body(new ByteArrayResource(zipDto.getByteArray()));
+		
 	}
 	
 	@PatchMapping("/{id}/trash")
@@ -77,8 +77,7 @@ public class FolderController {
 		return folderService.restoreFolderFromTrash(id);
 	}
 	@DeleteMapping("/{id}/delete")
-	public IdResponseDto deleteFolder(@PathVariable Integer id) {
-		
+	public IdResponseDto deleteFolder(@PathVariable Integer id) {		
 		return folderService.deleteFolder(id);
 	}
 }

@@ -36,6 +36,7 @@ public interface FolderService {
 	IdResponseDto restoreFolderFromTrash(Integer id);
 
 	IdResponseDto moveFolder(Integer id, Integer destinationId);
+	
 	IdResponseDto deleteFolder(Integer id);
 
 }

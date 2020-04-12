@@ -13,7 +13,6 @@ import com.matchaleaf.filesystem.dto.*;
 @Service
 public interface FileService {
 
-	// This can also be considered uploading a file
 	FileDto createFile(MultipartFile file, Integer folderId);
 
 	FileDownloadDto downloadFileById(Integer id);

@@ -29,20 +29,12 @@ public class FileServiceImpl implements FileService {
 
 	@Autowired
 	private FileRepository fileRepository;
+	
 	@Autowired
 	private FolderRepository folderRepository;
-//	@Autowired
-//	private IdResponseDto idResponseDto;
+
 
 	private FileMapper fileMapper;
-
-//	@Autowired
-//	Folder parentFolder;
-
-	// private IdResponseDto testDto;
-//	public FileServiceImpl() {
-//
-//	}
 
 	public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FolderRepository folderRepository) {
 
@@ -144,9 +136,6 @@ public class FileServiceImpl implements FileService {
 		originFolderFiles.remove(fileToMove);
 		originFolder.setFiles(originFolderFiles);
 		
-		//Temporarily commenting out this save, we are getting side effects due to orphan annotation in Folder Entity
-		//folderRepository.saveAndFlush(originFolder);
-
 		Set<File> destinationFolderFiles = destinationFolder.getFiles();
 		if (destinationFolderFiles == null) {
 			destinationFolderFiles = new HashSet();

@@ -28,13 +28,13 @@ public class Folder {
 	private Folder parentFolder;
 
 	@OneToMany(orphanRemoval=true)
-	private Set<Folder> childFolders; // use a list instead of set
+	private Set<Folder> childFolders; 
 
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
 	private Set<File> files;
 
 	public Folder(Set<File> files, String name, Folder parentFolder, Set<Folder> childFolders) {
-		// this.id = id;
+		
 		this.files = files;
 		this.name = name;
 		this.parentFolder = parentFolder;

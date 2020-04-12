@@ -43,7 +43,6 @@ public class FolderServiceImpl implements FolderService {
 		this.folderMapper = folderMapper;
 	}
 
-	// download a folders entire file contents as a zip file
 	public FolderDownloadZipDto downloadFolder(Integer id) {
 
 		Folder folderToZip = folderRepository.getOne(id);
@@ -78,9 +77,6 @@ public class FolderServiceImpl implements FolderService {
 		downloadZipDto.setName(folderToZip.getName());
 		downloadZipDto.setByteArray(arrayOutputStream.toByteArray());
 		return downloadZipDto;
-		// return arrayOutputStream.toByteArray();//repl;ace file output stream with
-		// byteoutarrayoutputstream //saves to byte array
-		// return byte array of file output stream
 
 	}
 
@@ -107,15 +103,11 @@ public class FolderServiceImpl implements FolderService {
 
 	@Override
 	public FolderDto getFolderById(Integer id) {
-		// TODO Auto-generated method stub
 
-		// Get the Folder requested from controller/end point
 		Folder folder = folderRepository.getOne(id);
 
-		// Get Set of Files belonging to requested folder
 		Set<File> fileSet = folder.getFiles();
 
-		// Get set of Folders belonging to requested folder
 		Set<Folder> folderSet = folder.getFolders();
 
 		Set<FileDto> fileDtos = new HashSet<>();
@@ -143,13 +135,11 @@ public class FolderServiceImpl implements FolderService {
 
 	@Override
 	public List<FolderDto> downloadZipFolder(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public FolderDto downloadFolderById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -192,48 +182,39 @@ public class FolderServiceImpl implements FolderService {
 		Folder folderToRestore = folderRepository.getOne(id);
 
 		Folder trashFolder = folderRepository.getOne(2);
-		
-		  Folder rootFolder = folderRepository.getOne(1); // 
-		  Set<Folder>  setOfFoldersInTrash = trashFolder.getFolders(); 
-		  Set<Folder>  setOfFoldersInRoot = rootFolder.getFolders(); 
-		  setOfFoldersInTrash.remove(folderToRestore); 
-		  setOfFoldersInRoot.add(folderToRestore);
-		  
-		  trashFolder.setFolders(setOfFoldersInTrash); 
-		  rootFolder.setFolders(setOfFoldersInRoot); 
-		 folderToRestore.setParentFolder(rootFolder); 
-		 folderRepository.saveAndFlush(folderToRestore); 
-		  folderRepository.saveAndFlush(trashFolder); 
-		  folderRepository.saveAndFlush(rootFolder); 
-		  
-		  IdResponseDto restoreFolderDto = new IdResponseDto();
-		  restoreFolderDto.setId(folderToRestore.getId());
-		 
+
+		Folder rootFolder = folderRepository.getOne(1); //
+		Set<Folder> setOfFoldersInTrash = trashFolder.getFolders();
+		Set<Folder> setOfFoldersInRoot = rootFolder.getFolders();
+		setOfFoldersInTrash.remove(folderToRestore);
+		setOfFoldersInRoot.add(folderToRestore);
+
+		trashFolder.setFolders(setOfFoldersInTrash);
+		rootFolder.setFolders(setOfFoldersInRoot);
+		folderToRestore.setParentFolder(rootFolder);
+		folderRepository.saveAndFlush(folderToRestore);
+		folderRepository.saveAndFlush(trashFolder);
+		folderRepository.saveAndFlush(rootFolder);
+
+		IdResponseDto restoreFolderDto = new IdResponseDto();
+		restoreFolderDto.setId(folderToRestore.getId());
 
 		return restoreFolderDto;
 	}
+
 	@Override
 	public IdResponseDto deleteFolder(Integer id) {
-		
+
 		Folder deletedFolder = folderRepository.getOne(id);
-		
-		//Remove this deleted folder from the parent folders child folder set
-		Folder parentFolder = deletedFolder.getParentFolder();		
+
+		Folder parentFolder = deletedFolder.getParentFolder();
 		Set<Folder> parentFolderFolders = parentFolder.getFolders();
 		parentFolderFolders.remove(deletedFolder);
 		parentFolder.setFolders(parentFolderFolders);
 		folderRepository.saveAndFlush(parentFolder);
-		
-		//Delete Children Folders
-		
-//		if(deletedFolder.getFolders)
-//		
-//		
-//		parentFolderFiles.remove(deletedFile);
-//		parentFolder.setFiles(parentFolderFiles);
-//		folderRepository.saveAndFlush(parentFolder);
+
 		folderRepository.delete(deletedFolder);
-		
+
 		return folderMapper.entityToDto(deletedFolder);
 	}
 
